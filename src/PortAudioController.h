@@ -15,23 +15,29 @@
 #include <math.h>
 #include "include/portaudio.h"
 
-#define NUM_SECONDS   (5)
 #define SAMPLE_RATE   (44100)
 #define FRAMES_PER_BUFFER  (64)
+#define TABLE_SIZE   (200)
 
 
 class PortAudioController
 {
     public:
+        PortAudioController();
+
         bool StartStream();
         bool StopStream();
-        bool OpenStream();
+        bool OpenStream(PaDeviceIndex index);
         bool CloseStream();
+        bool Initialize();
 
+        void InitExampleSine();
         
     private:
         PaStream *stream;
-
+        int rightPhase;
+        int leftPhase;
+        float generatedOutputBuffer[TABLE_SIZE];
 
         /* This routine will be called by the PortAudio engine when audio is needed */
         static int paCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
@@ -49,20 +55,3 @@ class PortAudioController
         void paStreamFinishedMethod();
 
 };
-
-
-class ScopedPortAudioHandler
-{
-    public:
-        ScopedPortAudioHandler();
-        ~ScopedPortAudioHandler();
-
-        PaError result() const { return _result; }
-    
-    private: 
-        PaError _result;
-
-};
-
-
-
