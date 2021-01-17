@@ -1,5 +1,5 @@
 /** @file Ava.h
-	@brief Main class of the engine which manages the states and their transitions as well as managing the tracks
+	@brief Main header file of the engine which manages the states and their transitions as well as managing the tracks
 	@author AMU <a@b.c>
 */
 /*
@@ -16,19 +16,6 @@ enum EngineState {StartingState, HaltState,
                   OutputPlaybackState, InputPlaybackOnlyState,
                   RecordingState };
 
-class AvaState;
-
-class Ava
-{
-    public:
-        Ava();        
-        bool SetState(EngineState newState);
-    
-    private:
-        AvaState currentState;
-        IOController io;
-};
-
 
 /* This abstract class is used for composing behavior based on states and their transitions aka managing the fsm */
 class AvaState
@@ -37,7 +24,7 @@ class AvaState
         AvaState() {}
         inline EngineState GetState() const { return stateName; }
 
-        virtual bool PerformTransition(IOController io);
+        virtual bool PerformTransition(IOController io) { return false; }
 
     protected:    
         EngineState stateName;
@@ -63,4 +50,19 @@ class Starting: public AvaState
     public:
         Starting() { SetStateName(StartingState);  }    
         bool PerformTransition(IOController io);
+};
+
+
+/**************************************************
+ *                  MAIN CLASS
+ * ************************************************/
+class Ava
+{
+    public:
+        Ava() {}        
+        bool SetState(EngineState newState);
+    
+    private:
+        AvaState* currentState;
+        IOController io;
 };

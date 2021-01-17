@@ -3,8 +3,10 @@
 
 bool Halt::PerformTransition(IOController io)
 {
-    io.pac.StopStream();
-    io.pac.CloseStream(); /* TODO: probably these two shouldn't be together */
+    if (io.pac.StopStream())
+        if (io.pac.CloseStream()) /* TODO: probably these two shouldn't be together */
+            return true;
+    return false;
 }
 
 bool OutputPlayback::PerformTransition(IOController io)
@@ -26,23 +28,40 @@ bool Starting::PerformTransition(IOController io)
         return false;
 }
 
-bool Ava::SetState(EngineState newState) {
+bool Ava::SetState(EngineState newState)
+{
+    bool hasChangedState = true;
+    
     switch (newState)
     {
         case StartingState:
+        {
             Starting startingObj;
-            currentState = startingObj;
+            currentState = &startingObj;
             break;
+        }
+
         case OutputPlaybackState:
+        {
             OutputPlayback outputPlaybackObj;
-            currentState = outputPlaybackObj;
+            currentState = &outputPlaybackObj;
             break;
+        }
+        
         case HaltState:
+        {
             Halt haltObj;
-            currentState = haltObj;
+            currentState = &haltObj;
             break;
+        }
+        
         default:
+            hasChangedState = false;
             break;
     }
-    currentState.PerformTransition(io);
+    
+    if (hasChangedState && currentState->PerformTransition(io))
+        return true;
+    
+    return false;
 }
