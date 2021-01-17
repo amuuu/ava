@@ -1,4 +1,4 @@
-#include "PortAudioController.h"
+#include "IOController.h"
 #include "include/portaudio.h"
 
 #define NUM_SECONDS   (3)
@@ -6,21 +6,21 @@
 int main(void)
 {
 
-    PortAudioController pac;
+    IOController io;
     
-    pac.Initialize();
+    io.pac.Initialize();
 
-    if(pac.OpenStream(Pa_GetDefaultOutputDevice()))
+    if(io.pac.OpenStream(Pa_GetDefaultOutputDevice()))
     {
-        if(pac.StartStream())
+        if(io.pac.StartStream())
         {
             printf("Play for %d seconds.\n", NUM_SECONDS);
 
             Pa_Sleep( NUM_SECONDS * 1000);
 
-            pac.StopStream();
+            io.pac.StopStream();
         }
-        pac.CloseStream();
+        io.pac.CloseStream();
     }
 
     printf("TEST DONE AND SEE YOU LATER.\n");
