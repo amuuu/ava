@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.12)
-project (AVA)
+project (Ava)
 
 SET(AVA_COMPILE_FLAGS "-lrt -lm -lasound -pthread")
 add_definitions(${AVA_COMPILE_FLAGS})
