@@ -1,5 +1,5 @@
-#include "Ava.h"
-#include "include/portaudio.h"
+#include "../src/Ava.h"
+#include "../src/include/portaudio.h"
 
 #define NUM_SECONDS   (3)
 
@@ -15,7 +15,7 @@ int main(void)
             printf("Play for %d seconds.\n", NUM_SECONDS);
 
             Pa_Sleep( NUM_SECONDS * 1000);
-
+    
             ava.SetState(HaltState);
         }
     }
