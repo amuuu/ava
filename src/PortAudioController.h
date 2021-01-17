@@ -19,6 +19,9 @@
 #define FRAMES_PER_BUFFER  (64)
 #define TABLE_SIZE   (200)
 
+#ifndef M_PI
+#define M_PI  (3.14159265)
+#endif
 
 class PortAudioController
 {

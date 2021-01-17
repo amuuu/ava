@@ -15,11 +15,10 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
         *out++ = generatedOutputBuffer[leftPhase];  /* left */
         *out++ = generatedOutputBuffer[rightPhase];  /* right */
         leftPhase += 1;
-        if( leftPhase >= TABLE_SIZE ) leftPhase -= TABLE_SIZE;
+        if (leftPhase >= TABLE_SIZE) leftPhase -= TABLE_SIZE;
         rightPhase += 3; /* higher pitch so we can distinguish left and right. */
-        if( rightPhase >= TABLE_SIZE ) rightPhase -= TABLE_SIZE;
+        if (rightPhase >= TABLE_SIZE) rightPhase -= TABLE_SIZE;
     }
-
     return paContinue;  
 }
 
@@ -38,50 +37,49 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
 {
     PaStreamParameters outputParameters;
 
-        outputParameters.device = index;
-        if (outputParameters.device == paNoDevice) {
-            return false;
-        }
+    outputParameters.device = index;
+    if (outputParameters.device == paNoDevice) {
+        return false;
+    }
 
-        const PaDeviceInfo* pInfo = Pa_GetDeviceInfo(index);
-        if (pInfo != 0)
-        {
-            printf("Output device name: '%s'\r", pInfo->name);
-        }
+    const PaDeviceInfo* pInfo = Pa_GetDeviceInfo(index);
+    if (pInfo != 0)
+    {
+        printf("Output device name: '%s'\r", pInfo->name);
+    }
 
-        outputParameters.channelCount = 2;       /* stereo output */
-        outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
-        outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
-        outputParameters.hostApiSpecificStreamInfo = NULL;
+    outputParameters.channelCount = 2;       /* stereo output */
+    outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+    outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
+    outputParameters.hostApiSpecificStreamInfo = NULL;
 
-        PaError err = Pa_OpenStream(
-            &stream,
-            NULL, /* no input */
-            &outputParameters,
-            SAMPLE_RATE,
-            paFramesPerBufferUnspecified,
-            paClipOff,      /* we won't output out of range samples so don't bother clipping them */
-            &PortAudioController::paCallback,
-            this            /* Using 'this' for userData so we can cast to Sine* in paCallback method */
-            );
+    PaError err = Pa_OpenStream(
+        &stream,
+        NULL, /* no input */
+        &outputParameters,
+        SAMPLE_RATE,
+        paFramesPerBufferUnspecified,
+        paClipOff,      /* we won't output out of range samples so don't bother clipping them */
+        &PortAudioController::paCallback,
+        this            /* Using 'this' for userData so we can cast to Sine* in paCallback method */
+        );
 
-        if (err != paNoError)
-        {
-            /* Failed to open stream to device !!! */
-            return false;
-        }
+    if (err != paNoError)
+    {
+        /* Failed to open stream to device !!! */
+        return false;
+    }
 
-        err = Pa_SetStreamFinishedCallback( stream, &PortAudioController::paStreamFinished );
+    err = Pa_SetStreamFinishedCallback(stream, &PortAudioController::paStreamFinished);
 
-        if (err != paNoError)
-        {
-            Pa_CloseStream( stream );
-            stream = 0;
+    if (err != paNoError)
+    {
+        Pa_CloseStream(stream);
+        stream = 0;
 
-            return false;
-        }
-
-        return true;
+        return false;
+    }
+    return true;
 }
 
 PortAudioController::PortAudioController()
@@ -99,8 +97,10 @@ bool PortAudioController::Initialize()
     
         printf("ERROR ON INITIALIZE\n");
         printf("Error number: %d\n Error Message: %s\n", err, Pa_GetErrorText(err));
-
         exit(0);
+    }
+    else {
+        return true;
     }
 }
 
@@ -109,7 +109,7 @@ bool PortAudioController::StartStream()
     if (stream == 0)
         return false;
     
-    PaError err = Pa_StartStream(stream);
+    PaError err = Pa_StartStream(stream);    
     
     return (err == paNoError);
 }
@@ -120,12 +120,13 @@ bool PortAudioController::StopStream()
         return false;
     
     PaError err = Pa_StopStream(stream);
+    // PaError err = Pa_AbortStream(stream);
 
     return (err == paNoError);
 }
 
 bool PortAudioController::CloseStream()
-{
+{   
     if (stream == 0)
         return false;
 
@@ -137,16 +138,15 @@ bool PortAudioController::CloseStream()
 
 void PortAudioController::InitExampleSine()
 {
-    /* initialise sinusoidal wavetable */
-        for( int i=0; i<TABLE_SIZE; i++ )
-        {
-            generatedOutputBuffer[i] = (float) sin( ((double)i/(double)TABLE_SIZE) * M_PI * 2. );
-        }
+    for(int i=0; i<TABLE_SIZE; i++)
+    {
+        generatedOutputBuffer[i] = (float)sin( ((double)i/(double)TABLE_SIZE) * M_PI * 2.);
+    }
 }
 
 void PortAudioController::paStreamFinishedMethod()
 {
-    printf("Stream Completed: %s\n");
+    printf("Stream Completed.\n");
 }
 
 void PortAudioController::paStreamFinished(void* userData)
