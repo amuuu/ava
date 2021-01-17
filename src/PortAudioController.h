@@ -1,4 +1,3 @@
-
 /** @file PortAudioController.h
 	@brief Main controller for audio I/O that uses PortAudio sound API
 	@author AMU <a@b.c>
@@ -36,6 +35,8 @@ class PortAudioController
 
         void InitExampleSine();
         
+        // TODO: set audio device
+
     private:
         PaStream *stream;
         int rightPhase;

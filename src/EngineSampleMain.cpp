@@ -1,4 +1,4 @@
-#include "IOController.h"
+#include "Ava.h"
 #include "include/portaudio.h"
 
 #define NUM_SECONDS   (3)
@@ -6,21 +6,19 @@
 int main(void)
 {
 
-    IOController io;
-    
-    io.pac.Initialize();
+    Ava ava;
+        
+    if (ava.SetState(StartingState)) {
 
-    if(io.pac.OpenStream(Pa_GetDefaultOutputDevice()))
-    {
-        if(io.pac.StartStream())
+    
+        if (ava.SetState(OutputPlaybackState))
         {
             printf("Play for %d seconds.\n", NUM_SECONDS);
 
             Pa_Sleep( NUM_SECONDS * 1000);
 
-            io.pac.StopStream();
+            ava.SetState(HaltState);
         }
-        io.pac.CloseStream();
     }
 
     printf("TEST DONE AND SEE YOU LATER.\n");
