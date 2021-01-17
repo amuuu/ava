@@ -9,8 +9,7 @@ int main(void)
     Ava ava;
         
     if (ava.SetState(StartingState)) {
-
-    
+        
         if (ava.SetState(OutputPlaybackState))
         {
             printf("Play for %d seconds.\n", NUM_SECONDS);

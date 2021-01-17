@@ -11,21 +11,17 @@ bool Halt::PerformTransition(IOController io)
 
 bool OutputPlayback::PerformTransition(IOController io)
 {
-    if(io.pac.StartStream())
-        return true;
-    
+    if (io.pac.OpenStream(Pa_GetDefaultOutputDevice())) /* TODO: it shouldn't always be the default device */
+        if(io.pac.StartStream())
+            return true;
     return false;
 }
 
 bool Starting::PerformTransition(IOController io)
 {   
-    if (io.pac.Initialize()) {
-        if (io.pac.OpenStream(Pa_GetDefaultOutputDevice())) /* TODO: it shouldn't always be the default device */
-            return true;
-        return false;
-    }
-    else 
-        return false;
+    if (io.pac.Initialize())
+        return true;
+    return false;
 }
 
 bool Ava::SetState(EngineState newState)

@@ -79,6 +79,7 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
 
         return false;
     }
+
     return true;
 }
 
@@ -110,7 +111,6 @@ bool PortAudioController::StartStream()
         return false;
     
     PaError err = Pa_StartStream(stream);    
-    
     return (err == paNoError);
 }
 
