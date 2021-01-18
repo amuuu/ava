@@ -2,7 +2,7 @@
 A more complete documentation will be added soon.
 
 
-## Buid Ava (+ Demo Program)
+## Build Ava (+ Demo Program)
 To build the engine alongside with the demo program you just need to make the project inside the root directory using the command below:
 ```
 make
