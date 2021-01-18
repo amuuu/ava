@@ -12,9 +12,9 @@
 
 #include "IOController.h"
 
-enum EngineState {StartingState, HaltState,
-                  OutputPlaybackState, InputPlaybackOnlyState,
-                  RecordingState };
+#include <map>
+
+enum EngineState {StartingState, HaltState, OutputPlaybackState, InputPlaybackOnlyState, RecordingState };
 
 
 /* This abstract class is used for composing behavior based on states and their transitions aka managing the fsm */
@@ -22,7 +22,7 @@ class AvaState
 {
     public:
         AvaState() {}
-        inline EngineState GetState() const { return stateName; }
+        inline EngineState GetStateName() const { return stateName; }
 
         virtual bool PerformTransition(IOController io) { return false; }
 
@@ -61,8 +61,13 @@ class Ava
     public:
         Ava() {}        
         bool SetState(EngineState newState);
+        // EngineState GetCurrentState() { return currentState->GetStateName(); }
     
     private:
         AvaState* currentState;
         IOController io;
+
+        Halt haltInstance; OutputPlayback outputPlaybackInstance; Starting startingInstance;
+        std::map<EngineState, AvaState*> statesMap { {HaltState, &haltInstance}, {OutputPlaybackState, &outputPlaybackInstance}, {StartingState, &startingInstance}};
+
 };

@@ -25,38 +25,11 @@ bool Starting::PerformTransition(IOController io)
 }
 
 bool Ava::SetState(EngineState newState)
-{
-    bool hasChangedState = true;
-    
-    switch (newState)
-    {
-        case StartingState:
-        {
-            Starting startingObj;
-            currentState = &startingObj;
-            break;
-        }
-
-        case OutputPlaybackState:
-        {
-            OutputPlayback outputPlaybackObj;
-            currentState = &outputPlaybackObj;
-            break;
-        }
+{        
+    /* TODO: don't allow transition to the same state (or should it be allowed?) */
+    currentState = statesMap[newState];
         
-        case HaltState:
-        {
-            Halt haltObj;
-            currentState = &haltObj;
-            break;
-        }
-        
-        default:
-            hasChangedState = false;
-            break;
-    }
-    
-    if (hasChangedState && currentState->PerformTransition(io))
+    if (currentState->PerformTransition(io))
         return true;
     
     return false;
