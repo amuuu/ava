@@ -58,4 +58,6 @@ class PortAudioController
         /* The instance finished method passed to paStreamFinished */
         void paStreamFinishedMethod();
 
+        bool IsStreamEmpty();
+
 };

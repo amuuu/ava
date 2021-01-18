@@ -107,7 +107,7 @@ bool PortAudioController::Initialize()
 
 bool PortAudioController::StartStream()
 {
-    if (stream == 0)
+    if (IsStreamEmpty())
         return false;
     
     PaError err = Pa_StartStream(stream);    
@@ -116,7 +116,7 @@ bool PortAudioController::StartStream()
 
 bool PortAudioController::StopStream()
 {
-    if (stream == 0)
+    if (IsStreamEmpty())
         return false;
     
     PaError err = Pa_StopStream(stream);
@@ -127,7 +127,7 @@ bool PortAudioController::StopStream()
 
 bool PortAudioController::CloseStream()
 {   
-    if (stream == 0)
+    if (IsStreamEmpty())
         return false;
 
     PaError err = Pa_CloseStream(stream);
@@ -152,4 +152,11 @@ void PortAudioController::paStreamFinishedMethod()
 void PortAudioController::paStreamFinished(void* userData)
 {
     return ((PortAudioController*)userData)->paStreamFinishedMethod();
+}
+
+bool PortAudioController::IsStreamEmpty()
+{
+    if (stream == 0)
+        return true;
+    return false;
 }
