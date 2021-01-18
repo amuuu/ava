@@ -1,6 +1,10 @@
 class ProjectController
 {
     public: 
+        ProjectController();
+        char* GetProjectName() const { return globalSettings.PROJECT_NAME; }
+
+    private:
         struct GlobalSettings_t
         {
             int PROJECT_SAMPLE_RATE;
@@ -8,8 +12,4 @@ class ProjectController
             float PROJECT_MASTER_PAN;
             char* PROJECT_NAME; 
         } globalSettings;
-
-        ProjectController();
-
-        char* GetProjectName() const { return globalSettings.PROJECT_NAME; }
 };
