@@ -1,6 +1,11 @@
 #include "Ava.h"
 
 
+Ava::Ava()
+{
+    printf("Project %s initialized.\n", project.GetProjectName());
+}
+
 bool Halt::PerformTransition(IOController io)
 {
     if (io.pac.StopStream())
