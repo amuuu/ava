@@ -1,6 +1,8 @@
 libs/
 build.txt
 src/.vscode
+.vscode
+
 
 # For cmake-generated stuff
 CMakeLists.txt.user
