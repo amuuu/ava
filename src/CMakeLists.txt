@@ -91,9 +91,9 @@ endif (PORTAUDIO_LIBRARIES AND PORTAUDIO_INCLUDE_DIRS)
 
 
 
-file(GLOB ava_SRC CONFIGURE_DEPENDS "*.h" "*.cpp")
+file(GLOB ava_SRC CONFIGURE_DEPENDS "*.h" "*.cpp" "instruments/*.h" "instruments/*.cpp")
 
-add_library(Ava ${ava_SRC}) # ${CMAKE_CURRENT_SOURCE_DIR}/include/portaudio.h)
+add_library(Ava ${ava_SRC} ) # ${CMAKE_CURRENT_SOURCE_DIR}/include/portaudio.h)
 
 include_directories("${PORTAUDIO_INCLUDE_DIRS}")
 

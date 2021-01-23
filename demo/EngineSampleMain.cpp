@@ -1,7 +1,7 @@
 #include "../src/Ava.h"
 #include "../src/include/portaudio.h"
 
-#include "../src/SimpleSineGenerator.h"
+#include "../src/instruments/SimpleSineGenerator.h"
 
 #define NUM_SECONDS   (3)
 

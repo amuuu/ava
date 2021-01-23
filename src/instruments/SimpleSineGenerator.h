@@ -1,4 +1,4 @@
-#include "VirtualInstrument.h"
+#include "../VirtualInstrument.h"
 
 
 class SimpleSineGenerator: public VirtualInstrument
