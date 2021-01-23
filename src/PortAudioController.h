@@ -43,7 +43,7 @@ class PortAudioController
         PaStream *stream;
         int rightPhase;
         int leftPhase;
-        float* generatedOutputBuffer;
+        float generatedOutputBuffer [TABLE_SIZE];
 
 
         /* This routine will be called by the PortAudio engine when audio is needed */

@@ -2,7 +2,7 @@
 
 bool PortAudioController::SetOutputBuffer(float* newBuffer)
 {
-    generatedOutputBuffer =  newBuffer;
+    generatedOutputBuffer[0] = *newBuffer;
     return true;
 }
 
@@ -15,16 +15,18 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
     (void) timeInfo; /* Prevent unused variable warnings. */
     (void) statusFlags;
     (void) inputBuffer;
-
+    
     for( i=0; i<framesPerBuffer; i++ )
     {
-        *out++ = *(generatedOutputBuffer+leftPhase);  /* left */
-        *out++ = *(generatedOutputBuffer+rightPhase);  /* right */
+        *out++=generatedOutputBuffer[leftPhase];
+        *out++=generatedOutputBuffer[rightPhase];
+
         leftPhase += 1;
         if (leftPhase >= TABLE_SIZE) leftPhase -= TABLE_SIZE;
         rightPhase += 3; /* higher pitch so we can distinguish left and right. */
         if (rightPhase >= TABLE_SIZE) rightPhase -= TABLE_SIZE;
     }
+
     return paContinue;  
 }
 
@@ -92,7 +94,6 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
 PortAudioController::PortAudioController()
     :stream(0), leftPhase(0), rightPhase(0)
 {
-    //InitExampleSine(); 
 }
 
 bool PortAudioController::Initialize()
