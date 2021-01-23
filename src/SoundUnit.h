@@ -1,3 +1,5 @@
+#pragma once
+
 #include <math.h>
 
 #define OUTPUT_BUFFER_SIZE   (200)
@@ -31,9 +33,3 @@ class VirtualInstrument : public RawUnit
 };
 
 
-class SimpleSineGenerator: public VirtualInstrument
-{
-    public:
-        float* FillData();
-
-};

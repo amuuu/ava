@@ -2,7 +2,9 @@
 
 bool PortAudioController::SetOutputBuffer(float* newBuffer)
 {
-    generatedOutputBuffer[0] = *newBuffer;
+    for(int i=0;i<TABLE_SIZE; i++) {
+        generatedOutputBuffer[i] = *(newBuffer+i);
+    }
     return true;
 }
 
