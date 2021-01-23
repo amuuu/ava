@@ -6,8 +6,9 @@ class ProjectController
         ProjectController();
         char* GetProjectName() const { return globalSettings.PROJECT_NAME; }
 
-        bool AppendTrack(Track newTrack) {}
-        bool RemoveTrack(Track toBeRemovedTrack) {}
+        bool AppendTrack(Track newTrack);
+        bool RemoveTrack(Track toBeRemovedTrack) { return true; }
+        Track GetTrack(int trackIndex);
 
     private:
         std::list<Track> tracks;

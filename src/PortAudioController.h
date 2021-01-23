@@ -33,15 +33,18 @@ class PortAudioController
         bool CloseStream();
         bool Initialize();
 
-        void InitExampleSine();
-        
+        bool SetOutputBuffer(float* newBuffer);
+
+
+        void InitExampleSine();        
         // TODO: set audio device
 
     private:
         PaStream *stream;
         int rightPhase;
         int leftPhase;
-        float generatedOutputBuffer[TABLE_SIZE];
+        float* generatedOutputBuffer;
+
 
         /* This routine will be called by the PortAudio engine when audio is needed */
         static int paCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,

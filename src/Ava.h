@@ -72,11 +72,13 @@ class Ava
         Ava();        
         bool SetState(EngineState newState);
         // EngineState GetCurrentState() { return currentState->GetStateName(); }
-    
+        bool UpdateOutputBuffer(float* newBuffer);  // this should be done based on the tracks not newBuffer [manually]
+        
+        ProjectController project;
+
     private:
         AvaState* currentState;
         IOController io;
-        ProjectController project;
 
         Halt haltInstance; OutputPlayback outputPlaybackInstance; Starting startingInstance;
         std::map<EngineState, AvaState*> statesMap { {HaltState, &haltInstance}, {OutputPlaybackState, &outputPlaybackInstance}, {StartingState, &startingInstance}};

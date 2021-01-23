@@ -12,6 +12,8 @@ class Track
         TrackState GetTrackState() const { return state; }
         bool ChangeTrackState(TrackState newState) { return true; /* for now */ };
 
+        bool AppendNewUnit(SoundUnit newSoundUnit); // TODO: doesn't obey SRP, should be inside a new class
+
     private:
         TrackState state;
 

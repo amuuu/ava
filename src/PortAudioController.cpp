@@ -1,5 +1,11 @@
 #include "PortAudioController.h"
 
+bool PortAudioController::SetOutputBuffer(float* newBuffer)
+{
+    generatedOutputBuffer =  newBuffer;
+    return true;
+}
+
 int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
                             const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags)
 {
@@ -12,8 +18,8 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
 
     for( i=0; i<framesPerBuffer; i++ )
     {
-        *out++ = generatedOutputBuffer[leftPhase];  /* left */
-        *out++ = generatedOutputBuffer[rightPhase];  /* right */
+        *out++ = *(generatedOutputBuffer+leftPhase);  /* left */
+        *out++ = *(generatedOutputBuffer+rightPhase);  /* right */
         leftPhase += 1;
         if (leftPhase >= TABLE_SIZE) leftPhase -= TABLE_SIZE;
         rightPhase += 3; /* higher pitch so we can distinguish left and right. */
@@ -86,7 +92,7 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
 PortAudioController::PortAudioController()
     :stream(0), leftPhase(0), rightPhase(0)
 {
-    InitExampleSine(); 
+    //InitExampleSine(); 
 }
 
 bool PortAudioController::Initialize()

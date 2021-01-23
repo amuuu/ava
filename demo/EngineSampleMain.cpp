@@ -1,13 +1,22 @@
 #include "../src/Ava.h"
 #include "../src/include/portaudio.h"
 
+
 #define NUM_SECONDS   (3)
 
 int main(void)
 {
 
     Ava ava;
-        
+    SimpleSineGenerator sine;
+
+    sine.FillData();
+    
+    ava.project.GetTrack(0).AppendNewUnit(sine);
+    
+    ava.UpdateOutputBuffer(sine.GetOutputBuffer());
+
+
     if (ava.SetState(StartingState)) {
         
         if (ava.SetState(OutputPlaybackState))
