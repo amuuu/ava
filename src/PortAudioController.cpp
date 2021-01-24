@@ -121,14 +121,6 @@ bool PortAudioController::CloseStream()
     return (err == paNoError);
 }
 
-void PortAudioController::InitExampleSine()
-{
-    for(int i=0; i<TABLE_SIZE; i++)
-    {
-        generatedOutputBuffer[i] = (float)sin( ((double)i/(double)TABLE_SIZE) * M_PI * 2.);
-    }
-}
-
 void PortAudioController::paStreamFinishedMethod()
 {
     printf("Stream Completed.\n");
