@@ -21,7 +21,7 @@ bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParamete
 { 
     parameters[targetParameter.name] = targetParameter.value; // TODO: handle none-existent parameters in the map
     
-    printf("Parameter %p = %f\n", targetParameter.name, parameters[targetParameter.name]);
+    // printf("Parameter %p = %f\n", targetParameter.name, parameters[targetParameter.name]);
     return true;
 }
 
@@ -30,7 +30,7 @@ bool SimpleSineGenerator::AddParameter(VirtualInstrumentParameter targetParamete
 { 
     parameters.insert({targetParameter.name, targetParameter.value});
     
-    printf("New parameter %p = %f was added.\n", targetParameter.name, parameters[targetParameter.name]);
+    // printf("New parameter %p = %f was added.\n", targetParameter.name, parameters[targetParameter.name]);
     return true;
 }
 
