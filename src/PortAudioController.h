@@ -45,7 +45,8 @@ class PortAudioController
         int rightPhase;
         int leftPhase;
         float generatedOutputBuffer [TABLE_SIZE];
-        CallbackType callbackType;
+        CallbackType callbackType;  // TODO: USE MAP INSIDE paCallback map_name[callbacktype] :
+                                    // ((PortAudioController*)userData)->paCallbackMethod(inputBuffer, outputBuffer, framesPerBuffer, timeInfo, statusFlags);
 
 
         /* This routine will be called by the PortAudio engine when audio is needed */
