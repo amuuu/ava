@@ -27,14 +27,12 @@ int main(void)
     p.name = "freq";
     p.value = 1;
     
-    
     sine.SetParameter(p);
     sine.FillData();
-    
+
     ava.project.GetTrack(0).AppendNewUnit(sine);
     
     ava.UpdateOutputBuffer(sine.GetOutputBuffer());
-
 
     if (ava.SetState(StartingState)) {
         
@@ -47,32 +45,6 @@ int main(void)
             ava.SetState(HaltState);
         }
     }
-
-    
-    p.value = 2;
-
-
-    sine.SetParameter(p);
-    sine.FillData();
-    
-    ava.project.GetTrack(0).AppendNewUnit(sine);
-    
-    ava.UpdateOutputBuffer(sine.GetOutputBuffer());
-
-
-    if (ava.SetState(StartingState)) {
-        
-        if (ava.SetState(OutputPlaybackState))
-        {
-            printf("Play for %d seconds.\n", NUM_SECONDS);
-
-            Pa_Sleep( NUM_SECONDS * 1000);
-    
-            ava.SetState(HaltState);
-        }
-    }
-
-
     printf("TEST DONE AND SEE YOU LATER.\n");
     return paNoError;
 }
