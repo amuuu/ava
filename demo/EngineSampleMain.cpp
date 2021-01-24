@@ -25,7 +25,7 @@ int main(void)
     
     VirtualInstrumentParameter p;
     p.name = "freq";
-    p.value = 1;
+    p.value = 440.0;
     
     sine.SetParameter(p);
     sine.FillData();
