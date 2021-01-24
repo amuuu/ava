@@ -24,3 +24,13 @@ bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParamete
     printf("Parameter %p = %f\n", targetParameter.name, parameters[targetParameter.name]);
     return true;
 }
+
+
+bool SimpleSineGenerator::AddParameter(VirtualInstrumentParameter targetParameter) 
+{ 
+    parameters.insert({targetParameter.name, targetParameter.value});
+    
+    printf("New parameter %p = %f was added.\n", targetParameter.name, parameters[targetParameter.name]);
+    return true;
+}
+

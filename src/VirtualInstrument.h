@@ -18,6 +18,7 @@ class VirtualInstrument : public RawUnit
     public:
         virtual float* FillData() {float* a; return a; };
         virtual bool SetParameter(VirtualInstrumentParameter targetParameter) { return false; }
+        virtual bool AddParameter(VirtualInstrumentParameter targetParameter) { return false; }
     
     protected:
         std::map<std::string, float> parameters;
