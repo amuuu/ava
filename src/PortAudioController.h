@@ -22,6 +22,8 @@
 #define M_PI  (3.14159265)
 #endif
 
+enum CallbackType {OutputPlaybackOnly, RealTimeProcessing};
+
 class PortAudioController
 {
     public:
