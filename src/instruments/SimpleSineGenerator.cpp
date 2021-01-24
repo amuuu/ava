@@ -1,5 +1,10 @@
 #include "SimpleSineGenerator.h"
 
+SimpleSineGenerator::SimpleSineGenerator()
+{
+    parameters.insert({"freq", 1});
+}
+
 float* SimpleSineGenerator::FillData()
 {
     for(int i=0; i < OUTPUT_BUFFER_SIZE; i++)
@@ -11,5 +16,6 @@ float* SimpleSineGenerator::FillData()
 
 bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParameter) 
 { 
-    return false;
+    parameters[targetParameter.name] = targetParameter.value;
+    return true;
 }

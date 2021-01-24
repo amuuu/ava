@@ -8,8 +8,8 @@
 
 struct VirtualInstrumentParameter
 {
-    std::string propName;
-    float propValue;
+    std::string name;
+    float value;
 };
 
 class VirtualInstrument : public RawUnit
@@ -19,7 +19,7 @@ class VirtualInstrument : public RawUnit
         virtual float* FillData() {float* a; return a; };
         virtual bool SetParameter(VirtualInstrumentParameter targetParameter) { return false; }
     
-    private:
+    protected:
         std::map<std::string, float> parameters;
 
 };
