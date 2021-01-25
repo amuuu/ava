@@ -2,20 +2,8 @@
 
 bool PortAudioController::SetOutputBuffer(OutputData* newPaOutputData)
 {
-    printf("ff %f\n", newPaOutputData->outputBuffer[12]);
-
     *paOutputData = *newPaOutputData;
 
-    printf("TEMEEEEEEEEEEEEE\n");
-
-    // memcpy(paOutputData, newPaOutputData, sizeof(OutputData*));
-    
-    printf("f %f\n", paOutputData->outputBuffer[12]);
-
-    // printf("Updated Buffer:\n");
-    // for (int i=0; i<paOutputData->size; i++)
-    //     printf("f %f", paOutputData->outputBuffer[i]);
-    
     return true;
 }
 

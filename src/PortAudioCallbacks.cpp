@@ -13,17 +13,18 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
     
     for( i=0; i<framesPerBuffer; i++ )
     {
-        printf("%cursor d\n", paOutputData->cursor);
-        if (paOutputData->cursor < paOutputData->framesNo) {
+        printf("%cursor %d\n", paOutputData->cursor);
+        // if (paOutputData->cursor < paOutputData->framesNo) {
             *out++ = paOutputData->outputBuffer[paOutputData->cursor];
             paOutputData->cursor+= 1;
             // printf("a %f, ", *(paOutputData->outputBuffer[paOutputData->cursor]));
-        }
-        else 
-        {
-            *out++ = 0;
+        // }
+        // else 
+        if (paOutputData->cursor = paOutputData->size) paOutputData->cursor = 0;
+        // {
+            // *out++ = 0;
             // printf("b\n");
-        }
+        // }
     }
 
     return paContinue;  
