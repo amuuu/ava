@@ -11,9 +11,7 @@
 #endif
 //////////////
 
-
 #define NUM_SECONDS   (3)
-
 
 
 int main(void)
@@ -21,8 +19,7 @@ int main(void)
 
     Ava ava;
     SimpleSineGenerator sine;
-
-    
+  
     VirtualInstrumentParameter p;
     p.name = "freq";
     p.value = 440.0;

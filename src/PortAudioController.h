@@ -11,6 +11,7 @@
 */
 
 #include <stdio.h>
+#include <string.h> // for memcpy
 #include <math.h>
 #include "include/portaudio.h"
 
@@ -44,8 +45,7 @@ class PortAudioController
 
     private:
         PaStream *stream;
-        int rightPhase;
-        int leftPhase;
+        
         float generatedOutputBuffer [TABLE_SIZE];
         OutputData *paOutputData;
         CallbackType callbackType;  // TODO: USE MAP INSIDE paCallback map_name[callbacktype] :

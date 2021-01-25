@@ -13,17 +13,22 @@
 class SoundUnit
 {
     public:
-        SoundUnit() { }
+        SoundUnit();
         
         OutputData* GetOutputBufferData() const { return outputData; }
     
     protected:
         OutputData* outputData;
+    
+    private:
+        bool InitializeDefaultIOStructValues();
+
 };
 
 
 class RawUnit : public SoundUnit
 {
-
+    public:
+        RawUnit() : SoundUnit() {}
 };
 

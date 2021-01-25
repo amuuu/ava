@@ -1,11 +1,14 @@
 #pragma once
 
-#define SIZE (200)
+#define DEFAULT_SIZE (200)
+#define DEFAULT_FRAMES_NO (200)
+#define INIT_CURSOR_VAL (0)
+
 
 struct OutputData
 {
-    int size = SIZE;
-    float outputBuffer [SIZE];
-    unsigned long cursor = 0; // add left and right cursors?
-    unsigned long framesNo = SIZE; //?
+    int size;
+    float outputBuffer [DEFAULT_SIZE];
+    unsigned long cursor; // add left and right cursors?
+    unsigned long framesNo; //?
 };

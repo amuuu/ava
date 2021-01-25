@@ -2,11 +2,20 @@
 
 bool PortAudioController::SetOutputBuffer(OutputData* newPaOutputData)
 {
-    paOutputData = newPaOutputData;
+    printf("ff %f\n", newPaOutputData->outputBuffer[12]);
 
-    // for (int i=0; i<paOutputData.size; i++)
-    //     printf("f %f", paOutputData.outputBuffer[i]);
-    // printf("\n");
+    *paOutputData = *newPaOutputData;
+
+    printf("TEMEEEEEEEEEEEEE\n");
+
+    // memcpy(paOutputData, newPaOutputData, sizeof(OutputData*));
+    
+    printf("f %f\n", paOutputData->outputBuffer[12]);
+
+    // printf("Updated Buffer:\n");
+    // for (int i=0; i<paOutputData->size; i++)
+    //     printf("f %f", paOutputData->outputBuffer[i]);
+    
     return true;
 }
 
@@ -72,8 +81,14 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
 }
 
 PortAudioController::PortAudioController()
-    :stream(0), leftPhase(0), rightPhase(0)
+    :stream(0)
 {
+    paOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
+    
+    // TODO: remove the below duplication using a helper class maybe with the soundunit.cpp file
+    paOutputData->size = DEFAULT_SIZE;
+    paOutputData->cursor = INIT_CURSOR_VAL;
+    paOutputData->framesNo = DEFAULT_FRAMES_NO;
 }
 
 bool PortAudioController::Initialize()

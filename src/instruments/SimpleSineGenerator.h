@@ -8,5 +8,4 @@ class SimpleSineGenerator: public VirtualInstrument
         OutputData* FillOutputData();
         bool SetParameter(VirtualInstrumentParameter targetParameter);
         bool AddParameter(VirtualInstrumentParameter targetParameter);
-
 };
