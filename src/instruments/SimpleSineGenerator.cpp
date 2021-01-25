@@ -10,9 +10,14 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 
 OutputData* SimpleSineGenerator::FillOutputData()
 {
-    for(int i=0; i < outputData->size; i++)
+    printf("freq=%f\n", parameters["freq"]);
+    
+    int size = outputData->size;
+    float freq = parameters["freq"];
+
+    for(int i=0; i < size; i++)
     {
-        outputData->outputBuffer[i] = (float) sin ( parameters["freq"] * (M_PI * 2) * ((double) i / (double) outputData->size));
+        outputData->outputBuffer[i] = (float) sin ( 440 * (M_PI * 2) * ((float) i / (float) size));
     }
 
     return outputData;
