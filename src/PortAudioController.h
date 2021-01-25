@@ -37,7 +37,7 @@ class PortAudioController
         bool CloseStream();
         bool Initialize();
 
-        bool SetOutputBuffer(OutputData newPaOutputData);
+        bool SetOutputBuffer(OutputData* newPaOutputData);
 
 
         // TODO: set audio device
@@ -47,7 +47,7 @@ class PortAudioController
         int rightPhase;
         int leftPhase;
         float generatedOutputBuffer [TABLE_SIZE];
-        OutputData paOutputData;
+        OutputData *paOutputData;
         CallbackType callbackType;  // TODO: USE MAP INSIDE paCallback map_name[callbacktype] :
                                     // ((PortAudioController*)userData)->paCallbackMethod(inputBuffer, outputBuffer, framesPerBuffer, timeInfo, statusFlags);
 

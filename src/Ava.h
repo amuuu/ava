@@ -74,7 +74,7 @@ class Ava
         Ava();        
         bool SetState(EngineState newState);
         // EngineState GetCurrentState() { return currentState->GetStateName(); }
-        bool UpdateOutputBufferData(OutputData newOutputData);  // this should be done based on the tracks not newBuffer [manually]
+        bool UpdateOutputBufferData(OutputData* newOutputData);  // this should be done based on the tracks not newBuffer [manually]
         
         ProjectController project;
 

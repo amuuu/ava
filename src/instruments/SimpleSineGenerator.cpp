@@ -8,11 +8,11 @@ SimpleSineGenerator::SimpleSineGenerator()
     parameters.insert({"freq", 1});
 }
 
-OutputData SimpleSineGenerator::FillOutputData()
+OutputData* SimpleSineGenerator::FillOutputData()
 {
-    for(int i=0; i < outputData.size; i++)
+    for(int i=0; i < outputData->size; i++)
     {
-        outputData.outputBuffer[i] = (float) sin ( parameters["freq"] * (M_PI * 2) * ((double) i / (double) outputData.size));
+        outputData->outputBuffer[i] = (float) sin ( parameters["freq"] * (M_PI * 2) * ((double) i / (double) outputData->size));
     }
     return outputData;
 }

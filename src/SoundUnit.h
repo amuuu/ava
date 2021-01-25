@@ -15,10 +15,10 @@ class SoundUnit
     public:
         SoundUnit() { }
         
-        OutputData GetOutputBuffer() const { return outputData; }
+        OutputData* GetOutputBufferData() const { return outputData; }
     
     protected:
-        OutputData outputData;
+        OutputData* outputData;
 };
 
 

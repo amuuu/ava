@@ -40,7 +40,7 @@ bool Ava::SetState(EngineState newState)
     return false;
 }
 
-bool Ava::UpdateOutputBufferData(OutputData newOutputData)
+bool Ava::UpdateOutputBufferData(OutputData* newOutputData)
 {
     if(io.pac.SetOutputBuffer(newOutputData))
         return true;

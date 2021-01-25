@@ -16,7 +16,7 @@ class VirtualInstrument : public RawUnit
 {
     
     public:
-        virtual OutputData FillOutputData() { return outputData; };
+        virtual OutputData* FillOutputData() { return outputData; };
         virtual bool SetParameter(VirtualInstrumentParameter targetParameter) { return false; }
         virtual bool AddParameter(VirtualInstrumentParameter targetParameter) { return false; }
     

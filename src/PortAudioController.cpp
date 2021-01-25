@@ -1,8 +1,12 @@
 #include "PortAudioController.h"
 
-bool PortAudioController::SetOutputBuffer(OutputData newPaOutputData)
+bool PortAudioController::SetOutputBuffer(OutputData* newPaOutputData)
 {
     paOutputData = newPaOutputData;
+
+    // for (int i=0; i<paOutputData.size; i++)
+    //     printf("f %f", paOutputData.outputBuffer[i]);
+    // printf("\n");
     return true;
 }
 
