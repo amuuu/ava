@@ -40,9 +40,9 @@ bool Ava::SetState(EngineState newState)
     return false;
 }
 
-bool Ava::UpdateOutputBuffer(float* newBuffer)
+bool Ava::UpdateOutputBufferData(OutputData newOutputData)
 {
-    if(io.pac.SetOutputBuffer(newBuffer))
+    if(io.pac.SetOutputBuffer(newOutputData))
         return true;
     return false;
 }

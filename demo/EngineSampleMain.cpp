@@ -32,7 +32,7 @@ int main(void)
 
     ava.project.GetTrack(0).AppendNewUnit(sine);
     
-    ava.UpdateOutputBuffer(sine.GetOutputBuffer());
+    ava.UpdateOutputBufferData(sine.GetOutputBuffer());
 
     if (ava.SetState(StartingState)) {
         

@@ -13,6 +13,8 @@
 #include "IOController.h"
 #include "ProjectController.h"
 
+#include "PortAudioDataStructs.h"
+
 #include <map>
 
 
@@ -72,7 +74,7 @@ class Ava
         Ava();        
         bool SetState(EngineState newState);
         // EngineState GetCurrentState() { return currentState->GetStateName(); }
-        bool UpdateOutputBuffer(float* newBuffer);  // this should be done based on the tracks not newBuffer [manually]
+        bool UpdateOutputBufferData(OutputData newOutputData);  // this should be done based on the tracks not newBuffer [manually]
         
         ProjectController project;
 

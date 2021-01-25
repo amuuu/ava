@@ -13,13 +13,14 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
     
     for( i=0; i<framesPerBuffer; i++ )
     {
-        *out++=generatedOutputBuffer[leftPhase];
-        *out++=generatedOutputBuffer[rightPhase];
-
-        leftPhase += 1;
-        if (leftPhase >= TABLE_SIZE) leftPhase -= TABLE_SIZE;
-        rightPhase += 3; /* higher pitch so we can distinguish left and right. */
-        if (rightPhase >= TABLE_SIZE) rightPhase -= TABLE_SIZE;
+        if (paOutputData.cursor < paOutputData.framesNo) {
+            *out++= paOutputData.outputBuffer[paOutputData.cursor];
+            paOutputData.cursor++;
+        }
+        else 
+        {
+            *out++ = 0;
+        }
     }
 
     return paContinue;  
