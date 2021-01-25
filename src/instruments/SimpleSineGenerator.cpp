@@ -8,13 +8,13 @@ SimpleSineGenerator::SimpleSineGenerator()
     parameters.insert({"freq", 1});
 }
 
-float* SimpleSineGenerator::FillData()
+OutputData SimpleSineGenerator::FillOutputData()
 {
-    for(int i=0; i < OUTPUT_BUFFER_SIZE; i++)
+    for(int i=0; i < outputData.size; i++)
     {
-        *(outputBuffer+i) = (float) sin ( parameters["freq"] * (M_PI * 2) * ((double) i / (double) OUTPUT_BUFFER_SIZE));
+        outputData.outputBuffer[i] = (float) sin ( parameters["freq"] * (M_PI * 2) * ((double) i / (double) outputData.size));
     }
-    return outputBuffer;
+    return outputData;
 }
 
 bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParameter) 

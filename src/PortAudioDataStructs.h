@@ -4,7 +4,8 @@
 
 struct OutputData
 {
+    int size = SIZE;
     float outputBuffer [SIZE];
-    unsigned long cursor;
+    unsigned long cursor; // add left and right cursors?
     unsigned long num_frames;
 };

@@ -5,7 +5,7 @@ class SimpleSineGenerator: public VirtualInstrument
 {
     public:
         SimpleSineGenerator();
-        float* FillData();
+        OutputData FillOutputData();
         bool SetParameter(VirtualInstrumentParameter targetParameter);
         bool AddParameter(VirtualInstrumentParameter targetParameter);
 

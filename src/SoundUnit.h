@@ -2,6 +2,8 @@
 
 #include <math.h>
 
+#include "PortAudioDataStructs.h"
+
 #define OUTPUT_BUFFER_SIZE   (200)
 
 #ifndef M_PI
@@ -11,12 +13,12 @@
 class SoundUnit
 {
     public:
-        SoundUnit() { outputBuffer = new float [OUTPUT_BUFFER_SIZE]; }
+        SoundUnit() { }
         
-        float* GetOutputBuffer() const { return outputBuffer; }
+        OutputData GetOutputBuffer() const { return outputData; }
     
     protected:
-        float* outputBuffer;
+        OutputData outputData;
 };
 
 

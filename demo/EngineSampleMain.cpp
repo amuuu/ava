@@ -28,7 +28,7 @@ int main(void)
     p.value = 440.0;
     
     sine.SetParameter(p);
-    sine.FillData();
+    sine.FillOutputData();
 
     ava.project.GetTrack(0).AppendNewUnit(sine);
     
