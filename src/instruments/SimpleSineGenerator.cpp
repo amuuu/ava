@@ -10,6 +10,8 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 
 OutputData* SimpleSineGenerator::FillOutputData()
 {
+    // TODO: Not all freqs can be heard. something's wrong with the formula.
+    
     int size = outputData->size;
     float freq = parameters["freq"];
 
