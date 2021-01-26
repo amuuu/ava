@@ -49,10 +49,9 @@ bool Ava::UpdateOutputBufferData()
     
     std::list<Track> tracks = project.GetAllTracks();
 
-    int tracksSize = (double) tracks.size();
-    double bufferDivisionValue = (double)1/tracksSize; // divide the buffer and sum up the data on all tracks using this value
+    float bufferDivisionValue = GetDivisionValue((int) tracks.size()); // divide the buffer and sum up the data on all tracks using this value
     
-    printf("SIZE = %d, div val = %d\n", tracks.size(), bufferDivisionValue);
+    printf("SIZE = %d, div val = %f\n", tracks.size(), bufferDivisionValue);
 
     for (std::list<Track>::iterator it = tracks.begin(); it != tracks.end(); ++it) { // for each track
         printf("Track: %s\n", it->GetTrackName().c_str());
