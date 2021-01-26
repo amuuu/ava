@@ -20,7 +20,7 @@ int main(void)
     Ava ava;
     SimpleSineGenerator sine;
   
-    VirtualInstrumentParameter p;
+    VirtualInstrumentParameter p; //= {.name = "freq", .value = 500.0 };
     p.name = "freq";
     p.value = 440.0;
     

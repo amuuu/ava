@@ -10,8 +10,6 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 
 OutputData* SimpleSineGenerator::FillOutputData()
 {
-    printf("freq=%f\n", parameters["freq"]);
-    
     int size = outputData->size;
     float freq = parameters["freq"];
 
@@ -26,8 +24,8 @@ OutputData* SimpleSineGenerator::FillOutputData()
 bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParameter) 
 { 
     parameters[targetParameter.name] = targetParameter.value; // TODO: handle none-existent parameters in the map
-    
-    // printf("Parameter %p = %f\n", targetParameter.name, parameters[targetParameter.name]);
+
+    printf("Parameter %s = %f\n", targetParameter.name.c_str(), parameters[targetParameter.name]);
     return true;
 }
 

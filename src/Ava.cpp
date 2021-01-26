@@ -40,6 +40,7 @@ bool Ava::SetState(EngineState newState)
     return false;
 }
 
+// TODO: Input must be a list/array of output data; one for each track in the project.
 bool Ava::UpdateOutputBufferData(OutputData* newOutputData)
 {
     if(io.pac.SetOutputBuffer(newOutputData))
