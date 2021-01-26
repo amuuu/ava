@@ -32,6 +32,7 @@ int main(void)
     sine2.SetParameter(p);
     ava.project.AppendTrack();
     ava.project.GetTrack(1)->AppendNewUnit(sine2);
+    ava.project.GetTrack(1)->ChangeTrackState(Deactivated);
     
     ava.UpdateOutputBufferData();
 
