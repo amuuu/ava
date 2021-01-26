@@ -3,7 +3,7 @@
 
 Ava::Ava()
 {
-    printf("Project %s initialized.\n", project.GetProjectName());
+    printf("Project %s initialized.\n", project.GetProjectName().c_str());
 }
 
 bool Halt::PerformTransition(IOController io)
@@ -44,28 +44,30 @@ bool Ava::SetState(EngineState newState)
 bool Ava::UpdateOutputBufferData()
 {
     
-    OutputData* tmpOutputData;
+    OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     InitOutputDataStruct(tmpOutputData);    
     
     std::list<Track> tracks = project.GetAllTracks();
 
-    float bufferDivisionValue = 1/float(tracks.size()); // divide the buffer and sum up the data on all tracks using this value
+    int tracksSize = (double) tracks.size();
+    double bufferDivisionValue = (double)1/tracksSize; // divide the buffer and sum up the data on all tracks using this value
     
+    printf("SIZE = %d, div val = %d\n", tracks.size(), bufferDivisionValue);
+
     for (std::list<Track>::iterator it = tracks.begin(); it != tracks.end(); ++it) { // for each track
+        printf("Track: %s\n", it->GetTrackName().c_str());
         
         OutputData* od = it->GetSoundUnit(0).GetOutputBufferData(); // get the sound unit (considering we don't have effects yet)
         
         for (int i=0; i< tmpOutputData->size; i++) {
-            
-            tmpOutputData->outputBuffer[i] = bufferDivisionValue * od->outputBuffer[i];
+            // printf()
+            tmpOutputData->outputBuffer[i] += bufferDivisionValue * od->outputBuffer[i];
         }
     }
-    // ????
-    // for (auto const& i : data) {
-    //     std::cout << i.name;
-    // }
 
-    if(io.pac.SetOutputBuffer(tmpOutputData))
+    if(io.pac.SetOutputBuffer(tmpOutputData)) {
+        printf("Output buffer updated. \n");
         return true;
+    }
     return false;
 }

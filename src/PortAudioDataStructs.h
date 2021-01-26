@@ -15,9 +15,10 @@ struct OutputData
 
 static void InitOutputDataStruct(OutputData* od)
 {
-    od = (struct OutputData*) malloc (sizeof(struct OutputData)); // segmentation fault potential
-    
+    // od = (struct OutputData*) malloc (sizeof(struct OutputData)); // segmentation fault potential
     od->size = DEFAULT_SIZE;
     od->cursor = INIT_CURSOR_VAL;
     od->framesNo = DEFAULT_FRAMES_NO;
+
+    for(int i=0; i<od->size; i++) od->outputBuffer[i] = 0;
 }

@@ -69,7 +69,10 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
 
 bool PortAudioController::InitPaOutputDataStruct()
 {
+    paOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     InitOutputDataStruct(paOutputData);
+
+    return true;
 }
 
 

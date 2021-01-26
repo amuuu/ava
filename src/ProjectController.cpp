@@ -6,7 +6,7 @@ ProjectController::ProjectController()
     globalSettings.PROJECT_NAME = "PURE AVA";
 
 
-    Track mainTrack ("Main");
+    Track mainTrack ("Main Track");
     tracks.push_back(mainTrack);
 }
 

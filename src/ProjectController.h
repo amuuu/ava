@@ -1,4 +1,5 @@
 #include "Track.h"
+#include <string>
 
 class ProjectController
 {
@@ -13,7 +14,7 @@ class ProjectController
         std::list<Track> GetAllTracks() const { return tracks; }
 
         
-        char* GetProjectName() const { return globalSettings.PROJECT_NAME; }
+        std::string GetProjectName() const { return globalSettings.PROJECT_NAME; }
 
     private:
         std::list<Track> tracks;
@@ -23,6 +24,6 @@ class ProjectController
             int PROJECT_SAMPLE_RATE;
             float PROJECT_MASTER_VOLUME;
             float PROJECT_MASTER_PAN;
-            char* PROJECT_NAME; 
+            std::string PROJECT_NAME; 
         } globalSettings;
 };

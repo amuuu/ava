@@ -11,8 +11,8 @@ class Track
 {
     public:
         
-        Track() {};
-        Track(std::string name) { trackAudioSettings.trackName = name; };
+        Track() { soundUnits = new std::list<SoundUnit>; };
+        Track(std::string name) : Track() { trackAudioSettings.trackName = name; };
         
         TrackState GetTrackState() const { return state; }
         bool ChangeTrackState(TrackState newState) { return true; /* for now */ };
@@ -21,11 +21,13 @@ class Track
         SoundUnit GetSoundUnit(int index);
 
         bool SetTrackName(std::string name) { trackAudioSettings.trackName = name; return true; }
+        std::string GetTrackName() { return trackAudioSettings.trackName; }
+
     
     private:
         TrackState state;
 
-        std::list<SoundUnit> soundUnits;
+        std::list<SoundUnit>* soundUnits;
 
         struct TrackAudioSettings_t
         {
@@ -33,5 +35,6 @@ class Track
             float volume;
             float pan;
             std::string trackName; 
+
         } trackAudioSettings;
 };

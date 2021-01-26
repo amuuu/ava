@@ -4,7 +4,6 @@
 SoundUnit::SoundUnit()
 {
     outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-
     InitializeDefaultIOStructValues();
 }
 

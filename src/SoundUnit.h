@@ -15,7 +15,7 @@ class SoundUnit
     public:
         SoundUnit();
         
-        OutputData* GetOutputBufferData() const { return outputData; }
+        OutputData* GetOutputBufferData() { return outputData; }
     
     protected:
         OutputData* outputData;
