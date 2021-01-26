@@ -6,18 +6,20 @@ class ProjectController
     public: 
         ProjectController();
 
-        Track GetTrack(int trackIndex);        
+        Track* GetTrack(int trackIndex);        
         bool AppendTrack(Track newTrack);
         bool RemoveTrack(Track toBeRemovedTrack) { return true; }
         bool AppendTrack();
 
-        std::list<Track> GetAllTracks() const { return tracks; }
+        int GetNumActiveTracks();
+
+        std::list<Track>* GetAllTracks() const { return tracks; }
 
         
         std::string GetProjectName() const { return globalSettings.PROJECT_NAME; }
 
     private:
-        std::list<Track> tracks;
+        std::list<Track>* tracks;
 
         struct GlobalSettings_t
         {

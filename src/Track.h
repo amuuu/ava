@@ -11,11 +11,11 @@ class Track
 {
     public:
         
-        Track() { soundUnits = new std::list<SoundUnit>; };
+        Track() { soundUnits = new std::list<SoundUnit>; ChangeTrackState(Active); };
         Track(std::string name) : Track() { trackAudioSettings.trackName = name; };
         
         TrackState GetTrackState() const { return state; }
-        bool ChangeTrackState(TrackState newState) { return true; /* for now */ };
+        bool ChangeTrackState(TrackState newState) { state = newState; return true;};
 
         bool AppendNewUnit(SoundUnit newSoundUnit); // TODO: doesn't obey SRP, should be inside a new class
         SoundUnit GetSoundUnit(int index);

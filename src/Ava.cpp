@@ -47,20 +47,25 @@ bool Ava::UpdateOutputBufferData()
     OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     InitOutputDataStruct(tmpOutputData);    
     
-    std::list<Track> tracks = project.GetAllTracks();
+    std::list<Track>* tracks = project.GetAllTracks();
 
-    float bufferDivisionValue = GetDivisionValue((int) tracks.size()); // divide the buffer and sum up the data on all tracks using this value
+    float bufferDivisionValue = GetDivisionValue((int) project.GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
     
-    printf("SIZE = %d, div val = %f\n", tracks.size(), bufferDivisionValue);
-
-    for (std::list<Track>::iterator it = tracks.begin(); it != tracks.end(); ++it) { // for each track
+    for (std::list<Track>::iterator it = tracks->begin(); it != tracks->end(); ++it) { // for each track
+        
         printf("Track: %s\n", it->GetTrackName().c_str());
         
-        OutputData* od = it->GetSoundUnit(0).GetOutputBufferData(); // get the sound unit (considering we don't have effects yet)
-        
-        for (int i=0; i< tmpOutputData->size; i++) {
-            tmpOutputData->outputBuffer[i] += bufferDivisionValue * od->outputBuffer[i];
-            printf("out[%d]=%f, input[%d]=%f\n", i, tmpOutputData->outputBuffer[i],i, od->outputBuffer[i]);
+        if (it->GetTrackState() == Active)
+        {
+            OutputData* od = it->GetSoundUnit(0).GetOutputBufferData(); // get the sound unit (considering we don't have effects yet)
+            
+            for (int i=0; i< tmpOutputData->size; i++) {
+                tmpOutputData->outputBuffer[i] += bufferDivisionValue * od->outputBuffer[i];
+            }
+        }
+        else
+        {
+            printf("^^^^ Track was not active.\n");
         }
     }
 
