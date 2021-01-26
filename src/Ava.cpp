@@ -59,8 +59,8 @@ bool Ava::UpdateOutputBufferData()
         OutputData* od = it->GetSoundUnit(0).GetOutputBufferData(); // get the sound unit (considering we don't have effects yet)
         
         for (int i=0; i< tmpOutputData->size; i++) {
-            // printf()
             tmpOutputData->outputBuffer[i] += bufferDivisionValue * od->outputBuffer[i];
+            printf("out[%d]=%f, input[%d]=%f\n", i, tmpOutputData->outputBuffer[i],i, od->outputBuffer[i]);
         }
     }
 

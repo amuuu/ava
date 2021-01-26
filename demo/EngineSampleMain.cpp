@@ -29,7 +29,7 @@ int main(void)
     
     SimpleSineGenerator sine2;
     p.value = 410.0;
-    sine.SetParameter(p);
+    sine2.SetParameter(p);
     ava.project.AppendTrack();
     ava.project.GetTrack(1).AppendNewUnit(sine2);
     
