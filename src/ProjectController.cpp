@@ -6,14 +6,24 @@ ProjectController::ProjectController()
     globalSettings.PROJECT_NAME = "PURE AVA";
 
 
-    Track mainTrack;
+    Track mainTrack ("Main");
     tracks.push_back(mainTrack);
 }
 
 bool ProjectController::AppendTrack(Track newTrack)
 {
     tracks.push_back(newTrack);
+    return true;
+}
+
+bool ProjectController::AppendTrack()
+{
+    Track newTrack;
     
+    std::string newTrackName = "Track " + std::to_string(tracks.size()+1);
+    newTrack.SetTrackName(newTrackName);
+
+    tracks.push_back(newTrack);
     return true;
 }
 

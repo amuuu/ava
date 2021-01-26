@@ -40,6 +40,7 @@ class PortAudioController
 
         bool SetOutputBuffer(OutputData* newPaOutputData);
 
+        OutputData* CalculateSumOutputData();
 
         // TODO: set audio device
 
@@ -68,5 +69,7 @@ class PortAudioController
         void paStreamFinishedMethod();
 
         bool IsStreamEmpty();
+
+        bool InitPaOutputDataStruct();
 
 };

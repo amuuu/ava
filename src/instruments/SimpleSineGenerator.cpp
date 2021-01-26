@@ -28,6 +28,9 @@ bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParamete
     parameters[targetParameter.name] = targetParameter.value; // TODO: handle none-existent parameters in the map
 
     printf("Parameter %s = %f\n", targetParameter.name.c_str(), parameters[targetParameter.name]);
+    
+    FillOutputData();
+
     return true;
 }
 

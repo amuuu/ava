@@ -18,18 +18,22 @@ int main(void)
 {
 
     Ava ava;
-    SimpleSineGenerator sine;
   
     VirtualInstrumentParameter p; //= {.name = "freq", .value = 500.0 };
     p.name = "freq";
     p.value = 440.0;
-    
-    sine.SetParameter(p);
-    sine.FillOutputData();
 
+    SimpleSineGenerator sine;
+    sine.SetParameter(p);
     ava.project.GetTrack(0).AppendNewUnit(sine);
     
-    ava.UpdateOutputBufferData(sine.GetOutputBufferData());
+    // SimpleSineGenerator sine2;
+    // p.value = 410.0;
+    // sine.SetParameter(p);
+    // ava.project.AppendTrack();
+    // ava.project.GetTrack(1).AppendNewUnit(sine2);
+    
+    ava.UpdateOutputBufferData();
 
     if (ava.SetState(StartingState)) {
         

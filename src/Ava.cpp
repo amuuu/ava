@@ -41,9 +41,31 @@ bool Ava::SetState(EngineState newState)
 }
 
 // TODO: Input must be a list/array of output data; one for each track in the project.
-bool Ava::UpdateOutputBufferData(OutputData* newOutputData)
+bool Ava::UpdateOutputBufferData()
 {
-    if(io.pac.SetOutputBuffer(newOutputData))
+    
+    OutputData* tmpOutputData;
+    InitOutputDataStruct(tmpOutputData);    
+    
+    std::list<Track> tracks = project.GetAllTracks();
+
+    float bufferDivisionValue = 1/float(tracks.size()); // divide the buffer and sum up the data on all tracks using this value
+    
+    for (std::list<Track>::iterator it = tracks.begin(); it != tracks.end(); ++it) { // for each track
+        
+        OutputData* od = it->GetSoundUnit(0).GetOutputBufferData(); // get the sound unit (considering we don't have effects yet)
+        
+        for (int i=0; i< tmpOutputData->size; i++) {
+            
+            tmpOutputData->outputBuffer[i] = bufferDivisionValue * od->outputBuffer[i];
+        }
+    }
+    // ????
+    // for (auto const& i : data) {
+    //     std::cout << i.name;
+    // }
+
+    if(io.pac.SetOutputBuffer(tmpOutputData))
         return true;
     return false;
 }

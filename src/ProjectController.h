@@ -4,11 +4,16 @@ class ProjectController
 {
     public: 
         ProjectController();
-        char* GetProjectName() const { return globalSettings.PROJECT_NAME; }
 
+        Track GetTrack(int trackIndex);        
         bool AppendTrack(Track newTrack);
         bool RemoveTrack(Track toBeRemovedTrack) { return true; }
-        Track GetTrack(int trackIndex);
+        bool AppendTrack();
+
+        std::list<Track> GetAllTracks() const { return tracks; }
+
+        
+        char* GetProjectName() const { return globalSettings.PROJECT_NAME; }
 
     private:
         std::list<Track> tracks;

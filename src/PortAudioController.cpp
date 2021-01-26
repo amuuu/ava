@@ -67,17 +67,16 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
     return true;
 }
 
+bool PortAudioController::InitPaOutputDataStruct()
+{
+    InitOutputDataStruct(paOutputData);
+}
+
+
 PortAudioController::PortAudioController()
     :stream(0)
 {
-    paOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    
-    // TODO: remove the below duplication using a helper class maybe with the soundunit.cpp file
-    paOutputData->size = DEFAULT_SIZE;
-    paOutputData->cursor = INIT_CURSOR_VAL;
-    paOutputData->framesNo = DEFAULT_FRAMES_NO;
-
-    for (int i=0;i<paOutputData->size;i++) paOutputData->outputBuffer[i] = 1;
+    InitPaOutputDataStruct();    
 }
 
 bool PortAudioController::Initialize()
