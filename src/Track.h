@@ -13,7 +13,9 @@ class Track
         bool ChangeTrackState(TrackState newState) { return true; /* for now */ };
 
         bool AppendNewUnit(SoundUnit newSoundUnit); // TODO: doesn't obey SRP, should be inside a new class
-
+        
+        SoundUnit GetSoundUnit(int index);
+    
     private:
         TrackState state;
 
