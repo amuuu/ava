@@ -4,28 +4,30 @@
 int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
                             const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags)
 {
-    float *out = (float*)outputBuffer;
-    unsigned long i;
-
-    (void) timeInfo; /* Prevent unused variable warnings. */
+    float *out = (float*) outputBuffer;
+    
+    (void) timeInfo;
     (void) statusFlags;
     (void) inputBuffer;
     
-    for( i=0; i<framesPerBuffer; i++ )
+    static int* cursor = &paOutputData->cursor;
+    static int* size = &paOutputData->size;
+    static unsigned long* framesNo = &paOutputData->framesNo;
+    static float* buffer = &paOutputData->outputBuffer[0];
+
+    for (int i=0; i<framesPerBuffer; i++)
     {
-        printf("%cursor %d\n", paOutputData->cursor);
-        // if (paOutputData->cursor < paOutputData->framesNo) {
-            *out++ = paOutputData->outputBuffer[paOutputData->cursor];
-            paOutputData->cursor+= 1;
-            // printf("a %f, ", *(paOutputData->outputBuffer[paOutputData->cursor]));
-        // }
-        // else 
-        if (paOutputData->cursor = paOutputData->size) paOutputData->cursor = 0;
-        // {
-            // *out++ = 0;
-            // printf("b\n");
-        // }
-    }
+        *out++ = *(buffer + *cursor);
+        *out++ = *(buffer + *cursor);
+        
+        *cursor += 1;        
+        if (*cursor >= *size) *cursor -= *size;
+        
+        /* if (*cursor < *framesNo) {
+            }        
+        else {
+        } */
+    }  
 
     return paContinue;  
 }

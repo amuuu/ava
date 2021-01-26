@@ -9,6 +9,6 @@ struct OutputData
 {
     int size;
     float outputBuffer [DEFAULT_SIZE];
-    unsigned long cursor; // add left and right cursors?
+    int cursor; // add left and right cursors?
     unsigned long framesNo; //?
 };

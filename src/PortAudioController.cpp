@@ -4,6 +4,12 @@ bool PortAudioController::SetOutputBuffer(OutputData* newPaOutputData)
 {
     *paOutputData = *newPaOutputData;
 
+    for (int i=0; i<paOutputData->size; i++) {
+        printf("i = %d,\tvalue= %f\n", i, paOutputData->outputBuffer[i]);
+        generatedOutputBuffer[i] = paOutputData->outputBuffer[i];
+    }
+
+    
     return true;
 }
 
@@ -77,6 +83,8 @@ PortAudioController::PortAudioController()
     paOutputData->size = DEFAULT_SIZE;
     paOutputData->cursor = INIT_CURSOR_VAL;
     paOutputData->framesNo = DEFAULT_FRAMES_NO;
+
+    for (int i=0;i<paOutputData->size;i++) paOutputData->outputBuffer[i] = 1;
 }
 
 bool PortAudioController::Initialize()
