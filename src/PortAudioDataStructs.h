@@ -1,3 +1,11 @@
+/** @file PortAudioCallbacks.h
+	@brief Shared structs between Port Audio and other classes
+*/
+/*
+*   This header contains shared structs that both PortAudioController and other classes such as VirtualInstrument use.
+*   It also has some static functions to use with those structs.
+*/
+
 #pragma once
 
 #define DEFAULT_SIZE (200)

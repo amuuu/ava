@@ -1,3 +1,10 @@
+/** @file Track.h
+	@brief Manages individual tracks and the soundunits inside them.
+*/
+/*
+*   This header contains methods for managing a single track and soundunits inside that track,
+*   as well as providing ways to manage track settings such as its state (active, mute, deactivated.)
+*/
 
 #include "SoundUnit.h"
 

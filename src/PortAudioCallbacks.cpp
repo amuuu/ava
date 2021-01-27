@@ -1,3 +1,11 @@
+/** @file PortAudioCallbacks.cpp
+	@brief Different Port Audio callback functions
+*/
+/*
+*   This header contains different pa callbacks. The only reason that it's not combined with PortAudioController.cpp
+*   is because it'd make the other file too crowded :)
+*/
+
 #include "PortAudioController.h"
 
 // TODO: re-write + rename this callback.

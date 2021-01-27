@@ -1,13 +1,9 @@
 /** @file PortAudioController.h
 	@brief Main controller for audio I/O that uses PortAudio sound API
-	@author AMU <a@b.c>
 */
 /*
-*
-*
-*
-*
-*
+*   This header contains methods for utilizing PortAudio API. 
+*   Methods are implemented inside PortAudioController.cpp and PortAudioCallbacks.cpp
 */
 
 #include <stdio.h>

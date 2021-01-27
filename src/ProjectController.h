@@ -1,3 +1,11 @@
+/** @file ProjectController.h
+	@brief Main controller for different tracks and their states inside a project
+*/
+/*
+*   This header contains methods for creating and managing a project with multiple tracks,
+*   as well as providing ways to change the general settings of the project.
+*/
+
 #include "Track.h"
 #include <string>
 

@@ -1,13 +1,10 @@
 /** @file Ava.h
 	@brief Main header file of the engine which manages the states and their transitions as well as managing the tracks
-	@author AMU <a@b.c>
 */
 /*
-*
-*
-*
-*
-*
+*   This header file consists of classes for managing the engine's states and transitions between them.
+*   The main IO controller object and the project controller object is inside the Ava class.
+*   Ava class is the main object that the user program must use when they're using the engine.
 */
 
 #include "IOController.h"

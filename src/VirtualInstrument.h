@@ -1,3 +1,10 @@
+/** @file VirtualInstrument.h
+	@brief Base class for instruments with real-time configurable parameters 
+*/
+/*
+*   This header contains methods for the base class that's inherited to create virtual instruments.
+*/
+
 #pragma once
 
 #include "SoundUnit.h"

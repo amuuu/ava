@@ -1,3 +1,10 @@
+/** @file MathStaticFuncs.h
+	@brief Math helper functions
+*/
+/*
+*   This header contains some helper static methods for math tasks.
+*/
+
 #pragma once
 
 #include "math.h"
