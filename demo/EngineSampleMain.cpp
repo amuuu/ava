@@ -26,13 +26,12 @@ int main(void)
     SimpleSineGenerator sine;
     sine.SetParameter(p);
     ava.project.GetTrack(0)->AppendNewUnit(sine);
+    ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
     
     SimpleSineGenerator sine2;
-    p.value = 410.0;
-    sine2.SetParameter(p);
+    sine2.SetParameter("freq", 410);
     ava.project.AppendTrack();
     ava.project.GetTrack(1)->AppendNewUnit(sine2);
-    ava.project.GetTrack(1)->ChangeTrackState(Deactivated);
     
     ava.UpdateOutputBufferData();
 

@@ -34,6 +34,16 @@ bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParamete
     return true;
 }
 
+bool SimpleSineGenerator::SetParameter(std::string parameterName, float parameterValue)
+{
+    parameters[parameterName] = parameterValue; // TODO: handle none-existent parameters in the map
+
+    FillOutputData();
+
+    return true;
+}
+
+
 
 bool SimpleSineGenerator::AddParameter(VirtualInstrumentParameter targetParameter) 
 { 
