@@ -21,13 +21,18 @@ class SoundEffect : public VirtualInstrument
         bool IsBypassed() { return *isBypassed; }
         
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
-        bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; }
+        bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
-        virtual bool ApplyEffect();
+        virtual OutputData* ApplyEffect();
 
+        OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
 
     private:
         float* drywetValue;
         bool* isBypassed;
 
-}
+    protected:
+        OutputData* processed;
+        OutputData* preProcessed;
+
+};
