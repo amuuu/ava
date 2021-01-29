@@ -24,15 +24,15 @@ class VirtualInstrument : public RawUnit
     
     public:
         VirtualInstrument() : RawUnit() {}
-        virtual bool SetParameter(VirtualInstrumentParameter targetParameter) { return false; }
-        virtual bool SetParameter(std::string parameterName, float parameterValue) { return false; }
+        bool SetParameter(VirtualInstrumentParameter targetParameter);
+        bool SetParameter(std::string parameterName, float parameterValue);
 
     
     protected:
-        std::map<std::string, float> parameters;
+        std::map<std::string, float> parameters; // this may have to be turned into a pointer
 
         virtual OutputData* UpdateOutputBuffer() { return outputData; };
-        virtual bool AddParameter(VirtualInstrumentParameter targetParameter) { return false; }
+        bool AddParameter(VirtualInstrumentParameter targetParameter);
 
 
 };
