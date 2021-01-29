@@ -31,7 +31,7 @@ class VirtualInstrument : public RawUnit
     protected:
         std::map<std::string, float> parameters;
 
-        virtual OutputData* FillOutputData() { return outputData; };
+        virtual OutputData* UpdateOutputBuffer() { return outputData; };
         virtual bool AddParameter(VirtualInstrumentParameter targetParameter) { return false; }
 
 

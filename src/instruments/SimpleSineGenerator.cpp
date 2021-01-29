@@ -8,7 +8,7 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
     parameters.insert({"freq", 1});
 }
 
-OutputData* SimpleSineGenerator::FillOutputData()
+OutputData* SimpleSineGenerator::UpdateOutputBuffer()
 {
     // TODO: Not all freqs can be heard. something's wrong with the formula.
     
@@ -29,7 +29,7 @@ bool SimpleSineGenerator::SetParameter(VirtualInstrumentParameter targetParamete
 
     printf("Parameter %s = %f\n", targetParameter.name.c_str(), parameters[targetParameter.name]);
     
-    FillOutputData();
+    UpdateOutputBuffer();
 
     return true;
 }
@@ -38,7 +38,7 @@ bool SimpleSineGenerator::SetParameter(std::string parameterName, float paramete
 {
     parameters[parameterName] = parameterValue; // TODO: handle none-existent parameters in the map
 
-    FillOutputData();
+    UpdateOutputBuffer();
 
     return true;
 }

@@ -2,7 +2,7 @@
 	@brief A simple and basic virtual instrument for Ava
 */
 /*
-*   This header contains the implementation for a simple sine wave generator. The main method is FillOutputData.
+*   This header contains the implementation for a simple sine wave generator. The main method is UpdateOutputBuffer.
 */
 
 #include "../VirtualInstrument.h"
@@ -17,6 +17,6 @@ class SimpleSineGenerator: public VirtualInstrument
         
     private:    
         bool AddParameter(VirtualInstrumentParameter targetParameter);
-        OutputData* FillOutputData();
+        OutputData* UpdateOutputBuffer();
 
 };
