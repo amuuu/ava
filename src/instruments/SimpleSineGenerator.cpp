@@ -5,7 +5,7 @@
 
 SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 {
-    parameters.insert({"freq", 1});
+    (*parameters).insert({"freq", 1});
 }
 
 OutputData* SimpleSineGenerator::UpdateOutputBuffer()
@@ -13,7 +13,7 @@ OutputData* SimpleSineGenerator::UpdateOutputBuffer()
     // TODO: Not all freqs can be heard. something's wrong with the formula.
     
     int size = outputData->size;
-    float freq = parameters["freq"];
+    float freq = (*parameters)["freq"];
 
     for(int i=0; i < size; i++)
     {

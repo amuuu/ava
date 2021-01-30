@@ -23,18 +23,17 @@ int main(void)
   
     VirtualInstrumentParameter p;
     p.name = "freq";
-    p.value = 440.0;
+    p.value = 410.0;
 
     SimpleSineGenerator sine;
     sine.SetParameter(p);
     ava.project.GetTrack(0)->AppendNewUnit(sine);
-    ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
+    // ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
     
-
     Delay delay;
     delay.SetParameter("amount", 1);
     ava.project.GetTrack(0)->AppendNewUnit(delay);
-
+    
     // SimpleSineGenerator sine2;
     // sine2.SetParameter("freq", 410);
     // ava.project.AppendTrack();

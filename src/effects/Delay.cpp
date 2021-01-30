@@ -2,6 +2,7 @@
 
 Delay::Delay() : SoundEffect()
 {
+
     SetParameter("amount", 1.0);
 
     tmpReadPtr = 0;
@@ -9,7 +10,7 @@ Delay::Delay() : SoundEffect()
 
 void Delay::SetDelayAmount()
 {
-    *amount = (int) parameters["amount"];
+    *amount = (int) (*parameters)["amount"];
 
 }
 
@@ -24,13 +25,13 @@ OutputData* Delay::ApplyEffect()
         
         if (*tmpReadPtr >= *amount) { *tmpReadPtr -= *amount; }
     }
-
+    printf("HERHERHERHERHEHRHERHER\n");
     return outputData;
 }
 
-void Delay::SetOutputBufferData(OutputData *newOutputData) {
-    
+void Delay::SetOutputBufferData(OutputData *newOutputData)
+{
+    printf("hererererer\n");
     *outputData = *newOutputData; 
-    
     ApplyEffect();
 }

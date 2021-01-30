@@ -26,6 +26,9 @@ class SoundEffect : public VirtualInstrument
         virtual OutputData* ApplyEffect() { return 0; };
         OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
 
+        
+        bool SetParameter(std::string parameterName, float parameterValue); // not a clean solution. should be changed
+        
 
     private:
         float* drywetValue;
