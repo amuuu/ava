@@ -15,7 +15,7 @@
 class SoundEffect : public VirtualInstrument
 {
     public:
-        SoundEffect();
+        SoundEffect() : VirtualInstrument() { }
 
         float GetDryWetValue() { return *drywetValue; }
         bool IsBypassed() { return *isBypassed; }
@@ -23,16 +23,12 @@ class SoundEffect : public VirtualInstrument
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
         bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
-        virtual OutputData* ApplyEffect();
-
+        virtual OutputData* ApplyEffect() { return 0; };
         OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
+
 
     private:
         float* drywetValue;
         bool* isBypassed;
-
-    protected:
-        OutputData* processed;
-        OutputData* preProcessed;
 
 };

@@ -30,6 +30,9 @@ class Track
         bool SetTrackName(std::string name) { trackAudioSettings.trackName = name; return true; }
         std::string GetTrackName() { return trackAudioSettings.trackName; }
 
+        std::list<SoundUnit>* GetAllSoundUnits() const { return soundUnits; }
+
+
     
     private:
         TrackState state;

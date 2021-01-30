@@ -1,6 +1,6 @@
 #include "Delay.h"
 
-Delay::Delay()
+Delay::Delay() : SoundEffect()
 {
     SetParameter("amount", 1.0);
 
@@ -26,5 +26,11 @@ OutputData* Delay::ApplyEffect()
     }
 
     return outputData;
+}
 
+void Delay::SetOutputBufferData(OutputData *newOutputData) {
+    
+    *outputData = *newOutputData; 
+    
+    ApplyEffect();
 }

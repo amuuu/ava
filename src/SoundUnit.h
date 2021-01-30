@@ -24,6 +24,7 @@ class SoundUnit
         SoundUnit();
         
         OutputData* GetOutputBufferData() { return outputData; }
+        void SetOutputBufferData(OutputData *newOutputData) { *outputData = *newOutputData; }
     
     protected:
         OutputData* outputData;

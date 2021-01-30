@@ -51,13 +51,29 @@ bool Ava::UpdateOutputBufferData()
 
     float bufferDivisionValue = GetDivisionValue((int) project.GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
     
-    for (std::list<Track>::iterator it = tracks->begin(); it != tracks->end(); ++it) { // for each track
+    for (std::list<Track>::iterator trackIt = tracks->begin(); trackIt != tracks->end(); ++trackIt) { // for each track
         
-        printf("Track: %s\n", it->GetTrackName().c_str());
+        printf("Track: %s\n", trackIt->GetTrackName().c_str());
         
-        if (it->GetTrackState() == Active) // only calculate the buffer based on active tracks
+        if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
         {
-            OutputData* od = it->GetSoundUnit(0).GetOutputBufferData(); // get the sound unit (considering we don't have effects yet)
+            
+            std::list<SoundUnit>* soundUnits = trackIt->GetAllSoundUnits();
+            std::list<SoundUnit>::iterator soundUnitIt = soundUnits->begin();
+            OutputData* od;
+            
+            for (soundUnitIt = soundUnits->begin(); soundUnitIt != soundUnits->end(); ++soundUnitIt) { // for each sound unit inside the track
+                od = soundUnitIt->GetOutputBufferData();
+                ++soundUnitIt;
+                soundUnitIt->SetOutputBufferData(od);  /* buffer of list[1] = list[0] <-(which is the source of sound) (list[1] is an effect)              
+                                                        * then buffer of list[2] = list[1]
+                                                        *  ...
+                                                        *
+                                                        * Inside SetOutputBufferData for effects, their effect will be applied and outputdata will be updated.
+                                                        */
+            }
+            
+            od = soundUnitIt->GetOutputBufferData(); // the final soundunit will now have the effects of itself + all previous units combined.
             
             for (int i=0; i< tmpOutputData->size; i++) {
                 tmpOutputData->outputBuffer[i] += bufferDivisionValue * od->outputBuffer[i]; // update the buffer value based on the division value

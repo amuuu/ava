@@ -1,5 +1,5 @@
-/** @file SoundEffect.h
-	@brief Base class for sound effect units
+/** @file Delay.h
+	@brief Basic delay effect
 */
 /*
 *   
@@ -14,6 +14,8 @@ class Delay : public SoundEffect
     public:
         Delay();
         OutputData* ApplyEffect();
+        
+        void SetOutputBufferData(OutputData *newOutputData);
     
     private:
         void SetDelayAmount();

@@ -2,6 +2,8 @@
 #include "../src/include/portaudio.h"
 
 #include "../src/instruments/SimpleSineGenerator.h"
+#include "../src/effects/Delay.h"
+
 
 ///////// This is only to use the sleep function to demonstrate the example.
 #ifdef _WIN32
@@ -28,10 +30,15 @@ int main(void)
     ava.project.GetTrack(0)->AppendNewUnit(sine);
     ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
     
-    SimpleSineGenerator sine2;
-    sine2.SetParameter("freq", 410);
-    ava.project.AppendTrack();
-    ava.project.GetTrack(1)->AppendNewUnit(sine2);
+
+    Delay delay;
+    delay.SetParameter("amount", 1);
+    ava.project.GetTrack(0)->AppendNewUnit(delay);
+
+    // SimpleSineGenerator sine2;
+    // sine2.SetParameter("freq", 410);
+    // ava.project.AppendTrack();
+    // ava.project.GetTrack(1)->AppendNewUnit(sine2);
     
     ava.UpdateOutputBufferData();
 
