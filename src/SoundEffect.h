@@ -23,11 +23,16 @@ class SoundEffect : public VirtualInstrument
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
         bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
-        virtual OutputData* ApplyEffect() { };
+        virtual OutputData* ApplyEffect() { printf("ssssssss"); return 0; };
         OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
+
+        int GetId() { return *id; }
+        void SetId(int givenId) { *id = givenId; }
+
 
     private:
         float* drywetValue;
         bool* isBypassed;
+        int* id;
 
 };

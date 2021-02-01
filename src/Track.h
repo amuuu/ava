@@ -7,11 +7,12 @@
 */
 
 #include "SoundUnit.h"
-#include "SoundEffect.h"
+// #include "SoundEffect.h"
+// #include "SoundEffectsList.h"
+#include "SoundEffectComposition.h"
 
 #include <list>
 #include <string>
-#include <typeinfo>
 
 enum TrackState {Mute, Deactivated, Active};
 enum TrackOutputMode {Mono, Stereo};
@@ -28,7 +29,7 @@ class Track
 
         bool AppendNewSoundEffect(SoundEffect newSoundEffect); // TODO: doesn't obey SRP, should be inside a new class
         bool SetSoundSource(SoundUnit newSoundSource) { *soundSource = newSoundSource; return true; }
-        
+        #include <typeinfo>
         SoundEffect GetEffect(int index);
         SoundUnit GetSoundSource();
 
@@ -45,6 +46,7 @@ class Track
         // std::list<SoundUnit>* soundUnits;
         std::list<SoundEffect>* effectChain;
         SoundUnit* soundSource;
+        
 
         struct TrackAudioSettings_t
         {

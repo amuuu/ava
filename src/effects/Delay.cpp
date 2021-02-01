@@ -3,6 +3,7 @@
 Delay::Delay() : SoundEffect()
 {
 
+    SetId(1);
     SetParameter("amount", 1.0);
 
     SetSoundUnitName("Delay");
@@ -20,8 +21,9 @@ OutputData* Delay::ApplyEffect()
 {
     printf("SHHHHHHHHHHHHHHHHHH");
     
-    SetDelayAmount();
-
+    // SetDelayAmount();
+    *amount = 1;
+    
     for (int i=0; i<outputData->size; i++) {
         double y = outputData->outputBuffer[*tmpReadPtr];
         
