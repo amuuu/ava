@@ -33,6 +33,6 @@ class SoundEffect : public VirtualInstrument
     private:
         float* drywetValue;
         bool* isBypassed;
-        int* id;
+        int* id; // TODO: this is not convinient; should be changed
 
 };

@@ -3,7 +3,7 @@
 Delay::Delay() : SoundEffect()
 {
 
-    SetId(1);
+    SetId(1); 
     SetParameter("amount", 1.0);
 
     SetSoundUnitName("Delay");

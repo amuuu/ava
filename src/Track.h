@@ -9,7 +9,7 @@
 #include "SoundUnit.h"
 // #include "SoundEffect.h"
 // #include "SoundEffectsList.h"
-#include "SoundEffectComposition.h"
+#include "SoundEffectComposite.h"
 
 #include <list>
 #include <string>
