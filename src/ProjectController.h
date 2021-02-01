@@ -9,6 +9,9 @@
 #include "Track.h"
 #include <string>
 
+#include "PortAudioDataStructs.h"
+#include "MathStaticFuncs.h"
+
 class ProjectController
 {
     public: 
@@ -19,11 +22,10 @@ class ProjectController
         bool RemoveTrack(Track toBeRemovedTrack) { return true; }
         bool AppendTrack();
 
-        int GetNumActiveTracks();
-
         std::list<Track>* GetAllTracks() const { return tracks; }
 
-        
+        OutputData* UpdateProjectOutputBufferData();
+
         std::string GetProjectName() const { return globalSettings.PROJECT_NAME; }
 
     private:
@@ -36,4 +38,6 @@ class ProjectController
             float PROJECT_MASTER_PAN;
             std::string PROJECT_NAME; 
         } globalSettings;
+
+        int GetNumActiveTracks();
 };

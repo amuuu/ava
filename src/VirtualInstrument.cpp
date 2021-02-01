@@ -14,9 +14,9 @@ bool VirtualInstrument::SetParameter(VirtualInstrumentParameter targetParameter)
 bool VirtualInstrument::SetParameter(std::string parameterName, float parameterValue)
 {
     (*parameters)[parameterName] = parameterValue; // TODO: handle none-existent parameters in the map
-    // printf("bruh");
     
-    UpdateOutputBuffer();
+    // UpdateOutputBuffer(); // TODO: causes seg. fault for sound effect units.
+                            // but still it's too much work to call this each time manually when a parameter changes for instrument
     
     return true;
 }

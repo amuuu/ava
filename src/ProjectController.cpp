@@ -50,3 +50,35 @@ int ProjectController::GetNumActiveTracks()
 
     return ans;
 }
+
+OutputData* ProjectController::UpdateProjectOutputBufferData()
+{
+    
+    OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
+    InitOutputDataStruct(tmpOutputData);    
+    
+    float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
+    
+    std::list<Track>::iterator trackIt;
+    for (trackIt = tracks->begin(); trackIt != tracks->end(); ++trackIt) { // for each track
+
+        printf("======= Track: %s =======\n", trackIt->GetTrackName().c_str());
+        
+        if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
+        {
+
+            OutputData* trackOutputData = trackIt->GetTrackOutputBuffer();            
+            
+            for (int i=0; i< tmpOutputData->size; i++) {
+                tmpOutputData->outputBuffer[i] += bufferDivisionValue * trackOutputData->outputBuffer[i]; // update the buffer value based on the division value
+            }
+
+        }
+        else
+        {
+            printf("^^^^ Track was not active.\n");
+            continue;
+        }
+    }
+    return tmpOutputData;
+}

@@ -72,7 +72,8 @@ class Ava
         Ava();        
         bool SetState(EngineState newState);
         // EngineState GetCurrentState() { return currentState->GetStateName(); }
-        bool UpdateOutputBufferData();
+        
+        bool UpdateMainOutputBuffer();
         
         ProjectController project;
 

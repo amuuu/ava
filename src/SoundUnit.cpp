@@ -5,6 +5,8 @@ SoundUnit::SoundUnit()
 {
     outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     InitializeDefaultIOStructValues();
+
+    isEffect = false;
 }
 
 bool SoundUnit::InitializeDefaultIOStructValues()

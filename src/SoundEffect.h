@@ -15,7 +15,7 @@
 class SoundEffect : public VirtualInstrument
 {
     public:
-        SoundEffect() : VirtualInstrument() { }
+        SoundEffect() : VirtualInstrument() { isEffect = true; }
 
         float GetDryWetValue() { return *drywetValue; }
         bool IsBypassed() { return *isBypassed; }
@@ -23,12 +23,8 @@ class SoundEffect : public VirtualInstrument
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
         bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
-        virtual OutputData* ApplyEffect() { return 0; };
+        virtual OutputData* ApplyEffect() { };
         OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
-
-        
-        bool SetParameter(std::string parameterName, float parameterValue); // not a clean solution. should be changed
-        
 
     private:
         float* drywetValue;

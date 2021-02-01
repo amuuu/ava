@@ -15,8 +15,6 @@ class Delay : public SoundEffect
         Delay();
         OutputData* ApplyEffect();
         
-        void SetOutputBufferData(OutputData *newOutputData);
-    
     private:
         void SetDelayAmount();
         int* amount; // to be changed

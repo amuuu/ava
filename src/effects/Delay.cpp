@@ -5,6 +5,8 @@ Delay::Delay() : SoundEffect()
 
     SetParameter("amount", 1.0);
 
+    SetSoundUnitName("Delay");
+
     tmpReadPtr = 0;
 }
 
@@ -16,6 +18,8 @@ void Delay::SetDelayAmount()
 
 OutputData* Delay::ApplyEffect()
 {
+    printf("SHHHHHHHHHHHHHHHHHH");
+    
     SetDelayAmount();
 
     for (int i=0; i<outputData->size; i++) {
@@ -27,11 +31,4 @@ OutputData* Delay::ApplyEffect()
     }
     printf("HERHERHERHERHEHRHERHER\n");
     return outputData;
-}
-
-void Delay::SetOutputBufferData(OutputData *newOutputData)
-{
-    printf("hererererer\n");
-    *outputData = *newOutputData; 
-    ApplyEffect();
 }

@@ -40,76 +40,14 @@ bool Ava::SetState(EngineState newState)
     return false;
 }
 
-// TODO: Input must be a list/array of output data; one for each track in the project.
-bool Ava::UpdateOutputBufferData()
+bool Ava::UpdateMainOutputBuffer()
 {
-    
-    OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    InitOutputDataStruct(tmpOutputData);    
-    
-    std::list<Track>* tracks = project.GetAllTracks();
+    OutputData* od = project.UpdateProjectOutputBufferData();
 
-    float bufferDivisionValue = GetDivisionValue((int) project.GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
-    
-    for (std::list<Track>::iterator trackIt = tracks->begin(); trackIt != tracks->end(); ++trackIt) { // for each track
-        
-        printf("Track: %s\n", trackIt->GetTrackName().c_str());
-        
-        if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
-        {
-            
-            std::list<SoundUnit>* soundUnits = trackIt->GetAllSoundUnits();
-            std::list<SoundUnit>::iterator soundUnitIt = soundUnits->begin();
-            OutputData* od;
-            OutputData* tmp;             
-            
-            if (soundUnits->size() > 1) {
-                for (soundUnitIt = soundUnits->begin(); soundUnitIt != --soundUnits->end(); ++soundUnitIt) { // for each sound unit inside the track
-
-                    od = soundUnitIt->GetOutputBufferData();
-                    printf("od %f\n", od->outputBuffer[12]);
-                    
-                    ++soundUnitIt;
-                    // printf("f %f\n", soundUnitIt->GetOutputBufferData()->outputBuffer[12]);
-                    soundUnitIt->SetOutputBufferData(od); 
-                                                            /* buffer of list[1] = list[0] <-(which is the source of sound) (list[1] is an effect)              
-                                                            * then buffer of list[2] = list[1]
-                                                            *  ...
-                                                            *
-                                                            * Inside SetOutputBufferData for effects, their effect will be applied and outputdata will be updated.
-                                                            */
-                    printf("osd %f\n", soundUnitIt->GetOutputBufferData()->outputBuffer[12]);
-
-
-                    --soundUnitIt;
-                    printf("FOR\n");
-                } 
-                
-                // ++soundUnitIt;
-                
-                od = soundUnitIt->GetOutputBufferData(); // the final soundunit will now have the effects of itself + all previous units combined.
-                printf("od %f\n", od->outputBuffer[12]);
-            }
-            else {
-                od = soundUnitIt->GetOutputBufferData(); // the final soundunit will now have the effects of itself + all previous units combined.
-                    // printf("f %f\n", od->outputBuffer[12]);
-                    printf("HERE\n");
-
-            }
-            
-            for (int i=0; i< tmpOutputData->size; i++) {
-                tmpOutputData->outputBuffer[i] += bufferDivisionValue * od->outputBuffer[i]; // update the buffer value based on the division value
-            }
-        }
-        else
-        {
-            printf("^^^^ Track was not active.\n");
-        }
-    }
-
-    if(io.pac.SetOutputBuffer(tmpOutputData)) {
+    if(io.pac.SetOutputBuffer(od)) {
         printf("Output buffer updated. \n");
         return true;
     }
     return false;
 }
+

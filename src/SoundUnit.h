@@ -9,6 +9,7 @@
 #pragma once
 
 #include <math.h>
+#include <string>
 
 #include "PortAudioDataStructs.h"
 
@@ -25,12 +26,23 @@ class SoundUnit
         
         OutputData* GetOutputBufferData() { return outputData; }
         void SetOutputBufferData(OutputData *newOutputData) { *outputData = *newOutputData; }
+
+        std::string GetSoundUnitName() { return soundUnitProps.name; }
+        void SetSoundUnitName(std::string name) { soundUnitProps.name = name; }
     
+
     protected:
         OutputData* outputData;
+        bool isEffect;
     
     private:
         bool InitializeDefaultIOStructValues();
+        
+        struct SoundUnitProps_t
+        {
+            std::string name; 
+
+        } soundUnitProps;
 
 };
 

@@ -12,8 +12,6 @@ class SimpleSineGenerator: public VirtualInstrument
 {
     public:
         SimpleSineGenerator();
-        
-    private:    
         OutputData* UpdateOutputBuffer();
-
+        
 };

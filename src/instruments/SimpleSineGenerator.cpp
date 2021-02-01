@@ -6,6 +6,8 @@
 SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 {
     (*parameters).insert({"freq", 1});
+
+    SetSoundUnitName("Simple Sine");
 }
 
 OutputData* SimpleSineGenerator::UpdateOutputBuffer()
