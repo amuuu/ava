@@ -11,7 +11,7 @@
 #include "ProjectController.h"
 
 #include "PortAudioDataStructs.h"
-#include "MathStaticFuncs.h"
+#include "util/MathStaticFuncs.h"
 
 #include <map>
 
