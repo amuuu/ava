@@ -5,24 +5,25 @@ Track::Track()
     // soundUnits = new std::list<SoundUnit>;
     effectChain = new std::list<SoundEffect>;
     soundSource = (SoundUnit*) malloc (sizeof(SoundUnit));
-    
+    soundEffectCollection = (SoundEffectCollection*) malloc (sizeof(SoundEffectCollection));
+
     ChangeTrackState(Active);
 }
 
-bool Track::AppendNewSoundEffect(SoundEffect newSoundEffect)
+bool Track::AppendNewSoundEffect(SoundEffect* newSoundEffect)
 {
-    effectChain->push_back(newSoundEffect);
+    effectChain->push_back(*soundEffectCollection->GetSoundEffectInstance(newSoundEffect));
     
     printf("New effect appended to: %s\n", GetTrackName().c_str());
 
     return true;
 }
 
-SoundEffect Track::GetEffect(int index)
+SoundEffect* Track::GetEffect(int index)
 {
     std::list<SoundEffect>::iterator it = effectChain->begin();
     std::advance(it, index);
-    return *it;
+    return soundEffectCollection->GetSoundEffectInstance(&(*it));
 }
 
 SoundUnit Track::GetSoundSource()
@@ -58,23 +59,27 @@ OutputData* Track::GetTrackOutputBuffer()
     // for each sound effect inside the track that comes after the sound generator
     for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 
-        SoundEffectComposite effectStrategy;
+        // SoundEffectComposite effectStrategy;
 
         
         printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
-        effectStrategy.SetEffect(*effectIt);
+        // effectStrategy.SetEffect(*effectIt);
         
         printf("1\n");
+        effectIt->SetOutputBufferData(outputData);
 
-        effectStrategy.soundEffect->SetOutputBufferData(outputData);
+        // effectStrategy.soundEffect->SetOutputBufferData(outputData);
         // printf("fffffffffff %f\n", effectStrategy.soundEffect->GetOutputBufferData()->outputBuffer[12]);
         printf("2\n");
 
-        effectStrategy.soundEffect->ApplyEffect();
+        // effectStrategy.soundEffect->ApplyEffect();
+        effectIt->ApplyEffect();
+
         printf("3\n");
         
-        outputData = effectStrategy.soundEffect->GetOutputBufferData();
+        // outputData = effectStrategy.soundEffect->GetOutputBufferData();
+        outputData = effectIt->GetOutputBufferData();
     }
     
     printf("after f=%f\n", outputData->outputBuffer[12]);
