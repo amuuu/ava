@@ -15,10 +15,6 @@ class SoundEffectType
          
         OutputData* ApplyEffect(std::map<std::string, float> parameters) {return nullptr;}
         
-        void SetEffectName(std::string name) { effectName = name; }
-        std::string GetEffectName() { return effectName; }
-
     protected:
         OutputData* outputData;
-        std::string effectName;
 }; 

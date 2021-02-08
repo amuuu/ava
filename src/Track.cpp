@@ -12,7 +12,7 @@ Track::Track()
 bool Track::AppendNewSoundEffect(std::string effectName)
 {
     SoundEffect newEffect;
-    newEffect.SetSoundEffectType(effectName);
+    newEffect.SetName(effectName);
 
     effectChain->push_back(newEffect);
     

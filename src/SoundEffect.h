@@ -30,14 +30,17 @@ class SoundEffect : public VirtualInstrument
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
         bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
-        void SetSoundEffectType(std::string typeName) { effectType = effectCollection.effectsMap[typeName]; printf(effectType->GetEffectName().c_str());}
 
-        
+        void SetName(std::string name) {SetSoundUnitName(name); SetSoundEffectType(name); }
+
     private:
         SoundEffectType* effectType;
         SoundEffectCollection effectCollection;
         
         float* drywetValue;
         bool* isBypassed;
+
+        void SetSoundEffectType(std::string typeName) { effectType = effectCollection.effectsMap[typeName]; printf(effectType->GetEffectName().c_str());}
+
 
 };
