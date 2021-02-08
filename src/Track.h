@@ -7,8 +7,8 @@
 */
 
 #include "SoundUnit.h"
-// #include "SoundEffect.h"
-// #include "SoundEffectsList.h"
+
+#include "SoundEffect.h"
 #include "SoundEffectCollection.h"
 
 #include <list>
@@ -27,9 +27,9 @@ class Track
         TrackState GetTrackState() { return state; }
         bool ChangeTrackState(TrackState newState) { state = newState; return true;};
 
-        bool AppendNewSoundEffect(SoundEffect* newSoundEffect); // TODO: doesn't obey SRP, should be inside a new class
+        bool AppendNewSoundEffect(std::string effectName); // TODO: doesn't obey SRP, should be inside a new class
         bool SetSoundSource(SoundUnit newSoundSource) { *soundSource = newSoundSource; return true; }
-        SoundEffect* GetEffect(int index);
+        SoundEffect GetEffect(int index);
         SoundUnit GetSoundSource();
 
         bool SetTrackName(std::string name) { trackAudioSettings.trackName = name; return true; }
@@ -42,7 +42,7 @@ class Track
 
         SoundUnit* soundSource;
         std::list<SoundEffect>* effectChain;
-        SoundEffectCollection* soundEffectCollection;
+        SoundEffectCollection soundEffectCollection;
         
 
         struct TrackAudioSettings_t

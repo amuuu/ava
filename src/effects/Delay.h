@@ -7,17 +7,16 @@
 
 #pragma once
 
-#include "../SoundEffect.h"
+#include "../SoundEffectType.h"
 
-class Delay : public SoundEffect
+class Delay : public SoundEffectType
 {
     public:
-        Delay();
-        OutputData* ApplyEffect();
-        
-    private:
-        void SetDelayAmount();
-        int* amount; // to be changed
+        Delay() { tmpReadPtr = 0; }
 
+        OutputData* ApplyEffect(std::map<std::string, float> parameters);
+    
+    private:
         int* tmpReadPtr;
+
 };

@@ -8,6 +8,8 @@
 #pragma once
 
 #include "VirtualInstrument.h"
+#include "SoundEffectType.h"
+#include "SoundEffectCollection.h"
 
 #include <map>
 #include <string>
@@ -15,7 +17,12 @@
 class SoundEffect : public VirtualInstrument
 {
     public:
-        SoundEffect() : VirtualInstrument() { isEffect = true; }
+        SoundEffect() : VirtualInstrument() {}
+
+        
+        OutputData* ApplyEffect() { printf("hereaaaaaaaaaaaaa\n"); return effectType->ApplyEffect(*GetParameters()); };
+        OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
+        
 
         float GetDryWetValue() { return *drywetValue; }
         bool IsBypassed() { return *isBypassed; }
@@ -23,16 +30,14 @@ class SoundEffect : public VirtualInstrument
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
         bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
-        virtual OutputData* ApplyEffect() = 0;
-        OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
+        void SetSoundEffectType(std::string typeName) { effectType = effectCollection.effectsMap[typeName]; printf(effectType->GetEffectName().c_str());}
 
-        int GetId() { return *id; }
-        void SetId(int givenId) { *id = givenId; }
-
-
+        
     private:
+        SoundEffectType* effectType;
+        SoundEffectCollection effectCollection;
+        
         float* drywetValue;
         bool* isBypassed;
-        int* id; // TODO: this is not convinient; should be changed
 
 };

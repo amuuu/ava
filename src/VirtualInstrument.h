@@ -23,13 +23,12 @@ class VirtualInstrument : public RawUnit
 {
     
     public:
-        VirtualInstrument() : RawUnit() { parameters = new std::map<std::string, float>; isEffect = false; }
+        VirtualInstrument() : RawUnit() { parameters = new std::map<std::string, float>; }
         bool SetParameter(VirtualInstrumentParameter targetParameter);
         bool SetParameter(std::string parameterName, float parameterValue);
         virtual OutputData* UpdateOutputBuffer() { return outputData; };
 
         std::map<std::string, float>* GetParameters() { return parameters; }
-        bool BulkSetParameters(std::map<std::string, float>* newParameters) { *parameters = *newParameters; return true; }
 
     
     protected:

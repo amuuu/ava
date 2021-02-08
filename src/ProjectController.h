@@ -9,7 +9,7 @@
 #include "Track.h"
 #include <string>
 
-#include "PortAudioDataStructs.h"
+#include "AudioDataStructs.h"
 #include "util/MathStaticFuncs.h"
 
 class ProjectController

@@ -5,25 +5,27 @@ Track::Track()
     // soundUnits = new std::list<SoundUnit>;
     effectChain = new std::list<SoundEffect>;
     soundSource = (SoundUnit*) malloc (sizeof(SoundUnit));
-    soundEffectCollection = (SoundEffectCollection*) malloc (sizeof(SoundEffectCollection));
 
     ChangeTrackState(Active);
 }
 
-bool Track::AppendNewSoundEffect(SoundEffect* newSoundEffect)
+bool Track::AppendNewSoundEffect(std::string effectName)
 {
-    effectChain->push_back(*soundEffectCollection->GetSoundEffectInstance(newSoundEffect));
+    SoundEffect newEffect;
+    newEffect.SetSoundEffectType(effectName);
+
+    effectChain->push_back(newEffect);
     
     printf("New effect appended to: %s\n", GetTrackName().c_str());
 
     return true;
 }
 
-SoundEffect* Track::GetEffect(int index)
+SoundEffect Track::GetEffect(int index)
 {
     std::list<SoundEffect>::iterator it = effectChain->begin();
     std::advance(it, index);
-    return soundEffectCollection->GetSoundEffectInstance(&(*it));
+    return *it;
 }
 
 SoundUnit Track::GetSoundSource()
@@ -59,26 +61,19 @@ OutputData* Track::GetTrackOutputBuffer()
     // for each sound effect inside the track that comes after the sound generator
     for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 
-        // SoundEffectComposite effectStrategy;
-
-        
         printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
-        // effectStrategy.SetEffect(*effectIt);
         
         printf("1\n");
         effectIt->SetOutputBufferData(outputData);
 
-        // effectStrategy.soundEffect->SetOutputBufferData(outputData);
         // printf("fffffffffff %f\n", effectStrategy.soundEffect->GetOutputBufferData()->outputBuffer[12]);
         printf("2\n");
 
-        // effectStrategy.soundEffect->ApplyEffect();
         effectIt->ApplyEffect();
 
         printf("3\n");
         
-        // outputData = effectStrategy.soundEffect->GetOutputBufferData();
         outputData = effectIt->GetOutputBufferData();
     }
     

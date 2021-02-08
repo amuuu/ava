@@ -11,7 +11,7 @@
 #include <math.h>
 #include <string>
 
-#include "PortAudioDataStructs.h"
+#include "AudioDataStructs.h"
 
 #define OUTPUT_BUFFER_SIZE   (200)
 
@@ -33,7 +33,6 @@ class SoundUnit
 
     protected:
         OutputData* outputData;
-        bool isEffect;
     
     private:
         bool InitializeDefaultIOStructValues();

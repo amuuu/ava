@@ -10,7 +10,7 @@
 #include "IOController.h"
 #include "ProjectController.h"
 
-#include "PortAudioDataStructs.h"
+#include "AudioDataStructs.h"
 #include "util/MathStaticFuncs.h"
 
 #include <map>
