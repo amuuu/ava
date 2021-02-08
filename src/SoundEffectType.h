@@ -13,7 +13,7 @@ class SoundEffectType
             InitOutputDataStruct(outputData);
         }
          
-        OutputData* ApplyEffect(std::map<std::string, float> parameters) {return nullptr;}
+        OutputData* ApplyEffect(std::map<std::string, float> parameters) {printf("bruh"); return nullptr;}
         
     protected:
         OutputData* outputData;

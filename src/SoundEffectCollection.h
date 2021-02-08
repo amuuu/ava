@@ -11,9 +11,9 @@ class SoundEffectCollection // TODO: change the name
         
         std::map<std::string, SoundEffectType*> effectsMap;
 
-        SoundEffectCollection() {
-
-            effectsMap.insert ( std::pair<std::string,SoundEffectType*>("Delay", &delayObject) );
+        SoundEffectCollection()
+        {
+            effectsMap.insert(std::pair<std::string,SoundEffectType*>("Delay", &delayObject));
         }
         
 };
