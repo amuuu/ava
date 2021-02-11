@@ -4,6 +4,8 @@
 OutputData* Delay::ApplyEffect(std::map<std::string, float> parameters)
 {
     int amount = parameters["amount"];
+    printf("amount====%d\n", amount);
+    
     printf("SHHHHHHHHHHHHHHHHHH");
     
     for (int i=0; i<outputData->size; i++) {

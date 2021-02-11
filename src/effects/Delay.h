@@ -12,7 +12,7 @@
 class Delay : public SoundEffectType
 {
     public:
-        Delay() : SoundEffectType() { tmpReadPtr = 0; m=2; }
+        Delay() : SoundEffectType() { tmpReadPtr = 0; }
 
         OutputData* ApplyEffect(std::map<std::string, float> parameters);
     
