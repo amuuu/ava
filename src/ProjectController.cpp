@@ -62,7 +62,7 @@ OutputData* ProjectController::UpdateProjectOutputBufferData()
     std::list<Track>::iterator trackIt;
     for (trackIt = tracks->begin(); trackIt != tracks->end(); ++trackIt) { // for each track
 
-        printf("======= Track: %s =======\n", trackIt->GetTrackName().c_str());
+        printf("\n======= Track: %s =======\n", trackIt->GetTrackName().c_str());
         
         if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
         {
@@ -79,6 +79,8 @@ OutputData* ProjectController::UpdateProjectOutputBufferData()
             printf("^^^^ Track was not active.\n");
             continue;
         }
+
+        
     }
     return tmpOutputData;
 }

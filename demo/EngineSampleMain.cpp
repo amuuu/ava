@@ -39,6 +39,7 @@ int main(void)
 
     ava.project.GetTrack(1)->AppendNewSoundEffect("Delay");
 
+
     ava.UpdateMainOutputBuffer();
 
     if (ava.SetState(StartingState)) {

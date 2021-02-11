@@ -9,7 +9,7 @@
 
 #include "VirtualInstrument.h"
 #include "SoundEffectType.h"
-#include "SoundEffectCollection.h"
+#include "SoundEffectTypes.h"
 
 #include <map>
 #include <string>
@@ -17,11 +17,10 @@
 class SoundEffect : public VirtualInstrument
 {
     public:
-        SoundEffect() : VirtualInstrument() {}
-
+        SoundEffect(std::string name) : SoundEffect() { SetName(name); SetParameter("amount", 1.0); printf("PA %f", (*parameters)["amount"]); }
         
-        OutputData* ApplyEffect() { printf("hereaaaaaaaaaaaaa\n"); return effectType->ApplyEffect(*GetParameters()); };
-        OutputData* UpdateOutputBuffer() { return ApplyEffect(); }
+        void ApplyEffect() { outputData = effectType->ApplyEffect(*parameters); printf("AAAAAAAAAAAAAAA\n"); };
+        OutputData* UpdateOutputBuffer() { ApplyEffect(); return outputData; }
         
 
         float GetDryWetValue() { return *drywetValue; }
@@ -30,14 +29,18 @@ class SoundEffect : public VirtualInstrument
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
         bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
-        void SetName(std::string name) {SetSoundUnitName(name); SetSoundEffectType(name); }
 
     private:
         SoundEffectType* effectType;
-        SoundEffectCollection effectCollection;
+        SoundEffectTypes effectCollection;
+
+        // Delay delay;
         
         float* drywetValue;
         bool* isBypassed;
 
-        void SetSoundEffectType(std::string typeName) { effectType = effectCollection.effectsMap[typeName];}
+        void SetSoundEffectType(std::string typeName) { printf("TYPE NAME: %s\n", typeName.c_str()); effectType = effectCollection.effectsMap[typeName];  printf("BNAME %d\n", effectType->m); }
+        void SetName(std::string name) {SetSoundUnitName(name); SetSoundEffectType(name); }
+        SoundEffect() : VirtualInstrument() { effectType = (SoundEffectType*) malloc(sizeof(SoundEffectType)); }
+
 };

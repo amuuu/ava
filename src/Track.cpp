@@ -11,9 +11,8 @@ Track::Track()
 
 bool Track::AppendNewSoundEffect(std::string effectName)
 {
-    SoundEffect newEffect;
-    newEffect.SetName(effectName);
-
+    SoundEffect newEffect(effectName);
+    
     effectChain->push_back(newEffect);
     
     printf("New effect appended to: %s\n", GetTrackName().c_str());

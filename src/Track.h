@@ -9,7 +9,7 @@
 #include "SoundUnit.h"
 
 #include "SoundEffect.h"
-#include "SoundEffectCollection.h"
+#include "SoundEffectTypes.h"
 
 #include <list>
 #include <string>
@@ -24,25 +24,33 @@ class Track
         Track();
         Track(std::string name) : Track() { trackAudioSettings.trackName = name; };
         
+        /* Track state management */
         TrackState GetTrackState() { return state; }
         bool ChangeTrackState(TrackState newState) { state = newState; return true;};
 
-        bool AppendNewSoundEffect(std::string effectName); // TODO: doesn't obey SRP, should be inside a new class
+
+        /* Sound source and effects */
         bool SetSoundSource(SoundUnit newSoundSource) { *soundSource = newSoundSource; return true; }
-        SoundEffect GetEffect(int index);
         SoundUnit GetSoundSource();
 
+        bool AppendNewSoundEffect(std::string effectName);
+        SoundEffect GetEffect(int index);
+
+
+        /* Track minor settings */
         bool SetTrackName(std::string name) { trackAudioSettings.trackName = name; return true; }
         std::string GetTrackName() { return trackAudioSettings.trackName; }
 
+
+        /* Main function */
         OutputData* GetTrackOutputBuffer();
+
     
     private:
         TrackState state;
 
         SoundUnit* soundSource;
         std::list<SoundEffect>* effectChain;
-        SoundEffectCollection soundEffectCollection;
         
 
         struct TrackAudioSettings_t
