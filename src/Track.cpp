@@ -66,7 +66,6 @@ OutputData* Track::GetTrackOutputBuffer()
         printf("1\n");
         effectIt->SetOutputBufferData(outputData);
 
-        // printf("fffffffffff %f\n", effectStrategy.soundEffect->GetOutputBufferData()->outputBuffer[12]);
         printf("2\n");
 
         effectIt->ApplyEffect();

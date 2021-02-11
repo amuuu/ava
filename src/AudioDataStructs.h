@@ -28,5 +28,5 @@ static void InitOutputDataStruct(OutputData* od)
     od->cursor = INIT_CURSOR_VAL;
     od->framesNo = DEFAULT_FRAMES_NO;
 
-    for(int i=0; i<od->size; i++) od->outputBuffer[i] = 0;
+    for(int i=0; i<od->size; i++) od->outputBuffer[i] = 0.0;
 }

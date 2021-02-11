@@ -19,8 +19,8 @@ class SoundEffect : public VirtualInstrument
     public:
         SoundEffect(std::string name) : SoundEffect() { SetName(name); SetParameter("amount", 1.0); }
         
-        void ApplyEffect() { outputData = effectType->ApplyEffect(*parameters); printf("AAAAAAAAAAAAAAA\n"); };
-        OutputData* UpdateOutputBuffer() { ApplyEffect(); return outputData; }
+        void ApplyEffect();
+        OutputData* UpdateOutputBuffer();
 
         float GetDryWetValue() { return *drywetValue; }
         bool IsBypassed() { return *isBypassed; }
@@ -33,8 +33,6 @@ class SoundEffect : public VirtualInstrument
         SoundEffectType* effectType;
         SoundEffectTypes effectCollection;
 
-        // Delay delay;
-        
         float* drywetValue;
         bool* isBypassed;
 
