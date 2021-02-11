@@ -72,7 +72,7 @@ OutputData* Track::GetTrackOutputBuffer()
 
         printf("3\n");
         
-        outputData = effectIt->GetOutputBufferData();
+        *outputData = *(effectIt->GetOutputBufferData());
     }
     
     printf("after f=%f\n", outputData->outputBuffer[12]);

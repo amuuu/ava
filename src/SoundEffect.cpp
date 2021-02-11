@@ -2,12 +2,11 @@
 
 void SoundEffect::ApplyEffect()
 {
-    printf("zxczxc\n");
-    printf("AMOUNT: %f\n", (*parameters)["amount"]);
-
-    printf("NAME: %d\n",effectType->m);
-
-    outputData = effectType->ApplyEffect(parameters);
+    printf("AMOUNT: (%f)\n", (*parameters)["amount"]);
+    printf("NAME: (%d)\n",effectType->m);
+    
+    *outputData = *(effectType->ApplyEffect(parameters));
+    // SetOutputBufferData(effectType->ApplyEffect(parameters));
     
     printf("AAAAAAAAAAAAAAA\n");
     

@@ -36,7 +36,7 @@ class SoundEffect : public VirtualInstrument
         float* drywetValue;
         bool* isBypassed;
 
-        void SetSoundEffectType(std::string typeName) { effectType = effectCollection.effectsMap[typeName]; }
+        void SetSoundEffectType(std::string typeName) { *effectType = *(effectCollection.effectsMap[typeName]); }
         void SetName(std::string name) {SetSoundUnitName(name); SetSoundEffectType(name); }
         SoundEffect() : VirtualInstrument() { effectType = (SoundEffectType*) malloc(sizeof(SoundEffectType)); }
 
