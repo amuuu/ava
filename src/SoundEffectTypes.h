@@ -9,12 +9,18 @@ class SoundEffectTypes
     public:
         Delay delayObject;
         
-        std::map<std::string, SoundEffectType*> effectsMap;
+        std::map<std::string, SoundEffectType*>* effectsMap;
 
         SoundEffectTypes()
         {
-            effectsMap.insert(std::pair<std::string,SoundEffectType*>("Delay", &delayObject));
+            effectsMap = new std::map<std::string, SoundEffectType*>;
+            effectsMap->insert(std::pair<std::string,SoundEffectType*>("Delay", &delayObject));
             
+        }
+
+        SoundEffectType* GetType(std::string name)
+        {
+            return (*effectsMap)[name];
         }
 
         

@@ -31,13 +31,13 @@ class SoundEffect : public VirtualInstrument
 
     private:
         SoundEffectType* effectType;
-        SoundEffectTypes effectCollection;
+        SoundEffectTypes* effectCollection;
 
         float* drywetValue;
         bool* isBypassed;
 
-        void SetSoundEffectType(std::string typeName) { *effectType = *(effectCollection.effectsMap[typeName]); }
-        void SetName(std::string name) {SetSoundUnitName(name); SetSoundEffectType(name); }
-        SoundEffect() : VirtualInstrument() { effectType = (SoundEffectType*) malloc(sizeof(SoundEffectType)); }
+        void SetSoundEffectType(std::string typeName) { effectType = effectCollection->GetType(typeName); }
+        void SetName(std::string name) { SetSoundUnitName(name); SetSoundEffectType(name); }
+        SoundEffect();
 
 };
