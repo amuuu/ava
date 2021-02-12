@@ -11,6 +11,7 @@
 #define DEFAULT_SIZE (200)
 #define DEFAULT_FRAMES_NO (200)
 #define INIT_CURSOR_VAL (0)
+#define SAMPLE_RATE (44100)
 
 
 struct OutputData
@@ -19,6 +20,7 @@ struct OutputData
     float outputBuffer [DEFAULT_SIZE];
     int cursor; // add left and right cursors?
     unsigned long framesNo; //?
+    float deltaTime;
 };
 
 static void InitOutputDataStruct(OutputData* od)
@@ -27,6 +29,7 @@ static void InitOutputDataStruct(OutputData* od)
     od->size = DEFAULT_SIZE;
     od->cursor = INIT_CURSOR_VAL;
     od->framesNo = DEFAULT_FRAMES_NO;
+    od->deltaTime = (float)1/(float)SAMPLE_RATE;
 
     for(int i=0; i<od->size; i++) od->outputBuffer[i] = 0.0;
 }

@@ -13,7 +13,6 @@
 
 #include "AudioDataStructs.h"
 
-#define SAMPLE_RATE   (44100)
 #define FRAMES_PER_BUFFER  (64)
 #define TABLE_SIZE   (200)
 
