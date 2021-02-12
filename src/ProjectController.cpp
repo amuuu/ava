@@ -70,7 +70,7 @@ OutputData* ProjectController::UpdateProjectOutputBufferData()
             OutputData* trackOutputData = trackIt->GetTrackOutputBuffer();            
             
             for (int i=0; i< tmpOutputData->size; i++) {
-                tmpOutputData->outputBuffer[i] += bufferDivisionValue * trackOutputData->outputBuffer[i]; // update the buffer value based on the division value
+                *(tmpOutputData->outputBuffer+i) += bufferDivisionValue * *(trackOutputData->outputBuffer+i); // update the buffer value based on the division value
             }
 
         }

@@ -19,8 +19,12 @@ OutputData* SimpleSineGenerator::UpdateOutputBuffer()
 
     for(int i=0; i < size; i++)
     {
-        outputData->outputBuffer[i] = sin ( freq * (M_PI * 2) * ((float) i / (float) size));
+        *(outputData->outputBuffer+i) = sin ( freq * (M_PI * 2) * ((float) i / (float) size));
     }
+
+    // float freq = (*parameters)["freq"];
+    // outputData->size = 2*freq;
+    // outputData->outputBuffer
 
     return outputData;
 }

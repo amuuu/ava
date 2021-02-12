@@ -19,23 +19,23 @@ int main(void)
   
     VirtualInstrumentParameter p;
     p.name = "freq";
-    p.value = 440.0;
+    p.value = 410.0;
 
     SimpleSineGenerator sine;
     sine.SetParameter(p);
     sine.UpdateOutputBuffer();
     ava.project.GetTrack(0)->SetSoundSource(sine);
 
-    ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
+    // ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
 
-    SimpleSineGenerator sine2;
-    sine2.SetParameter("freq", 410);
-    sine2.UpdateOutputBuffer();
-    ava.project.AppendTrack();
-    ava.project.GetTrack(1)->SetSoundSource(sine2);
+    // SimpleSineGenerator sine2;
+    // sine2.SetParameter("freq", 410);
+    // sine2.UpdateOutputBuffer();
+    // ava.project.AppendTrack();
+    // ava.project.GetTrack(1)->SetSoundSource(sine2);
 
-    DelayEffect delay;
-    ava.project.GetTrack(1)->AppendNewSoundEffect(delay);
+    // DelayEffect delay;
+    // ava.project.GetTrack(1)->AppendNewSoundEffect(delay);
 
 
     ava.UpdateMainOutputBuffer();
