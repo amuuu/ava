@@ -1,7 +1,4 @@
-#include "../src/Ava.h"
-#include "../src/include/portaudio.h"
-
-#include "../src/instruments/SimpleSineGenerator.h"
+#include "../src/AvaUserHeaders.h"
 
 
 ///////// This is only to use the sleep function to demonstrate the example.
