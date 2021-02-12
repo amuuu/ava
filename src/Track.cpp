@@ -9,11 +9,9 @@ Track::Track()
     ChangeTrackState(Active);
 }
 
-bool Track::AppendNewSoundEffect(std::string effectName)
+bool Track::AppendNewSoundEffect(BaseEffectPreset effect)
 {
-    SoundEffect newEffect(effectName);
-    
-    effectChain->push_back(newEffect);
+    effectChain->push_back(effect.GetEffect());
     
     printf("New effect appended to: %s\n", GetTrackName().c_str());
 

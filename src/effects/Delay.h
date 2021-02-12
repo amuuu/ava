@@ -20,3 +20,4 @@ class Delay : public SoundEffectType
         int* tmpReadPtr;
 
 };
+
