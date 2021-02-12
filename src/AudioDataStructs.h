@@ -35,3 +35,9 @@ static void InitOutputDataStruct(OutputData* od)
 
     for(int i=0; i<od->size; i++) od->outputBuffer[i] = 0.0;
 }
+
+static void ModifyOutputDataStructBufferSize(OutputData* od, int newSize)
+{
+    od->size = newSize;
+    od->outputBuffer = new float[od->size];
+}

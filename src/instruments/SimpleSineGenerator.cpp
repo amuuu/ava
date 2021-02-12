@@ -14,12 +14,16 @@ OutputData* SimpleSineGenerator::UpdateOutputBuffer()
 {
     // TODO: Not all freqs can be heard. something's wrong with the formula.
     
-    int size = outputData->size;
     float freq = (*parameters)["freq"];
+    ModifyOutputDataStructBufferSize(outputData, 2*freq);
+    int size = outputData->size;
+
+    printf("size: %d\n", size);
 
     for(int i=0; i < size; i++)
     {
         *(outputData->outputBuffer+i) = sin ( freq * (M_PI * 2) * ((float) i / (float) size));
+        printf("val %f\n", *(outputData->outputBuffer+i));
     }
 
     // float freq = (*parameters)["freq"];
