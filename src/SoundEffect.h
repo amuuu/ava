@@ -1,9 +1,14 @@
 /** @file SoundEffect.h
-	@brief Base class for sound effect units
+	@brief defines a sound effect and its properties.
 */
-/*
-*   
-*/
+/**
+ * This class defines the sound effect and its properties. However the SOUND ALGORITHM of the sound effect is not defined here. 
+ * Sound Effect's algorithm works with Strategy design pattern;
+ * SoundEffect has an object called effectType which is filled with an effect algorithm, such as Delay (on runtime).
+ * The effectType object has a method (ApplyEffect) that applies the effect based on the effect's sound algorithm and passes it back to the outputData object of the SoundEffect class.
+ * Then the outputData object of the SoundEffect will contain the applied effect results.
+ */
+
 
 #pragma once
 
