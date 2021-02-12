@@ -52,30 +52,17 @@ OutputData* Track::GetTrackOutputBuffer()
     
     *outputData = *(soundSource->GetOutputBufferData()); // first sound unit that generates sounds
 
-    printf("before f=%f\n", outputData->outputBuffer[12]);
-
     std::list<SoundEffect>::iterator effectIt = effectChain->begin();
-
 
     // for each sound effect inside the track that comes after the sound generator
     for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 
         printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
-        
-        printf("1\n");
         effectIt->SetOutputBufferData(outputData);
-
-        printf("2\n");
-
         effectIt->ApplyEffect();
-
-        printf("3\n");
-        
         *outputData = *(effectIt->GetOutputBufferData());
     }
-    
-    printf("after f=%f\n", outputData->outputBuffer[12]);
     
     printf("::::::::::::::::::\n");
 
