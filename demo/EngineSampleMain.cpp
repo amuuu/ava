@@ -34,7 +34,8 @@ int main(void)
     ava.project.AppendTrack();
     ava.project.GetTrack(1)->SetSoundSource(sine2);
 
-    ava.project.GetTrack(1)->AppendNewSoundEffect("Delay");
+    DelayEffect delay;
+    ava.project.GetTrack(1)->AppendNewSoundEffect(delay);
 
 
     ava.UpdateMainOutputBuffer();

@@ -3,3 +3,4 @@
 
 #include "instruments/SimpleSineGenerator.h"
 
+#include "effects/Presets.h"

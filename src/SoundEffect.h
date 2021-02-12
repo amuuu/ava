@@ -17,7 +17,9 @@
 class SoundEffect : public VirtualInstrument
 {
     public:
-        SoundEffect(std::string name) : SoundEffect() { SetName(name); SetParameter("amount", 1.0); }
+        
+        SoundEffect();
+        SoundEffect(std::string name) : SoundEffect() { SetName(name); }
         
         void ApplyEffect();
         OutputData* UpdateOutputBuffer();
@@ -28,6 +30,8 @@ class SoundEffect : public VirtualInstrument
         bool SetDryWetValue(float newVal) { *drywetValue = newVal; return true; }
         bool SetIsBypassed(bool newIsBypassed) { *isBypassed = newIsBypassed; return true; }
 
+        void SetName(std::string name) { SetSoundUnitName(name); SetSoundEffectType(name); }
+
 
     private:
         SoundEffectType* effectType;
@@ -37,7 +41,5 @@ class SoundEffect : public VirtualInstrument
         bool* isBypassed;
 
         void SetSoundEffectType(std::string typeName) { effectType = effectCollection->GetType(typeName); }
-        void SetName(std::string name) { SetSoundUnitName(name); SetSoundEffectType(name); }
-        SoundEffect();
 
 };

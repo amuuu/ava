@@ -10,6 +10,7 @@
 
 #include "SoundEffect.h"
 #include "SoundEffectTypes.h"
+#include "effects/Presets.h"
 
 #include <list>
 #include <string>
@@ -33,7 +34,7 @@ class Track
         bool SetSoundSource(SoundUnit newSoundSource) { *soundSource = newSoundSource; return true; }
         SoundUnit GetSoundSource();
 
-        bool AppendNewSoundEffect(std::string effectName);
+        bool AppendNewSoundEffect(BaseEffectPreset effect);
         SoundEffect GetEffect(int index);
 
 
