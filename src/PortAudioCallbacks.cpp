@@ -22,7 +22,7 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
     static int* cursor = &paOutputData->cursor;
     static int* size = &paOutputData->size;
     static unsigned long* framesNo = &paOutputData->framesNo;
-    static float* buffer = paOutputData->outputBuffer;
+    static double* buffer = paOutputData->outputBuffer;
 
     for (int i=0; i<framesPerBuffer; i++)
     {
