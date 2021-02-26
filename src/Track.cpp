@@ -43,7 +43,6 @@ OutputData* Track::GetNextTrackSample()
 {
     OutputData* outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     InitOutputDataStruct(outputData);
-    
 
     printf("::::UNIT CHAIN::::\n");
     printf("Generator: %s\n", soundSource->GetSoundUnitName().c_str());

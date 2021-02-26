@@ -12,7 +12,7 @@ class SimpleSineGenerator: public VirtualInstrument
 {
     public:
         SimpleSineGenerator();
-        OutputData* UpdateOutputBuffer();
+        OutputData* GetNextUnitSample() override;
     
     private:
         void CreateWaveTable();

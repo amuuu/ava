@@ -26,7 +26,7 @@ class VirtualInstrument : public RawUnit
         VirtualInstrument() : RawUnit() { parameters = new std::map<std::string, float>; }
         bool SetParameter(VirtualInstrumentParameter targetParameter);
         bool SetParameter(std::string parameterName, float parameterValue);
-        virtual OutputData* UpdateOutputBuffer() { return outputData; };
+        // virtual OutputData* UpdateOutputBuffer() { return outputData; };
 
         std::map<std::string, float>* GetParameters() { return parameters; }
 

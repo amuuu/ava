@@ -67,7 +67,7 @@ OutputData* ProjectController::GetNextProjectSample()
         if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
         {
 
-            OutputData* trackOutputData = trackIt->GetTrackOutputBuffer();            
+            OutputData* trackOutputData = trackIt->GetNextTrackSample();            
             
             for (int i=0; i< tmpOutputData->size; i++) {
                 *(tmpOutputData->outputBuffer+i) += bufferDivisionValue * *(trackOutputData->outputBuffer+i); // update the buffer value based on the division value

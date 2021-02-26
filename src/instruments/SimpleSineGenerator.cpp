@@ -1,26 +1,35 @@
 #include "SimpleSineGenerator.h"
 
 #include <stdio.h>
-#include <cmath>
 
 SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 {
-    (*parameters).insert({"freq", 1});
+    (*parameters).insert({"freq", -1});
+    (*parameters).insert({"amp", -1});
+
 
     SetSoundUnitName("Simple Sine");
 
     CreateWaveTable();
 }
 
-OutputData* SimpleSineGenerator::UpdateOutputBuffer()
+OutputData* SimpleSineGenerator::GetNextUnitSample()
 {
-    // TODO: Not all freqs can be heard. something's wrong with the formula.
+    printf("bruh");
+    float freq, amp;
     
-    float freq = (*parameters)["freq"];
-    float amp = (*parameters)["amp"];
+    try {
+        float freq = (*parameters)["freq"];
+        float amp = (*parameters)["amp"];
+        if (freq < 0 || amp < 0)
+            throw BadParam();
+    }
+    catch (BadParam& e) {
+        printf(e.Msg());
+    }
     
     SetFrequency(freq, SAMPLE_RATE);
-
+    
     return outputData;
 }
 
@@ -29,6 +38,7 @@ void SimpleSineGenerator::CreateWaveTable()
 {
     wavetableSize = 1<<7;
     ModifyOutputDataStructBufferSize(outputData, wavetableSize);
+    
     double angleData = (2*M_PI)/(double)(wavetableSize-1);
     double currentAngle = 0 ;
 

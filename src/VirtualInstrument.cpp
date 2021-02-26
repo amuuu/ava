@@ -6,7 +6,7 @@ bool VirtualInstrument::SetParameter(VirtualInstrumentParameter targetParameter)
 
     printf("Parameter %s = %f\n", targetParameter.name.c_str(), (*parameters)[targetParameter.name]);
     
-    UpdateOutputBuffer();
+    // UpdateOutputBuffer();
 
     return true;
 }
