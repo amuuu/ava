@@ -19,7 +19,7 @@ struct OutputData
     int size;
     // float outputBuffer [DEFAULT_SIZE];
     double* outputBuffer;
-    int cursor; // add left and right cursors?
+    int* cursor; // add left and right cursors?
     unsigned long framesNo; //?
     float deltaTime;
 };
@@ -29,7 +29,8 @@ static void InitOutputDataStruct(OutputData* od)
     // od = (struct OutputData*) malloc (sizeof(struct OutputData)); // segmentation fault potential
     od->size = DEFAULT_SIZE;
     od->outputBuffer = new double[od->size];
-    od->cursor = INIT_CURSOR_VAL;
+    od->cursor = new int;
+    *(od->cursor) = 0;
     od->framesNo = DEFAULT_FRAMES_NO;
     od->deltaTime = (float)1/(float)SAMPLE_RATE;
 

@@ -16,13 +16,10 @@ int main(void)
 {
 
     Ava ava;
-  
-    VirtualInstrumentParameter p;
-    p.name = "freq";
-    p.value = 410.0;
-
+    
     SimpleSineGenerator sine;
-    sine.SetParameter(p);
+    sine.SetParameter("freq", 500);
+    sine.SetParameter("amp", 1);
     sine.UpdateOutputBuffer();
     ava.project.GetTrack(0)->SetSoundSource(sine);
 

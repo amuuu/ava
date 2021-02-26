@@ -1,7 +1,7 @@
 #include "SimpleSineGenerator.h"
 
 #include <stdio.h>
-
+#include <cmath>
 
 SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 {
@@ -23,7 +23,8 @@ OutputData* SimpleSineGenerator::UpdateOutputBuffer()
 
     printf("size: %d\n", size);
     
-    double timeUnit = (double) 1 / (freq*size);
+    double timeUnit = (double) 1 / (double) (freq*size);
+
     printf("time unit: %f\n", timeUnit);
     float time = 0;
 
