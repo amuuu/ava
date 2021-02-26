@@ -51,7 +51,7 @@ int ProjectController::GetNumActiveTracks()
     return ans;
 }
 
-OutputData* ProjectController::UpdateProjectOutputBufferData()
+OutputData* ProjectController::GetNextProjectSample()
 {
     
     OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));

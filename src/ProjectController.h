@@ -24,7 +24,7 @@ class ProjectController
 
         std::list<Track>* GetAllTracks() const { return tracks; }
 
-        OutputData* UpdateProjectOutputBufferData();
+        OutputData* GetNextProjectSample();
 
         std::string GetProjectName() const { return globalSettings.PROJECT_NAME; }
 

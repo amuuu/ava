@@ -39,7 +39,7 @@ SoundUnit Track::GetSoundSource()
 * Inside SetOutputBufferData for effects, their effect will be applied and outputdata will be updated.
 */
 
-OutputData* Track::GetTrackOutputBuffer()
+OutputData* Track::GetNextTrackSample()
 {
     OutputData* outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     InitOutputDataStruct(outputData);
@@ -48,7 +48,7 @@ OutputData* Track::GetTrackOutputBuffer()
     printf("::::UNIT CHAIN::::\n");
     printf("Generator: %s\n", soundSource->GetSoundUnitName().c_str());
     
-    *outputData = *(soundSource->GetOutputBufferData()); // first sound unit that generates sounds
+    *outputData = *(soundSource->GetNextUnitSample()); // first sound unit that generates sounds
 
     std::list<SoundEffect>::iterator effectIt = effectChain->begin();
 
@@ -59,7 +59,7 @@ OutputData* Track::GetTrackOutputBuffer()
         
         effectIt->SetOutputBufferData(outputData);
         effectIt->ApplyEffect();
-        *outputData = *(effectIt->GetOutputBufferData());
+        *outputData = *(effectIt->GetNextUnitSample());
     }
     
     printf("::::::::::::::::::\n");
