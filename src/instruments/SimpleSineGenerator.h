@@ -13,5 +13,7 @@ class SimpleSineGenerator: public VirtualInstrument
     public:
         SimpleSineGenerator();
         OutputData* UpdateOutputBuffer();
-        
+    
+    private:
+        void CreateWaveTable();
 };

@@ -8,6 +8,8 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
     (*parameters).insert({"freq", 1});
 
     SetSoundUnitName("Simple Sine");
+
+    CreateWaveTable();
 }
 
 OutputData* SimpleSineGenerator::UpdateOutputBuffer()
@@ -17,30 +19,26 @@ OutputData* SimpleSineGenerator::UpdateOutputBuffer()
     float freq = (*parameters)["freq"];
     float amp = (*parameters)["amp"];
     
-    ModifyOutputDataStructBufferSize(outputData, 2*freq);
     
-    int size = outputData->size;
-
-    printf("size: %d\n", size);
-    
-    double timeUnit = (double) 1 / (double) (freq*size);
-
-    printf("time unit: %f\n", timeUnit);
-    float time = 0;
-
-    for (int i=0; i < size; i++)
-    {
-        // *(outputData->outputBuffer+i) = sin ( freq * (M_PI * 2) * ((float) i / (float) size));
-        *(outputData->outputBuffer+i) = amp * sin (freq * (M_PI * 2) * (time));
-        // *(outputData->outputBuffer+i) = amp * sin (freq * (M_PI * 2) * (i * timeUnit));
-
-
-        // printf("val %f\n", *(outputData->outputBuffer+i));
-        // printf("val %f\n", time);
-        time += timeUnit;    
-
-    }
 
     return outputData;
 }
 
+
+void SimpleSineGenerator::CreateWaveTable()
+{
+    int size = 1<<7;
+    ModifyOutputDataStructBufferSize(outputData, size);
+    double angleData = (2*M_PI)/(double)(size-1);
+    double currentAngle = 0 ;
+
+    printf("size: %d\n", size);
+
+    for (int i=0; i < size; i++)
+    {
+        double value = std::sin(currentAngle);
+        *(outputData->outputBuffer+i) = value;
+        currentAngle += angleData;
+    }
+
+}
