@@ -25,11 +25,11 @@ OutputData* SimpleSineGenerator::GetNextUnitSample()
             throw BadParam();
     }
     catch (BadParam& e) {
-        printf(e.Msg());
+        printf("%s\n", e.Msg());
     }
     
     SetFrequency(freq, SAMPLE_RATE);
-    
+
     return outputData;
 }
 
