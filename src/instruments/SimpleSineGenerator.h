@@ -17,7 +17,8 @@ class SimpleSineGenerator: public VirtualInstrument
     private:
         void CreateWaveTable();
         void SetFrequency(float freq, float sampleRate);
-
+        float GetNextSample();
+        
         int wavetableSize;
         double wavetableDelta;
 };
