@@ -19,11 +19,13 @@ OutputData* SimpleSineGenerator::GetNextUnitSample()
     float freq, amp;
     
     try {
-        float freq = (*parameters)["freq"];
-        float amp = (*parameters)["amp"];
+        freq = (*parameters)["freq"];
+        amp = (*parameters)["amp"];
+        
         if (freq < 0 || amp < 0)
             throw BadParam();
     }
+    
     catch (BadParam& e) {
         printf("%s\n", e.Msg());
     }
