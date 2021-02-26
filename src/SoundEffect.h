@@ -27,7 +27,7 @@ class SoundEffect : public VirtualInstrument
         SoundEffect(std::string name) : SoundEffect() { SetName(name); }
         
         void ApplyEffect();
-        OutputData* UpdateOutputBuffer();
+        OutputData* GetNextUnitSample() override;
 
         float GetDryWetValue() { return *drywetValue; }
         bool IsBypassed() { return *isBypassed; }
