@@ -21,7 +21,6 @@ struct OutputData
     double* outputBuffer;
     int* cursor; // add left and right cursors?
     unsigned long framesNo; //?
-    float deltaTime;
 };
 
 static void InitOutputDataStruct(OutputData* od)
@@ -32,7 +31,6 @@ static void InitOutputDataStruct(OutputData* od)
     od->cursor = new int;
     *(od->cursor) = 0;
     od->framesNo = DEFAULT_FRAMES_NO;
-    od->deltaTime = (float)1/(float)SAMPLE_RATE;
 
     for(int i=0; i<od->size; i++) od->outputBuffer[i] = 0.0;
 }
