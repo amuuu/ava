@@ -23,7 +23,7 @@ class SoundEffectType
             InitOutputDataStruct(outputData);
         }
          
-        virtual OutputData* ApplyEffect(std::map<std::string, float>* parameters) { return outputData; }
+        virtual float ApplyEffect(std::map<std::string, float>* parameters, float inputSample) { return 0.0; }
     
     protected:
         OutputData* outputData;

@@ -6,13 +6,13 @@ SoundEffect::SoundEffect() : VirtualInstrument()
     effectCollection = new SoundEffectTypes();
 }
 
-void SoundEffect::ApplyEffect()
+float SoundEffect::ApplyEffect(float inputSample)
 {
-    *outputData = *(effectType->ApplyEffect(parameters));
+    return effectType->ApplyEffect(parameters, inputSample);
 }
 
 float SoundEffect::GetNextUnitSample()
 { 
     ApplyEffect();
-    return outputData; 
+    return 0.0; 
 }

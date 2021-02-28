@@ -42,7 +42,7 @@ bool Ava::SetState(EngineState newState)
 
 bool Ava::UpdateMainOutputBuffer()
 {
-    OutputData* od = project.GetNextProjectSample();
+    float od = project.GetNextProjectSample();
 
     if(io.pac.SetOutputBuffer(od)) {
         printf("Output buffer updated. \n");

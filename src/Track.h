@@ -44,7 +44,7 @@ class Track
 
 
         /* Main function */
-        OutputData* GetNextTrackSample();
+        float GetNextTrackSample();
 
     
     private:

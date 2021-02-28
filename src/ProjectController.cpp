@@ -51,11 +51,12 @@ int ProjectController::GetNumActiveTracks()
     return ans;
 }
 
-OutputData* ProjectController::GetNextProjectSample()
+float ProjectController::GetNextProjectSample()
 {
     
-    OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    InitOutputDataStruct(tmpOutputData);    
+    // OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
+    // InitOutputDataStruct(tmpOutputData);    
+    static float outputSample = 0.0;
     
     float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
     
@@ -67,11 +68,9 @@ OutputData* ProjectController::GetNextProjectSample()
         if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
         {
 
-            OutputData* trackOutputData = trackIt->GetNextTrackSample();            
+            float trackOutputData = trackIt->GetNextTrackSample();            
             
-            for (int i=0; i< tmpOutputData->size; i++) {
-                *(tmpOutputData->outputBuffer+i) += bufferDivisionValue * *(trackOutputData->outputBuffer+i); // update the buffer value based on the division value
-            }
+            outputSample += bufferDivisionValue * trackOutputData; // update the buffer value based on the division value
 
         }
         else
@@ -79,8 +78,6 @@ OutputData* ProjectController::GetNextProjectSample()
             printf("^^^^ Track was not active.\n");
             continue;
         }
-
-        
     }
-    return tmpOutputData;
+    return outputSample;
 }

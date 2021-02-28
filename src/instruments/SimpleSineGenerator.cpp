@@ -24,7 +24,6 @@ float SimpleSineGenerator::GetNextUnitSample()
 
     auto frac = currentIndex - (float) index0;
 
-
     // auto value0 = table[index0];
     auto value0 = *(outputData->outputBuffer+index0);
     auto value1 = *(outputData->outputBuffer+index1);
