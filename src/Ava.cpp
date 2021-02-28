@@ -3,7 +3,9 @@
 
 Ava::Ava()
 {
-    printf("Project %s initialized.\n", project.GetProjectName().c_str());
+    project = new ProjectController();
+    printf("Project %s initialized.\n", project->GetProjectName().c_str());
+    io.pac.SetProjectObject(project);
 }
 
 bool Halt::PerformTransition(IOController io)
@@ -42,12 +44,12 @@ bool Ava::SetState(EngineState newState)
 
 bool Ava::UpdateMainOutputBuffer()
 {
-    float od = project.GetNextProjectSample();
+    float od = project->GetNextProjectSample();
 
-    if(io.pac.SetOutputBuffer(od)) {
-        printf("Output buffer updated. \n");
-        return true;
-    }
+    // if(io.pac.SetOutputBuffer(od)) {
+        // printf("Output buffer updated. \n");
+        // return true;
+    // }
     return false;
 }
 

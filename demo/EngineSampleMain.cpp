@@ -20,7 +20,7 @@ int main(void)
     SimpleSineGenerator sine;
     sine.SetParameter("freq", 500);
     sine.SetParameter("amp", 1);
-    ava.project.GetTrack(0)->SetSoundSource(sine);
+    ava.project->GetTrack(0)->SetSoundSource(sine);
 
     // ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
 
@@ -34,10 +34,8 @@ int main(void)
     // ava.project.GetTrack(1)->AppendNewSoundEffect(delay);
 
 
-    ava.UpdateMainOutputBuffer();
-
-    if (ava.SetState(StartingState)) {
-        
+    if (ava.SetState(StartingState))
+    {
         if (ava.SetState(OutputPlaybackState))
         {
             printf("Play for %d seconds.\n", NUM_SECONDS);

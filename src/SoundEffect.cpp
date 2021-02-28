@@ -13,6 +13,6 @@ float SoundEffect::ApplyEffect(float inputSample)
 
 float SoundEffect::GetNextUnitSample()
 { 
-    ApplyEffect();
+    // ApplyEffect();
     return 0.0; 
 }

@@ -79,7 +79,8 @@ bool PortAudioController::InitPaOutputDataStruct()
 PortAudioController::PortAudioController()
     :stream(0)
 {
-    InitPaOutputDataStruct();    
+    InitPaOutputDataStruct();
+    project = new ProjectController();    
 }
 
 bool PortAudioController::Initialize()

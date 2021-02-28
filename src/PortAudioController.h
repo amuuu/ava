@@ -6,10 +6,13 @@
 *   Methods are implemented inside PortAudioController.cpp and PortAudioCallbacks.cpp
 */
 
+#pragma once
+
 #include <stdio.h>
 #include <string.h> // for memcpy
 #include <math.h>
 #include "include/portaudio.h"
+#include "ProjectController.h"
 
 #include "AudioDataStructs.h"
 
@@ -35,12 +38,15 @@ class PortAudioController
 
         bool SetOutputBuffer(OutputData* newPaOutputData);
 
+        void SetProjectObject(ProjectController* projectController) { *project = *projectController; }
+
         OutputData* CalculateSumOutputData();
 
         // TODO: set audio device
 
     private:
         PaStream *stream;
+        ProjectController* project;
         
         float generatedOutputBuffer [TABLE_SIZE];
         OutputData *paOutputData;

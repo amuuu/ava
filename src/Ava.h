@@ -75,7 +75,7 @@ class Ava
         
         bool UpdateMainOutputBuffer();
         
-        ProjectController project;
+        ProjectController* project;
 
     private:
         AvaState* currentState;

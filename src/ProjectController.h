@@ -6,6 +6,8 @@
 *   as well as providing ways to change the general settings of the project.
 */
 
+#pragma once
+
 #include "Track.h"
 #include <string>
 
