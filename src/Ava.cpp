@@ -42,14 +42,3 @@ bool Ava::SetState(EngineState newState)
     return false;
 }
 
-bool Ava::UpdateMainOutputBuffer()
-{
-    float od = project->GetNextProjectSample();
-
-    // if(io.pac.SetOutputBuffer(od)) {
-        // printf("Output buffer updated. \n");
-        // return true;
-    // }
-    return false;
-}
-

@@ -15,7 +15,7 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 
 float SimpleSineGenerator::GetNextUnitSample()
 {
-    printf("bruh");
+    printf("bruhhhhhhhhhhhhhhhhhhhhh");
     
     if (pendingParamUpdate) UpdateParams();
 
@@ -32,7 +32,7 @@ float SimpleSineGenerator::GetNextUnitSample()
 
     if ((currentIndex += wavetableDelta) > (float) wavetableSize)
         currentIndex -= (float) wavetableSize;
-
+    printf("current %f\n", currentSample);
     return currentSample;
 }
 

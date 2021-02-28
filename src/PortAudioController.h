@@ -38,7 +38,7 @@ class PortAudioController
 
         bool SetOutputBuffer(OutputData* newPaOutputData);
 
-        void SetProjectObject(ProjectController* projectController) { *project = *projectController; }
+        void SetProjectObject(ProjectController* projectController) { project = projectController; }
 
         OutputData* CalculateSumOutputData();
 
