@@ -11,7 +11,7 @@ void SoundEffect::ApplyEffect()
     *outputData = *(effectType->ApplyEffect(parameters));
 }
 
-OutputData* SoundEffect::GetNextUnitSample()
+float SoundEffect::GetNextUnitSample()
 { 
     ApplyEffect();
     return outputData; 

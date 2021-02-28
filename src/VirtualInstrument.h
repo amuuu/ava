@@ -30,6 +30,7 @@ class VirtualInstrument : public RawUnit
 
         std::map<std::string, float>* GetParameters() { return parameters; }
 
+        bool pendingParamUpdate;
     
     protected:
         std::map<std::string, float>* parameters; // this may have to be turned into a pointer

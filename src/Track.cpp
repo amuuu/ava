@@ -41,13 +41,15 @@ SoundUnit Track::GetSoundSource()
 
 OutputData* Track::GetNextTrackSample()
 {
-    OutputData* outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
+    // OutputData* outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     InitOutputDataStruct(outputData);
 
     printf("::::UNIT CHAIN::::\n");
     printf("Generator: %s\n", soundSource->GetSoundUnitName().c_str());
     
-    *outputData = *(soundSource->GetNextUnitSample()); // first sound unit that generates sounds
+    // *outputData = *(soundSource->GetNextUnitSample()); // first sound unit that generates sounds
+    static float nextSample = *(soundSource->GetNextUnitSample()); // first sound unit that generates sounds
+
 
     std::list<SoundEffect>::iterator effectIt = effectChain->begin();
 

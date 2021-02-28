@@ -25,7 +25,7 @@ class SoundUnit
     public:
         SoundUnit();
         
-        virtual OutputData* GetNextUnitSample() { return outputData; }
+        virtual float GetNextUnitSample() { return outputData; }
         void SetOutputBufferData(OutputData *newOutputData) { *outputData = *newOutputData; }
 
         std::string GetSoundUnitName() { return soundUnitProps.name; }

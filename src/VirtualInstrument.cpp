@@ -8,6 +8,8 @@ bool VirtualInstrument::SetParameter(VirtualInstrumentParameter targetParameter)
     
     // UpdateOutputBuffer();
 
+    pendingParamUpdate = true;
+
     return true;
 }
 
@@ -17,6 +19,8 @@ bool VirtualInstrument::SetParameter(std::string parameterName, float parameterV
     
     // UpdateOutputBuffer(); // TODO: causes seg. fault for sound effect units.
                             // but still it's too much work to call this each time manually when a parameter changes for instrument
+
+    pendingParamUpdate = true;
     
     return true;
 }
@@ -27,6 +31,7 @@ bool VirtualInstrument::AddParameter(VirtualInstrumentParameter targetParameter)
 { 
     (*parameters).insert({targetParameter.name, targetParameter.value});
     
+    pendingParamUpdate = true;
     // printf("New parameter %p = %f was added.\n", targetParameter.name, parameters[targetParameter.name]);
     return true;
 }

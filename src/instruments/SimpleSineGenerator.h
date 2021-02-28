@@ -12,13 +12,18 @@ class SimpleSineGenerator: public VirtualInstrument
 {
     public:
         SimpleSineGenerator();
-        OutputData* GetNextUnitSample() override;
+        float GetNextUnitSample() override;
     
     private:
         void CreateWaveTable();
         void SetFrequency(float freq, float sampleRate);
         float GetNextSample();
+        void UpdateParams();
         
+        float freq;
+        float amp;
+
         int wavetableSize;
         double wavetableDelta;
+        float currentIndex;        
 };
