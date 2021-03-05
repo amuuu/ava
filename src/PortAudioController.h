@@ -6,14 +6,16 @@
 *   Methods are implemented inside PortAudioController.cpp and PortAudioCallbacks.cpp
 */
 
+#pragma once
+
 #include <stdio.h>
 #include <string.h> // for memcpy
 #include <math.h>
 #include "include/portaudio.h"
+#include "ProjectController.h"
 
 #include "AudioDataStructs.h"
 
-#define SAMPLE_RATE   (44100)
 #define FRAMES_PER_BUFFER  (64)
 #define TABLE_SIZE   (200)
 
@@ -34,17 +36,14 @@ class PortAudioController
         bool CloseStream();
         bool Initialize();
 
-        bool SetOutputBuffer(OutputData* newPaOutputData);
-
-        OutputData* CalculateSumOutputData();
+        void SetProjectObject(ProjectController* projectController) { project = projectController; }
 
         // TODO: set audio device
 
     private:
         PaStream *stream;
-        
-        float generatedOutputBuffer [TABLE_SIZE];
-        OutputData *paOutputData;
+        ProjectController* project;
+
         CallbackType callbackType;  // TODO: USE MAP INSIDE paCallback map_name[callbacktype] :
                                     // ((PortAudioController*)userData)->paCallbackMethod(inputBuffer, outputBuffer, framesPerBuffer, timeInfo, statusFlags);
 

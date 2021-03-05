@@ -18,24 +18,14 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
     (void) statusFlags;
     (void) inputBuffer;
     
-    // accessing paOutputData pointer values inside the loop causes segementation faults.
-    static int* cursor = &paOutputData->cursor;
-    static int* size = &paOutputData->size;
-    static unsigned long* framesNo = &paOutputData->framesNo;
-    static float* buffer = &paOutputData->outputBuffer[0];
+    static unsigned long i = 0;
+    static float sample = 0;
 
-    for (int i=0; i<framesPerBuffer; i++)
+    for (i = 0; i<framesPerBuffer; i++)
     {
-        *out++ = *(buffer + *cursor);
-        *out++ = *(buffer + *cursor);
-        
-        *cursor += 1;        
-        if (*cursor >= *size) *cursor -= *size;
-        
-        /* if (*cursor < *framesNo) {
-            }        
-        else {
-        } */
+        sample = project->GetNextProjectSample();
+        *out++ = sample;
+        *out++ = sample;
     }  
 
     return paContinue;  

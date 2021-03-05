@@ -1,11 +1,5 @@
 #include "PortAudioController.h"
 
-bool PortAudioController::SetOutputBuffer(OutputData* newPaOutputData)
-{
-    *paOutputData = *newPaOutputData;
-    return true;
-}
-
 int PortAudioController::paCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
                             const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags,
                             void *userData)
@@ -67,19 +61,11 @@ bool PortAudioController::OpenStream(PaDeviceIndex index)
     return true;
 }
 
-bool PortAudioController::InitPaOutputDataStruct()
-{
-    paOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    InitOutputDataStruct(paOutputData);
-
-    return true;
-}
-
 
 PortAudioController::PortAudioController()
     :stream(0)
 {
-    InitPaOutputDataStruct();    
+    project = new ProjectController();  
 }
 
 bool PortAudioController::Initialize()

@@ -6,6 +6,8 @@
 *   as well as providing ways to change the general settings of the project.
 */
 
+#pragma once
+
 #include "Track.h"
 #include <string>
 
@@ -24,7 +26,7 @@ class ProjectController
 
         std::list<Track>* GetAllTracks() const { return tracks; }
 
-        OutputData* UpdateProjectOutputBufferData();
+        float GetNextProjectSample();
 
         std::string GetProjectName() const { return globalSettings.PROJECT_NAME; }
 

@@ -12,6 +12,7 @@
 #include <string>
 
 #include "AudioDataStructs.h"
+#include "AvaExceptions.h"
 
 #define OUTPUT_BUFFER_SIZE   (200)
 
@@ -24,15 +25,12 @@ class SoundUnit
     public:
         SoundUnit();
         
-        OutputData* GetOutputBufferData() { return outputData; }
-        void SetOutputBufferData(OutputData *newOutputData) { *outputData = *newOutputData; }
+        virtual float GetNextUnitSample() { return 0.0; }
 
         std::string GetSoundUnitName() { return soundUnitProps.name; }
         void SetSoundUnitName(std::string name) { soundUnitProps.name = name; }
     
 
-    protected:
-        OutputData* outputData;
     
     private:
         bool InitializeDefaultIOStructValues();

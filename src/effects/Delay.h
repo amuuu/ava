@@ -14,7 +14,7 @@ class Delay : public SoundEffectType
     public:
         Delay() : SoundEffectType() { tmpReadPtr = new int; *tmpReadPtr = 0;}
 
-        OutputData* ApplyEffect(std::map<std::string, float>* parameters) override;
+        float ApplyEffect(std::map<std::string, float>* parameters, float inputSample) override;
     
     private:
         int* tmpReadPtr;

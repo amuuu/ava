@@ -11,5 +11,7 @@
 class IOController
 {
     public:
-        PortAudioController pac;
+        PortAudioController* pac;
+
+        IOController() { pac = new PortAudioController(); }
 };

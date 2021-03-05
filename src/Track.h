@@ -31,8 +31,8 @@ class Track
 
 
         /* Sound source and effects */
-        bool SetSoundSource(SoundUnit newSoundSource) { *soundSource = newSoundSource; return true; }
-        SoundUnit GetSoundSource();
+        bool SetSoundSource(SoundUnit* newSoundSource) { soundSource = newSoundSource; return true; }
+        SoundUnit GetSoundSource() { return *soundSource; }
 
         bool AppendNewSoundEffect(BaseEffectPreset effect);
         SoundEffect GetEffect(int index);
@@ -44,7 +44,7 @@ class Track
 
 
         /* Main function */
-        OutputData* GetTrackOutputBuffer();
+        float GetNextTrackSample();
 
     
     private:
@@ -52,7 +52,7 @@ class Track
 
         SoundUnit* soundSource;
         std::list<SoundEffect>* effectChain;
-        
+        std::list<SoundEffect>::iterator effectIt;
 
         struct TrackAudioSettings_t
         {

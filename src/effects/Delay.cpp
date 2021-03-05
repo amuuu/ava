@@ -1,7 +1,7 @@
 #include "Delay.h"
 
 
-OutputData* Delay::ApplyEffect(std::map<std::string, float>* parameters)
+float Delay::ApplyEffect(std::map<std::string, float>* parameters, float inputSample)
 {
     int amount = (*parameters)["amount"];
 
@@ -14,6 +14,6 @@ OutputData* Delay::ApplyEffect(std::map<std::string, float>* parameters)
         
     //     if (*tmpReadPtr >= amount) { *tmpReadPtr -= amount; }
     // }
-    return outputData;
+    return 0.0;
     
 }

@@ -26,10 +26,10 @@ class VirtualInstrument : public RawUnit
         VirtualInstrument() : RawUnit() { parameters = new std::map<std::string, float>; }
         bool SetParameter(VirtualInstrumentParameter targetParameter);
         bool SetParameter(std::string parameterName, float parameterValue);
-        virtual OutputData* UpdateOutputBuffer() { return outputData; };
 
         std::map<std::string, float>* GetParameters() { return parameters; }
 
+        bool pendingParamUpdate;
     
     protected:
         std::map<std::string, float>* parameters; // this may have to be turned into a pointer

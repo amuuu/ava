@@ -2,9 +2,8 @@
 
 Track::Track()
 {
-    // soundUnits = new std::list<SoundUnit>;
+    soundSource = new SoundUnit();
     effectChain = new std::list<SoundEffect>;
-    soundSource = (SoundUnit*) malloc (sizeof(SoundUnit));
 
     ChangeTrackState(Active);
 }
@@ -25,12 +24,6 @@ SoundEffect Track::GetEffect(int index)
     return *it;
 }
 
-SoundUnit Track::GetSoundSource()
-{
-    return *soundSource;
-}
-
-
 /* buffer of list[1] = list[0] <- (list[0] is the source of sound and list[1] is an effect)              
 * then buffer of list[2] = list[1]
 * then buffer of list[3] = list[2]
@@ -39,30 +32,26 @@ SoundUnit Track::GetSoundSource()
 * Inside SetOutputBufferData for effects, their effect will be applied and outputdata will be updated.
 */
 
-OutputData* Track::GetTrackOutputBuffer()
+float Track::GetNextTrackSample()
 {
-    OutputData* outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    InitOutputDataStruct(outputData);
+    static float nextSample = 0.0;
     
-
     printf("::::UNIT CHAIN::::\n");
     printf("Generator: %s\n", soundSource->GetSoundUnitName().c_str());
     
-    *outputData = *(soundSource->GetOutputBufferData()); // first sound unit that generates sounds
+    nextSample = soundSource->GetNextUnitSample(); // first sound unit that generates sounds
+    
+    // effectIt = effectChain->begin();
+    
+    // // for each sound effect inside the track that comes after the sound generator
+    // for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 
-    std::list<SoundEffect>::iterator effectIt = effectChain->begin();
-
-    // for each sound effect inside the track that comes after the sound generator
-    for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
-
-        printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
+    //     printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
-        effectIt->SetOutputBufferData(outputData);
-        effectIt->ApplyEffect();
-        *outputData = *(effectIt->GetOutputBufferData());
-    }
+    //     nextSample = effectIt->ApplyEffect(nextSample);
+    // }
     
     printf("::::::::::::::::::\n");
 
-    return outputData;
+    return nextSample;
 }

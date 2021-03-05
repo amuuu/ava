@@ -9,6 +9,7 @@ ProjectController::ProjectController()
 
     Track mainTrack ("Main Track");
     tracks->push_back(mainTrack);
+
 }
 
 bool ProjectController::AppendTrack(Track newTrack)
@@ -51,27 +52,25 @@ int ProjectController::GetNumActiveTracks()
     return ans;
 }
 
-OutputData* ProjectController::UpdateProjectOutputBufferData()
+float ProjectController::GetNextProjectSample()
 {
-    
-    OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    InitOutputDataStruct(tmpOutputData);    
+    static float outputSample = 0.0;
+    outputSample = 0.0;
+    static float trackOutputData = 0.0;
     
     float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
     
-    std::list<Track>::iterator trackIt;
-    for (trackIt = tracks->begin(); trackIt != tracks->end(); ++trackIt) { // for each track
+    static std::list<Track>::iterator trackIterator = tracks->begin();
+    for (trackIterator = tracks->begin(); trackIterator != tracks->end(); ++trackIterator) { // for each track
 
-        printf("\n======= Track: %s =======\n", trackIt->GetTrackName().c_str());
+        // printf("\n======= Track: %s =======\n", trackIterator->GetTrackName().c_str());
         
-        if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
+        if (trackIterator->GetTrackState() == Active) // only calculate the buffer based on active tracks
         {
 
-            OutputData* trackOutputData = trackIt->GetTrackOutputBuffer();            
+            trackOutputData = trackIterator->GetNextTrackSample();            
             
-            for (int i=0; i< tmpOutputData->size; i++) {
-                tmpOutputData->outputBuffer[i] += bufferDivisionValue * trackOutputData->outputBuffer[i]; // update the buffer value based on the division value
-            }
+            outputSample += bufferDivisionValue * trackOutputData; // update the buffer value based on the division value
 
         }
         else
@@ -79,8 +78,7 @@ OutputData* ProjectController::UpdateProjectOutputBufferData()
             printf("^^^^ Track was not active.\n");
             continue;
         }
-
-        
     }
-    return tmpOutputData;
+    return outputSample;
+
 }
