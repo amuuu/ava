@@ -18,9 +18,12 @@ int main(void)
     Ava ava;
     
     SimpleSineGenerator sine;
-    sine.SetParameter("freq", 500);
+    sine.SetParameter("freq", 800);
     sine.SetParameter("amp", 1);
     ava.project->GetTrack(0)->SetSoundSource(&sine);
+
+    // DelayEffect delay;
+    // ava.project->GetTrack(0)->AppendNewSoundEffect(delay);
 
     // ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
 
@@ -30,9 +33,7 @@ int main(void)
     // ava.project.AppendTrack();
     // ava.project.GetTrack(1)->SetSoundSource(sine2);
 
-    // DelayEffect delay;
-    // ava.project.GetTrack(1)->AppendNewSoundEffect(delay);
-
+    
 
     if (ava.SetState(StartingState))
     {
