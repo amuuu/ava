@@ -58,10 +58,7 @@ float ProjectController::GetNextProjectSample()
     outputSample = 0.0;
     static float trackOutputData = 0.0;
     
-    // float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
-    float bufferDivisionValue = 1; //GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
-
-
+    float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
     
     static std::list<Track>::iterator trackIterator = tracks->begin();
     for (trackIterator = tracks->begin(); trackIterator != tracks->end(); ++trackIterator) { // for each track
