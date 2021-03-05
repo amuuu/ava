@@ -11,7 +11,7 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 
     CreateWaveTable();
 
-    currentS = new float;
+    currentSample = new float;
     currentIndex = 0;
 }
 
@@ -31,15 +31,13 @@ float SimpleSineGenerator::GetNextUnitSample()
     value0 = *(wavetable+index0);
     value1 = *(wavetable+index1);
 
-    // float currentSample = value0 + frac * (value1 - value0);
-    *currentS = value0 + frac * (value1 - value0);
-
+    *currentSample = value0 + frac * (value1 - value0);
 
     if ((currentIndex += wavetableDelta) > (float) wavetableSize)
         currentIndex -= (float) wavetableSize;
     
-    printf("current %f\n", *currentS);
-    return *currentS;
+    printf("current %f\n", *currentSample);
+    return *currentSample;
 }
 
 

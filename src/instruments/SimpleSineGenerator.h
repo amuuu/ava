@@ -27,5 +27,5 @@ class SimpleSineGenerator: public VirtualInstrument
         double wavetableDelta;
         float* wavetable;
         float currentIndex;
-        float* currentS;
+        float* currentSample;
 };
