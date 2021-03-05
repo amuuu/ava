@@ -7,6 +7,8 @@ Track::Track()
     soundSource = new SoundUnit();
 
     ChangeTrackState(Active);
+
+    effectIt = effectChain->begin();
 }
 
 bool Track::AppendNewSoundEffect(BaseEffectPreset effect)
@@ -47,9 +49,6 @@ float Track::GetNextTrackSample()
     
     nextSample = soundSource->GetNextUnitSample(); // first sound unit that generates sounds
     
-    
-    // static std::list<SoundEffect>::iterator effectIt = effectChain->begin();
-
     // for each sound effect inside the track that comes after the sound generator
     // for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 

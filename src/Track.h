@@ -52,7 +52,7 @@ class Track
 
         SoundUnit* soundSource;
         std::list<SoundEffect>* effectChain;
-        
+        std::list<SoundEffect>::iterator effectIt;
 
         struct TrackAudioSettings_t
         {
