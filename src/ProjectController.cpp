@@ -54,11 +54,19 @@ int ProjectController::GetNumActiveTracks()
 
 float ProjectController::GetNextProjectSample()
 {
-    float outputSample = 0.0;
+    printf("hora\n");
+    static float outputSample = 0.0;
+    outputSample = 0.0;
     static float trackOutputData = 0.0;
+    printf("bruh\n");
+    
+    // float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
+    float bufferDivisionValue = 1; //GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
 
-    float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
 
+    printf("bgn of prj\n");
+    /*
+    static std::list<Track>::iterator trackIterator = tracks->begin();
     for (trackIterator = tracks->begin(); trackIterator != tracks->end(); ++trackIterator) { // for each track
 
         // printf("\n======= Track: %s =======\n", trackIterator->GetTrackName().c_str());
@@ -76,7 +84,9 @@ float ProjectController::GetNextProjectSample()
             printf("^^^^ Track was not active.\n");
             continue;
         }
-    }
-    printf("herererererererererere\n");
-    return outputSample;
+    }*/
+    printf("end of prj\n");
+    // return outputSample;
+    return GetTrack(0)->GetNextTrackSample();
+
 }

@@ -23,9 +23,11 @@ int PortAudioController::paCallbackMethod(const void *inputBuffer, void *outputB
 
     for (i = 0; i<framesPerBuffer; i++)
     {
+        printf("hereeee\n");
         sample = project->GetNextProjectSample();
         *out++ = sample;
         *out++ = sample;
+        printf("haaaaaaaa\n");
     }  
 
     return paContinue;  

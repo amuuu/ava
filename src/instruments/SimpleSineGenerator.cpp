@@ -12,19 +12,24 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
     CreateWaveTable();
 
     currentS = new float;
+    currentIndex = 0;
 }
 
 float SimpleSineGenerator::GetNextUnitSample()
 {
+    static unsigned int index0 = 0;
+    static unsigned int index1 = 0;
+    static float frac = 0;
+    static float value0 = 0, value1 = 0;
     if (pendingParamUpdate) UpdateParams();
 
-    unsigned int index0 = (unsigned int) currentIndex;
-    unsigned int index1 = index0 == (wavetableSize - 1) ? (unsigned int) 0 : index0 + 1;
+    index0 = (unsigned int) currentIndex;
+    index1 = index0 == (wavetableSize - 1) ? (unsigned int) 0 : index0 + 1;
 
-    float frac = currentIndex - (float) index0;
+    frac = currentIndex - (float) index0;
 
-    float value0 = *(wavetable+index0);
-    float value1 = *(wavetable+index1);
+    value0 = *(wavetable+index0);
+    value1 = *(wavetable+index1);
 
     // float currentSample = value0 + frac * (value1 - value0);
     *currentS = value0 + frac * (value1 - value0);
@@ -52,6 +57,8 @@ void SimpleSineGenerator::CreateWaveTable()
         *(wavetable+i) = value;
         currentAngle += angleData;
     }
+
+    printf("Simple Sine Wave Table Created.\n");
 }
 
 void SimpleSineGenerator::SetFrequency(float freq, float sampleRate)
