@@ -39,25 +39,20 @@ float Track::GetNextTrackSample()
 {
     static float nextSample = 0.0;
     
-    // OutputData* outputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    // InitOutputDataStruct(outputData);
-
     printf("::::UNIT CHAIN::::\n");
     printf("Generator: %s\n", soundSource->GetSoundUnitName().c_str());
     
-    // *outputData = *(soundSource->GetNextUnitSample()); // first sound unit that generates sounds
-    
     nextSample = soundSource->GetNextUnitSample(); // first sound unit that generates sounds
     
-    effectIt = effectChain->begin();
+    // effectIt = effectChain->begin();
     
-    // for each sound effect inside the track that comes after the sound generator
-    for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
+    // // for each sound effect inside the track that comes after the sound generator
+    // for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 
-        printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
+    //     printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
-        nextSample = effectIt->ApplyEffect(nextSample);
-    }
+    //     nextSample = effectIt->ApplyEffect(nextSample);
+    // }
     
     printf("::::::::::::::::::\n");
 

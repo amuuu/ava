@@ -28,10 +28,10 @@ int main(void)
     // ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
 
     // SimpleSineGenerator sine2;
-    // sine2.SetParameter("freq", 410);
-    // sine2.UpdateOutputBuffer();
-    // ava.project.AppendTrack();
-    // ava.project.GetTrack(1)->SetSoundSource(sine2);
+    // sine2.SetParameter("freq", 200);
+    // sine2.SetParameter("amp", 0.5);
+    // ava.project->AppendTrack();
+    // ava.project->GetTrack(1)->SetSoundSource(&sine2);
 
     
 

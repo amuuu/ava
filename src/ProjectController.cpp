@@ -56,10 +56,13 @@ float ProjectController::GetNextProjectSample()
     
     // OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
     // InitOutputDataStruct(tmpOutputData);    
-    static float outputSample = 0.0;
-    
+    float outputSample = 0.0;
+    static float trackOutputData = 0.0;
+
     float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
     
+    printf("BUFF DIV %f\n", bufferDivisionValue);
+
     std::list<Track>::iterator trackIt;
     for (trackIt = tracks->begin(); trackIt != tracks->end(); ++trackIt) { // for each track
 
@@ -68,7 +71,7 @@ float ProjectController::GetNextProjectSample()
         if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
         {
 
-            float trackOutputData = trackIt->GetNextTrackSample();            
+            trackOutputData = trackIt->GetNextTrackSample();            
             
             outputSample += bufferDivisionValue * trackOutputData; // update the buffer value based on the division value
 
