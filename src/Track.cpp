@@ -2,13 +2,10 @@
 
 Track::Track()
 {
-    // soundUnits = new std::list<SoundUnit>;
-    effectChain = new std::list<SoundEffect>;
     soundSource = new SoundUnit();
+    effectChain = new std::list<SoundEffect>;
 
     ChangeTrackState(Active);
-
-    // effectIt = effectChain->begin();
 }
 
 bool Track::AppendNewSoundEffect(BaseEffectPreset effect)

@@ -32,6 +32,7 @@ class ProjectController
 
     private:
         std::list<Track>* tracks;
+        std::list<Track>::iterator trackIterator;
 
         struct GlobalSettings_t
         {

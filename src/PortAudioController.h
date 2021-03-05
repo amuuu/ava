@@ -47,8 +47,7 @@ class PortAudioController
     private:
         PaStream *stream;
         ProjectController* project;
-        
-        float generatedOutputBuffer [TABLE_SIZE];
+
         OutputData *paOutputData;
         CallbackType callbackType;  // TODO: USE MAP INSIDE paCallback map_name[callbacktype] :
                                     // ((PortAudioController*)userData)->paCallbackMethod(inputBuffer, outputBuffer, framesPerBuffer, timeInfo, statusFlags);

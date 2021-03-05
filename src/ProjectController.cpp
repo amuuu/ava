@@ -9,6 +9,7 @@ ProjectController::ProjectController()
 
     Track mainTrack ("Main Track");
     tracks->push_back(mainTrack);
+
 }
 
 bool ProjectController::AppendTrack(Track newTrack)
@@ -53,25 +54,19 @@ int ProjectController::GetNumActiveTracks()
 
 float ProjectController::GetNextProjectSample()
 {
-    
-    // OutputData* tmpOutputData = (struct OutputData*) malloc (sizeof(struct OutputData));
-    // InitOutputDataStruct(tmpOutputData);    
     float outputSample = 0.0;
     static float trackOutputData = 0.0;
 
     float bufferDivisionValue = GetDivisionValue((int) GetNumActiveTracks()); // divide the buffer and sum up the data on all tracks using this value
-    
-    printf("BUFF DIV %f\n", bufferDivisionValue);
 
-    std::list<Track>::iterator trackIt;
-    for (trackIt = tracks->begin(); trackIt != tracks->end(); ++trackIt) { // for each track
+    for (trackIterator = tracks->begin(); trackIterator != tracks->end(); ++trackIterator) { // for each track
 
-        printf("\n======= Track: %s =======\n", trackIt->GetTrackName().c_str());
+        // printf("\n======= Track: %s =======\n", trackIterator->GetTrackName().c_str());
         
-        if (trackIt->GetTrackState() == Active) // only calculate the buffer based on active tracks
+        if (trackIterator->GetTrackState() == Active) // only calculate the buffer based on active tracks
         {
 
-            trackOutputData = trackIt->GetNextTrackSample();            
+            trackOutputData = trackIterator->GetNextTrackSample();            
             
             outputSample += bufferDivisionValue * trackOutputData; // update the buffer value based on the division value
 
@@ -82,5 +77,6 @@ float ProjectController::GetNextProjectSample()
             continue;
         }
     }
+    printf("herererererererererere\n");
     return outputSample;
 }

@@ -10,12 +10,12 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
     SetSoundUnitName("Simple Sine");
 
     CreateWaveTable();
+
+    currentS = new float;
 }
 
 float SimpleSineGenerator::GetNextUnitSample()
 {
-    // printf("bruhhhhhhhhhhhhhhhhhhhhh");
-    
     if (pendingParamUpdate) UpdateParams();
 
     unsigned int index0 = (unsigned int) currentIndex;
@@ -23,17 +23,18 @@ float SimpleSineGenerator::GetNextUnitSample()
 
     float frac = currentIndex - (float) index0;
 
-    // auto value0 = table[index0];
     float value0 = *(wavetable+index0);
     float value1 = *(wavetable+index1);
 
-    float currentSample = value0 + frac * (value1 - value0);
+    // float currentSample = value0 + frac * (value1 - value0);
+    *currentS = value0 + frac * (value1 - value0);
+
 
     if ((currentIndex += wavetableDelta) > (float) wavetableSize)
         currentIndex -= (float) wavetableSize;
     
-    printf("current %f\n", currentSample);
-    return currentSample;
+    printf("current %f\n", *currentS);
+    return *currentS;
 }
 
 
@@ -42,12 +43,8 @@ void SimpleSineGenerator::CreateWaveTable()
     wavetableSize = 1<<7;
     wavetable = new float [wavetableSize];
 
-    ModifyOutputDataStructBufferSize(outputData, wavetableSize);
-    
     double angleData = (2*M_PI)/(double)(wavetableSize-1);
     double currentAngle = 0 ;
-
-    // printf("size: %d\n", wavetableSize);
 
     for (int i=0; i < wavetableSize; i++)
     {

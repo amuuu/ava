@@ -80,7 +80,7 @@ PortAudioController::PortAudioController()
     :stream(0)
 {
     InitPaOutputDataStruct();
-    project = new ProjectController();    
+    project = new ProjectController();  
 }
 
 bool PortAudioController::Initialize()
