@@ -4,7 +4,7 @@ Track::Track()
 {
     // soundUnits = new std::list<SoundUnit>;
     effectChain = new std::list<SoundEffect>;
-    soundSource = (SoundUnit*) malloc (sizeof(SoundUnit));
+    soundSource = new SoundUnit();
 
     ChangeTrackState(Active);
 }
@@ -24,12 +24,6 @@ SoundEffect Track::GetEffect(int index)
     std::advance(it, index);
     return *it;
 }
-
-SoundUnit Track::GetSoundSource()
-{
-    return *soundSource;
-}
-
 
 /* buffer of list[1] = list[0] <- (list[0] is the source of sound and list[1] is an effect)              
 * then buffer of list[2] = list[1]
@@ -53,18 +47,17 @@ float Track::GetNextTrackSample()
     
     nextSample = soundSource->GetNextUnitSample(); // first sound unit that generates sounds
     
-    printf("HERERERERERER\n");
     
-    static std::list<SoundEffect>::iterator effectIt = effectChain->begin();
+    // static std::list<SoundEffect>::iterator effectIt = effectChain->begin();
 
     // for each sound effect inside the track that comes after the sound generator
-    for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
+    // for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 
-        printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
+        // printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
         // effectIt->SetOutputBufferData(outputData);
-        nextSample = effectIt->ApplyEffect(nextSample);
-    }
+        // nextSample = effectIt->ApplyEffect(nextSample);
+    // }
     
     printf("::::::::::::::::::\n");
 

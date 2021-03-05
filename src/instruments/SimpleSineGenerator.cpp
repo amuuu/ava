@@ -15,7 +15,7 @@ SimpleSineGenerator::SimpleSineGenerator() : VirtualInstrument()
 
 float SimpleSineGenerator::GetNextUnitSample()
 {
-    printf("bruhhhhhhhhhhhhhhhhhhhhh");
+    // printf("bruhhhhhhhhhhhhhhhhhhhhh");
     
     if (pendingParamUpdate) UpdateParams();
 
