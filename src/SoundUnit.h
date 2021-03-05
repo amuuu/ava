@@ -26,14 +26,11 @@ class SoundUnit
         SoundUnit();
         
         virtual float GetNextUnitSample() { return 0.0; }
-        void SetOutputBufferData(OutputData *newOutputData) { *outputData = *newOutputData; }
 
         std::string GetSoundUnitName() { return soundUnitProps.name; }
         void SetSoundUnitName(std::string name) { soundUnitProps.name = name; }
     
 
-    protected:
-        OutputData* outputData;
     
     private:
         bool InitializeDefaultIOStructValues();

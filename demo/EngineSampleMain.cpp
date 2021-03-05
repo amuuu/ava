@@ -18,7 +18,7 @@ int main(void)
     Ava ava;
     
     SimpleSineGenerator sine;
-    sine.SetParameter("freq", 410);
+    sine.SetParameter("freq", 510);
     sine.SetParameter("amp", 1);
     ava.project->GetTrack(0)->SetSoundSource(&sine);
 

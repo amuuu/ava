@@ -36,11 +36,7 @@ class PortAudioController
         bool CloseStream();
         bool Initialize();
 
-        bool SetOutputBuffer(OutputData* newPaOutputData);
-
         void SetProjectObject(ProjectController* projectController) { project = projectController; }
-
-        OutputData* CalculateSumOutputData();
 
         // TODO: set audio device
 
@@ -48,7 +44,6 @@ class PortAudioController
         PaStream *stream;
         ProjectController* project;
 
-        OutputData *paOutputData;
         CallbackType callbackType;  // TODO: USE MAP INSIDE paCallback map_name[callbacktype] :
                                     // ((PortAudioController*)userData)->paCallbackMethod(inputBuffer, outputBuffer, framesPerBuffer, timeInfo, statusFlags);
 
