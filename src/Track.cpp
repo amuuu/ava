@@ -8,9 +8,9 @@ Track::Track()
     ChangeTrackState(Active);
 }
 
-bool Track::AppendNewSoundEffect(BaseEffectPreset effect)
+bool Track::AppendNewSoundEffect(BaseEffectPreset* effect)
 {
-    effectChain->push_back(effect.GetEffect());
+    effectChain->push_back(effect->GetEffect());
     
     printf("New effect appended to: %s\n", GetTrackName().c_str());
 
@@ -41,15 +41,15 @@ float Track::GetNextTrackSample()
     
     nextSample = soundSource->GetNextUnitSample(); // first sound unit that generates sounds
     
-    // effectIt = effectChain->begin();
+    effectIt = effectChain->begin();
     
     // // for each sound effect inside the track that comes after the sound generator
-    // for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
+    for (effectIt = effectChain->begin(); effectIt != effectChain->end(); ++effectIt) {   
 
-    //     printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
+        printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
-    //     nextSample = effectIt->ApplyEffect(nextSample);
-    // }
+        nextSample = effectIt->ApplyEffect(nextSample);
+    }
     
     printf("::::::::::::::::::\n");
 

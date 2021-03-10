@@ -22,8 +22,8 @@ int main(void)
     sine.SetParameter("amp", 1);
     ava.project->GetTrack(0)->SetSoundSource(&sine);
 
-    // DelayEffect delay;
-    // ava.project->GetTrack(0)->AppendNewSoundEffect(delay);
+    DelayEffect delay;
+    ava.project->GetTrack(0)->AppendNewSoundEffect(&delay);
 
     // ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
 
