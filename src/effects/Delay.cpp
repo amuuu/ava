@@ -7,7 +7,7 @@ float Delay::ApplyEffect(std::map<std::string, float>* parameters, float inputSa
     int amount = (*parameters)["amount"];
     double feedback = (*parameters)["feedback"];
 
-    printf("   Applying delay effect...\n");
+    // printf("   Applying delay effect...\n");
     static float out = 0;
     
     out = ((1-amount) * inputSample + amount * *(buffer + *readPosition)); //1-amount=dryMix, amount=wetMix
@@ -23,7 +23,7 @@ float Delay::ApplyEffect(std::map<std::string, float>* parameters, float inputSa
     if (*writePosition >= bufferLength)
         *writePosition = 0;
     
-    printf("read: %d, write: %d\n", *readPosition, *writePosition);
+    // printf("read: %d, write: %d\n", *readPosition, *writePosition);
     return out;
 }
 
