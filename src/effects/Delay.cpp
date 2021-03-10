@@ -1,11 +1,23 @@
 #include "Delay.h"
 
+Delay::Delay(): SoundEffectType()
+{
+    writePosition = new int;
+    readPosition = new int;
+    *writePosition = 0;
+    *readPosition = 0;
+    SetDelay();
+    amount = -1;
+    feedback = -1;
+}
+
 
 float Delay::ApplyEffect(std::map<std::string, float>* parameters, float inputSample)
 {
     // TODO: add update param method like sine generator
-    int amount = (*parameters)["amount"];
-    double feedback = (*parameters)["feedback"];
+    // double amount = (*parameters)["amount"];
+    // double feedback = (*parameters)["feedback"];
+    UpdateParams(parameters);
 
     // printf("   Applying delay effect...\n");
     static float out = 0;
@@ -29,7 +41,7 @@ float Delay::ApplyEffect(std::map<std::string, float>* parameters, float inputSa
 
 void Delay::SetDelay()
 {
-    delayLength = 0.5;
+    delayLength = 0.5; // make this a parameter?
 
     bufferLength  = (int) 2.0 * SAMPLE_RATE;
     // bufferLength  = 512;
@@ -43,4 +55,19 @@ void Delay::SetDelay()
 
     *readPosition = (int) (*writePosition - (delayLength * SAMPLE_RATE) + bufferLength) % bufferLength;
 
+}
+
+void Delay::UpdateParams(std::map<std::string, float>* parameters)
+{
+    try {
+        amount = (*parameters)["amount"];
+        feedback = (*parameters)["feedback"];
+        
+        if (amount < 0 || feedback < 0)
+            throw BadParam();
+    }
+    
+    catch (BadParam& e) {
+        printf("%s\n", e.Msg());
+    }
 }

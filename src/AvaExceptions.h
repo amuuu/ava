@@ -1,3 +1,5 @@
+#pragma once
+
 #include <exception>
 
 struct BadParam : public std::exception

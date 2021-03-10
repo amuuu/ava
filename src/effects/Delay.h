@@ -12,18 +12,20 @@
 class Delay : public SoundEffectType
 {
     public:
-        Delay() : SoundEffectType() { writePosition = new int; readPosition = new int; *writePosition = 0; *readPosition = 0; SetDelay(); }
-
+        Delay();
         float ApplyEffect(std::map<std::string, float>* parameters, float inputSample) override;
     
         void SetDelay();
     
     private:
+        void UpdateParams(std::map<std::string, float>* parameters);
         
         int bufferLength;
         double* buffer;
         
         double delayLength;
+        double amount;
+        double feedback;
         
         int* writePosition;
         int* readPosition;
