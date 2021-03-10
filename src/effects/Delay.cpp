@@ -23,10 +23,10 @@ float Delay::ApplyEffect(std::map<std::string, float>* parameters, float inputSa
     if (*writePosition >= bufferLength)
         *writePosition = 0;
     
-    return out ;
+    return out;
 }
 
-void Delay::SetDelay(int delayValue)
+void Delay::SetDelay()
 {
     delayLength = 0.5;
 

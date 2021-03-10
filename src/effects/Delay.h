@@ -16,7 +16,7 @@ class Delay : public SoundEffectType
 
         float ApplyEffect(std::map<std::string, float>* parameters, float inputSample) override;
     
-        void SetDelay(int delayValue);
+        void SetDelay();
     
     private:
         
