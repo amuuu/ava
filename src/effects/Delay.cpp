@@ -14,15 +14,16 @@ float Delay::ApplyEffect(std::map<std::string, float>* parameters, float inputSa
             
     *(buffer + *writePosition) = inputSample + (*(buffer + *readPosition) * feedback);
     
-    *readPosition++;
+    (*readPosition)++;
     if (*readPosition >= bufferLength)
         *readPosition = 0;
 
-    *writePosition++;
+    (*writePosition)++;
     
     if (*writePosition >= bufferLength)
         *writePosition = 0;
     
+    printf("read: %d, write: %d\n", *readPosition, *writePosition);
     return out;
 }
 
@@ -31,6 +32,8 @@ void Delay::SetDelay()
     delayLength = 0.5;
 
     bufferLength  = (int) 2.0 * SAMPLE_RATE;
+    // bufferLength  = 512;
+
     if (bufferLength < 1)
         bufferLength = 1;
 
