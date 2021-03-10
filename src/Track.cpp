@@ -48,11 +48,11 @@ float Track::GetNextTrackSample()
 
         printf("   Effect: %s\n", effectIt->GetSoundUnitName().c_str());
         
-        printf("before %f\n", nextSample);
+        // printf("before %f\n", nextSample);
         
         nextSample = effectIt->ApplyEffect(nextSample);
         
-        printf("after %f\n", nextSample);
+        // printf("after %f\n", nextSample);
 
     }
     
