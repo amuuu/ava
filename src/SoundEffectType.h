@@ -10,6 +10,7 @@
 #pragma once
 
 #include "AudioDataStructs.h"
+#include "AvaExceptions.h"
 
 #include <map>
 

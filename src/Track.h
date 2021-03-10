@@ -34,7 +34,7 @@ class Track
         bool SetSoundSource(SoundUnit* newSoundSource) { soundSource = newSoundSource; return true; }
         SoundUnit GetSoundSource() { return *soundSource; }
 
-        bool AppendNewSoundEffect(BaseEffectPreset effect);
+        bool AppendNewSoundEffect(BaseEffectPreset* effect);
         SoundEffect GetEffect(int index);
 
 

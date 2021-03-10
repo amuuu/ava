@@ -15,6 +15,8 @@ class DelayEffect : public BaseEffectPreset
         DelayEffect() : BaseEffectPreset("Delay")
         {
             effect.SetParameter("amount", 1.0); 
+            effect.SetParameter("feedback", 0.25); 
+            effect.SetParameter("length", 0.5); 
         }
 };
 

@@ -36,7 +36,7 @@ float SimpleSineGenerator::GetNextUnitSample()
     if ((currentIndex += wavetableDelta) > (float) wavetableSize)
         currentIndex -= (float) wavetableSize;
     
-    printf("current %f\n", *currentSample);
+    // printf("current %f\n", *currentSample);
     return *currentSample;
 }
 
