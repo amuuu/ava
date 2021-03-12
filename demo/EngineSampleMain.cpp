@@ -33,15 +33,15 @@ int main(void)
     float newFreq = 440, newAmp = 1;
     float numSeconds = 0.5; 
     int deviceNumber = 1;
-    int exit = -1;
+    int shouldExit = -1;
 
     while (true)
     {
 
         std::cout << "exit? ";
-        std::cin >> exit;
+        std::cin >> shouldExit;
         
-        if (exit != 1)
+        if (shouldExit != 1)
         {
             // std::cin >> targetInstrument;
             std::cout << "which device? ";
