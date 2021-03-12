@@ -1,6 +1,8 @@
 # Ava Sound Engine
 A more complete documentation will be added soon.
 
+You can see the implemetation kanban board in the repo's [projects section](https://github.com/funktional-stdo/ava/projects).
+
 
 ## Build Ava (+ Demo Program)
 To build the engine alongside with the demo program you just need to make the project inside the root directory using the command below:
@@ -13,7 +15,7 @@ Then you can run the demo program using this command:
 ./demo/AvaDemo
 ```
 
-If you configure the CMake scripts, make sure to use the command below, to update the auto-generated makefiles (in the root directory). Then build the project using the previous instructions.
+If you configure the CMake scripts, you might need to use the command below to update the auto-generated makefiles (in the root directory). Then build the project using the previous instructions.
 ```
 make --configure .
 ```
