@@ -9,6 +9,10 @@
 
 #include "math.h"
 
+
+/*
+   This function is used because of the floating point division inaccuracies.
+*/
 static float GetDivisionValue(int input)
 {
     switch(input)
