@@ -15,15 +15,16 @@
 int main(void)
 {
 
-    Ava ava;
+    Ava* ava = new Ava();
+    SimpleSineGenerator* sine = new SimpleSineGenerator();
+    DelayEffect* delay = new DelayEffect();
     
-    SimpleSineGenerator sine;
-    sine.SetParameter("freq", 510);
-    sine.SetParameter("amp", 1);
-    ava.project->GetTrack(0)->SetSoundSource(&sine);
 
-    DelayEffect delay;
-    ava.project->GetTrack(0)->AppendNewSoundEffect(&delay);
+    sine->SetParameter("freq", 510);
+    sine->SetParameter("amp", 1);
+    ava->project->GetTrack(0)->SetSoundSource(sine);
+
+    ava->project->GetTrack(0)->AppendNewSoundEffect(delay);
 
     // ava.project.GetTrack(0)->ChangeTrackState(Deactivated);
 
@@ -35,15 +36,15 @@ int main(void)
 
     
 
-    if (ava.SetState(StartingState))
+    if (ava->SetState(StartingState))
     {
-        if (ava.SetState(OutputPlaybackState))
+        if (ava->SetState(OutputPlaybackState))
         {
             printf("Play for %d seconds.\n", NUM_SECONDS);
 
             Pa_Sleep( NUM_SECONDS * 1000);
     
-            ava.SetState(HaltState);
+            ava->SetState(HaltState);
         }
     }
     printf("TEST DONE AND SEE YOU LATER.\n");
