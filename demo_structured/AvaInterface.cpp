@@ -49,3 +49,8 @@ void AvaInterface::SetTrackActive(int trackIndex, TrackState state)
 {
     ava->project->GetTrack(trackIndex)->ChangeTrackState(state);
 }
+
+void AvaInterface::SetParameter(int trackIndex, std::string name, float value, bool isEffect=false)
+{
+    (*instruments)[trackIndex]->SetParameter(name, value);
+}

@@ -1,6 +1,5 @@
 #include "../src/AvaUserHeaders.h"
 
-enum TrackState {Mute, Deactivated, Active};
 
 class AvaInterface
 {
@@ -10,7 +9,7 @@ class AvaInterface
         void Play(float numSeconds);
 
         /* TODO: Set parameter for effects */
-        void SetParameter(int trackIndex, std::string name, float value, int isEffect);
+        void SetParameter(int trackIndex, std::string name, float value, bool isEffect);
         void SetTrackActive(int trackIndex, TrackState state);
 
         void AddNewSineGeneratorTrack();

@@ -5,6 +5,7 @@
 *   This header contains methods for managing a single track and soundunits inside that track,
 *   as well as providing ways to manage track settings such as its state (active, mute, deactivated.)
 */
+#pragma once
 
 #include "SoundUnit.h"
 

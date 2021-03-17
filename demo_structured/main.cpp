@@ -7,9 +7,6 @@ int main(void)
 {
     AvaInterface* ava = new AvaInterface();
     
-    // ava->project->GetTrack(0)->ChangeTrackState(Deactivated);
-
-
     float newFreq = 440, newAmp = 1;
     float numSeconds = 0.5; 
     int deviceNumber = 1;
@@ -24,7 +21,7 @@ int main(void)
         if (shouldExit != 1)
         {
             // std::cin >> targetInstrument;
-            std::cout << "which device? ";
+            std::cout << "(index starts from 0) which device? ";
             std::cin >> deviceNumber;
 
             std::cout << "new freq: ";
@@ -38,12 +35,12 @@ int main(void)
 
             if (newFreq != -1)
             {
-                (*devices)[deviceNumber]->SetParameter("freq", newFreq);
+                ava->SetParameter(deviceNumber,"freq", newFreq, false);
             }
             
             if (newAmp != -1)
             {
-                (*devices)[deviceNumber]->SetParameter("amp", newAmp);
+                ava->SetParameter(deviceNumber,"amp", newAmp, false);
             }
             
             if (numSeconds != -1)
