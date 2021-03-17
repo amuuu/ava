@@ -1,12 +1,13 @@
-#include "../src/AvaUserHeaders.h"
+#include "AvaInterface.h"
 
 #include <iostream>
 #include <map>
 
 int main(void)
 {
-
-    Ava* ava = new Ava();
+    AvaInterface* ava = new AvaInterface();
+    
+    // Ava* ava = new Ava();
     
     SimpleSineGenerator* sine = new SimpleSineGenerator();
     SimpleSineGenerator* sine2 = new SimpleSineGenerator();
@@ -68,17 +69,7 @@ int main(void)
             
             if (numSeconds != -1)
             {
-                if (ava->SetState(StartingState))
-                {
-                    if (ava->SetState(OutputPlaybackState))
-                    {
-                        printf("Play for %f seconds.\n", numSeconds);
-
-                        Pa_Sleep( numSeconds * 1000);
-                
-                        ava->SetState(HaltState);
-                    }
-                }
+                ava->Play(numSeconds);
             }
         }
         else {
