@@ -6,4 +6,5 @@ add_definitions(${AVA_COMPILE_FLAGS})
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${AVA_COMPILE_FLAGS}")
 
 add_subdirectory (src)
-add_subdirectory (demo)
+add_subdirectory (demo_simple)
+add_subdirectory (demo_structured)
