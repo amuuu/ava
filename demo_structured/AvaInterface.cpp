@@ -34,12 +34,12 @@ void AvaInterface::InitInstruments()
     ava->project->GetTrack(0)->SetSoundSource((*instruments)[0]);
 }
 
-void AvaInterface::AddNewSineGeneratorTrack()
+void AvaInterface::AddNewSineGeneratorTrack(float initialFreq, float initialAmp)
 {
     int newIndex = ava->project->GetTracksSize();
     instruments->insert(std::pair<int, SimpleSineGenerator*>(newIndex, new SimpleSineGenerator()));
-    (*instruments)[newIndex]->SetParameter("freq", 440);
-    (*instruments)[newIndex]->SetParameter("amp", 1);
+    (*instruments)[newIndex]->SetParameter("freq", initialFreq);
+    (*instruments)[newIndex]->SetParameter("amp", initialAmp);
 
     ava->project->AppendTrack();
     ava->project->GetTrack(newIndex)->SetSoundSource((*instruments)[newIndex]);

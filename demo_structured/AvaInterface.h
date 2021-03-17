@@ -1,5 +1,5 @@
 #include "../src/AvaUserHeaders.h"
-
+#include <map>
 
 class AvaInterface
 {
@@ -12,7 +12,7 @@ class AvaInterface
         void SetParameter(int trackIndex, std::string name, float value, bool isEffect);
         void SetTrackActive(int trackIndex, TrackState state);
 
-        void AddNewSineGeneratorTrack();
+        void AddNewSineGeneratorTrack(float initialFreq, float initialAmp);
         /* TODO: audio device settings */
 
     private:

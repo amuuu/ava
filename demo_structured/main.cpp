@@ -1,7 +1,7 @@
 #include "AvaInterface.h"
 
 #include <iostream>
-#include <map>
+
 
 int main(void)
 {
@@ -10,18 +10,37 @@ int main(void)
     float newFreq = 440, newAmp = 1;
     float numSeconds = 0.5; 
     int deviceNumber = 1;
-    int shouldExit = -1;
+    bool shouldExit = false;
+    
+    std::string inputCommand;
 
     while (true)
     {
 
-        std::cout << "exit? ";
-        std::cin >> shouldExit;
+        std::cout << "commands: addnew/setparams/play/exit\n";
+        std::cin >> inputCommand;
         
-        if (shouldExit != 1)
+        if (inputCommand == "exit")
         {
-            // std::cin >> targetInstrument;
-            std::cout << "(index starts from 0) which device? ";
+            break;
+        }
+
+        else if (inputCommand == "addnew")
+        {
+            std::cout << "init freq? ";
+            std::cin >> newFreq;
+            std::cout << "init amp? ";
+            std::cin >> newAmp;
+
+            if (newFreq = -1) newFreq = 440;
+            if (newAmp = -1) newAmp = 1;
+
+            ava->AddNewSineGeneratorTrack(newFreq, newAmp);
+        }
+
+        else if (inputCommand == "setparams")
+        {
+            std::cout << "(index starts from 0)\nwhich device? ";
             std::cin >> deviceNumber;
 
             std::cout << "new freq: ";
@@ -29,9 +48,6 @@ int main(void)
             
             std::cout << "new amp: ";
             std::cin >> newAmp;
-            
-            std::cout << "secs: ";
-            std::cin >> numSeconds;
 
             if (newFreq != -1)
             {
@@ -42,15 +58,20 @@ int main(void)
             {
                 ava->SetParameter(deviceNumber,"amp", newAmp, false);
             }
-            
+        }
+
+        else if (inputCommand == "play")
+        {
+
+            std::cout << "secs: ";
+            std::cin >> numSeconds;
+
             if (numSeconds != -1)
             {
                 ava->Play(numSeconds);
             }
         }
-        else {
-            break;
-        }
+
     }
 
     printf("TEST DONE AND SEE YOU LATER.\n");
