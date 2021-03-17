@@ -44,3 +44,8 @@ void AvaInterface::AddNewSineGeneratorTrack()
     ava->project->AppendTrack();
     ava->project->GetTrack(newIndex)->SetSoundSource((*instruments)[newIndex]);
 }
+
+void AvaInterface::SetTrackActive(int trackIndex, TrackState state)
+{
+    ava->project->GetTrack(trackIndex)->ChangeTrackState(state);
+}

@@ -7,9 +7,6 @@ int main(void)
 {
     AvaInterface* ava = new AvaInterface();
     
-    // DelayEffect* delay = new DelayEffect();    
-    // ava->project->GetTrack(0)->AppendNewSoundEffect(delay);
-
     // ava->project->GetTrack(0)->ChangeTrackState(Deactivated);
 
 
