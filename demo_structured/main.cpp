@@ -7,27 +7,9 @@ int main(void)
 {
     AvaInterface* ava = new AvaInterface();
     
-    // Ava* ava = new Ava();
-    
-    SimpleSineGenerator* sine = new SimpleSineGenerator();
-    SimpleSineGenerator* sine2 = new SimpleSineGenerator();
-    
-    std::map<int, SimpleSineGenerator*>* devices = new std::map<int, SimpleSineGenerator*>;
-    devices->insert(std::pair<int, SimpleSineGenerator*>(1, sine));
-    devices->insert(std::pair<int, SimpleSineGenerator*>(2, sine2));
-
-    ava->project->GetTrack(0)->SetSoundSource(sine);
-    ava->project->AppendTrack();
-    ava->project->GetTrack(1)->SetSoundSource(sine2);
-
     // DelayEffect* delay = new DelayEffect();    
     // ava->project->GetTrack(0)->AppendNewSoundEffect(delay);
 
-    sine->SetParameter("freq", 440);
-    sine->SetParameter("amp", 1);
-
-    sine2->SetParameter("freq", 800);
-    sine2->SetParameter("amp", 1);
     // ava->project->GetTrack(0)->ChangeTrackState(Deactivated);
 
 

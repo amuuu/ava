@@ -3,6 +3,10 @@
 AvaInterface::AvaInterface()
 {
     ava = new Ava();
+    instruments = new std::map<int, SimpleSineGenerator*>;
+
+    InitInstruments();
+
 }
 
 void AvaInterface::Play(float numSeconds)
@@ -18,4 +22,25 @@ void AvaInterface::Play(float numSeconds)
             ava->SetState(HaltState);
         }
     }
+}
+
+void AvaInterface::InitInstruments()
+{
+    instruments->insert(std::pair<int, SimpleSineGenerator*>(0, new SimpleSineGenerator()));
+    
+    (*instruments)[0]->SetParameter("freq", 440);
+    (*instruments)[0]->SetParameter("amp", 1);
+
+    ava->project->GetTrack(0)->SetSoundSource((*instruments)[0]);
+}
+
+void AvaInterface::AddNewSineGeneratorTrack()
+{
+    int newIndex = ava->project->GetTracksSize();
+    instruments->insert(std::pair<int, SimpleSineGenerator*>(newIndex, new SimpleSineGenerator()));
+    (*instruments)[newIndex]->SetParameter("freq", 440);
+    (*instruments)[newIndex]->SetParameter("amp", 1);
+
+    ava->project->AppendTrack();
+    ava->project->GetTrack(newIndex)->SetSoundSource((*instruments)[newIndex]);
 }
