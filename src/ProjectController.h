@@ -23,6 +23,7 @@ class ProjectController
         bool AppendTrack(Track newTrack);
         bool RemoveTrack(Track toBeRemovedTrack) { return true; }
         bool AppendTrack();
+        int GetTracksSize() { return tracks->size(); }
 
         std::list<Track>* GetAllTracks() const { return tracks; }
 
