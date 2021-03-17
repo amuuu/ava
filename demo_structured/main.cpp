@@ -72,6 +72,11 @@ int main(void)
             }
         }
 
+        else
+        {
+            std::cout << "invalid command.\n";
+        }
+
     }
 
     printf("TEST DONE AND SEE YOU LATER.\n");
