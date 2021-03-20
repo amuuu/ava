@@ -17,7 +17,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "commands: addnew/setparams/play/showdevices/exit\n";
+        std::cout << "commands: addnew/setparams/play/showdevices/deactivate/activate/exit\n";
         std::cin >> inputCommand;
         
         if (inputCommand == "exit")
@@ -72,6 +72,22 @@ int main(void)
             }
         }
         
+        else if (inputCommand == "deactivate")
+        {
+            std::cout << "(index starts from 0)\nwhich device? ";
+            std::cin >> deviceNumber;
+
+            ava->SetTrackActive(deviceNumber, Deactivated);
+        }
+
+        else if (inputCommand == "activate")
+        {
+            std::cout << "(index starts from 0)\nwhich device? ";
+            std::cin >> deviceNumber;
+
+            ava->SetTrackActive(deviceNumber, Active);
+        }
+
         else if (inputCommand == "showdevices")
         {
             ava->DisplayAudioDeviceSettings();
