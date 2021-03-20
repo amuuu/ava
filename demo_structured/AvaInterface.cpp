@@ -54,3 +54,8 @@ void AvaInterface::SetParameter(int trackIndex, std::string name, float value, b
 {
     (*instruments)[trackIndex]->SetParameter(name, value);
 }
+
+void AvaInterface::DisplayAudioDeviceSettings()
+{
+    ava->DisplayAudioDevicesSettings();
+}

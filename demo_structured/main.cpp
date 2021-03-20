@@ -17,7 +17,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "commands: addnew/setparams/play/exit\n";
+        std::cout << "commands: addnew/setparams/play/showdevices/exit\n";
         std::cin >> inputCommand;
         
         if (inputCommand == "exit")
@@ -70,6 +70,11 @@ int main(void)
             {
                 ava->Play(numSeconds);
             }
+        }
+        
+        else if (inputCommand == "showdevices")
+        {
+            ava->DisplayAudioDeviceSettings();
         }
 
         else

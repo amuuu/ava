@@ -136,14 +136,15 @@ bool PortAudioController::IsStreamEmpty()
 bool PortAudioController::DisplayAudioDevicesSettings()
 {
     int numDevices = Pa_GetDeviceCount();
+
+
     if( numDevices < 0 )
     {
         printf( "ERROR: Pa_GetDeviceCount returned 0x%x\n", numDevices );
         return false;
     }
     
-    printf( "Total number of devices: %d\n", numDevices );
-
+    printf( "Total number of devices: %d\n", numDevices);
 
     const PaDeviceInfo *deviceInfo;
     int defaultDisplayed;
