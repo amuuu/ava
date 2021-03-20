@@ -32,7 +32,7 @@ class AvaState
         AvaState() {}
         inline EngineState GetStateName() const { return stateName; }
 
-        virtual bool PerformTransition(IOController io) { return false; }
+        virtual bool PerformTransition(IOController* io) { return false; }
 
     protected:    
         EngineState stateName;
@@ -43,21 +43,21 @@ class Halt: public AvaState
 {
     public:
         Halt() { SetStateName(HaltState); }    
-        bool PerformTransition(IOController io);
+        bool PerformTransition(IOController* io);
 };
 
 class OutputPlayback: public AvaState
 {
     public:
         OutputPlayback() { SetStateName(OutputPlaybackState); }
-        bool PerformTransition(IOController io);
+        bool PerformTransition(IOController* io);
 };
 
 class Starting: public AvaState
 {
     public:
         Starting() { SetStateName(StartingState);  }    
-        bool PerformTransition(IOController io);
+        bool PerformTransition(IOController* io);
 };
 
 
@@ -72,12 +72,12 @@ class Ava
         Ava();        
         bool SetState(EngineState newState);
         // EngineState GetCurrentState() { return currentState->GetStateName(); }
-        
+        void DisplayAudioDevicesSettings() { io->pac->DisplayAudioDevicesSettings(); }
         ProjectController* project;
 
     private:
         AvaState* currentState;
-        IOController io;
+        IOController* io;
 
         Halt haltInstance; OutputPlayback outputPlaybackInstance; Starting startingInstance;
         std::map<EngineState, AvaState*> statesMap { {HaltState, &haltInstance}, {OutputPlaybackState, &outputPlaybackInstance}, {StartingState, &startingInstance}};

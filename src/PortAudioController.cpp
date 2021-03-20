@@ -131,3 +131,76 @@ bool PortAudioController::IsStreamEmpty()
         return true;
     return false;
 }
+
+
+bool PortAudioController::DisplayAudioDevicesSettings()
+{
+    printf( "PortAudio version: 0x%08X\n", Pa_GetVersion());
+    printf( "Version text: '%s'\n", Pa_GetVersionInfo()->versionText );
+
+    int numDevices = Pa_GetDeviceCount();
+
+    if( numDevices < 0)
+    {
+        printf( "ERROR: Pa_GetDeviceCount returned 0x%x\n", numDevices );
+        return false;
+    }
+    
+    printf( "Total number of devices: %d\n", numDevices);
+
+    const PaDeviceInfo *deviceInfo;
+    int defaultDisplayed;
+    PaStreamParameters inputParameters, outputParameters;
+    PaError err;
+
+    for(int i=0; i < numDevices; i++ )
+    {
+        deviceInfo = Pa_GetDeviceInfo( i );
+        printf( "Device #%d ~~~~~~~~~~~\n", i );
+
+        /* Mark global and API specific default devices */
+        defaultDisplayed = 0;
+        if( i == Pa_GetDefaultInputDevice() )
+        {
+            printf( "[ Default Input" );
+            defaultDisplayed = 1;
+        }
+        else if( i == Pa_GetHostApiInfo( deviceInfo->hostApi )->defaultInputDevice )
+        {
+            const PaHostApiInfo *hostInfo = Pa_GetHostApiInfo( deviceInfo->hostApi );
+            printf( "[ Default %s Input", hostInfo->name );
+            defaultDisplayed = 1;
+        }
+        
+        if( i == Pa_GetDefaultOutputDevice() )
+        {
+            printf( (defaultDisplayed ? "," : "[") );
+            printf( " Default Output" );
+            defaultDisplayed = 1;
+        }
+        else if( i == Pa_GetHostApiInfo( deviceInfo->hostApi )->defaultOutputDevice )
+        {
+            const PaHostApiInfo *hostInfo = Pa_GetHostApiInfo( deviceInfo->hostApi );
+            printf( (defaultDisplayed ? "," : "[") );                
+            printf( " Default %s Output", hostInfo->name );
+            defaultDisplayed = 1;
+        }
+
+        if( defaultDisplayed )
+            printf( " ]\n" );
+
+        /* print device info fields */
+        #ifdef WIN32
+        {   /* Use wide char on windows, so we can show UTF-8 encoded device names */
+            wchar_t wideName[MAX_PATH];
+            MultiByteToWideChar(CP_UTF8, 0, deviceInfo->name, -1, wideName, MAX_PATH-1);
+            wprintf( L"Name                        = %s\n", wideName );
+        }
+        #else
+                printf( "Name = %s\n", deviceInfo->name );
+        #endif
+        printf( "Default sample rate = %8.2f\n", deviceInfo->defaultSampleRate );
+    }
+
+    return true;
+}

@@ -13,7 +13,9 @@ class AvaInterface
         void SetTrackActive(int trackIndex, TrackState state);
 
         void AddNewSineGeneratorTrack(float initialFreq, float initialAmp);
+        
         /* TODO: audio device settings */
+        void DisplayAudioDeviceSettings();
 
     private:
         Ava* ava;
