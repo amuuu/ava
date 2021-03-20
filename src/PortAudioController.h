@@ -36,6 +36,9 @@ class PortAudioController
         bool CloseStream();
         bool Initialize();
 
+        bool DisplayAudioDevicesSettings();
+        // void SetAudioDevice(bool isOutput, int index);
+
         void SetProjectObject(ProjectController* projectController) { project = projectController; }
 
         // TODO: set audio device
@@ -66,5 +69,7 @@ class PortAudioController
         bool IsStreamEmpty();
 
         bool InitPaOutputDataStruct();
+
+        void PrintSupportedStandardSampleRates(const PaStreamParameters *inputParameters, const PaStreamParameters *outputParameters);
 
 };
