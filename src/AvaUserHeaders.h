@@ -4,3 +4,5 @@
 #include "instruments/SimpleSineGenerator.h"
 
 #include "effects/Presets.h"
+
+#include "util/MusicTheoryStuff.h"
