@@ -39,7 +39,25 @@ class Chord
 
 class MinorChord : public Chord
 {
+    public:
+        MinorChord(int baseNoteIndex, std::list<Note>* scale) : Chord("m", baseNoteIndex, scale)
+        {
+            std::list<Note>::iterator it = scale->begin();
+            
+            std::advance(it, baseNoteIndex % 7);
+            Note n1(it->number);
+            notes->push_back(n1);
 
+            it = scale->begin();
+            std::advance(it, (baseNoteIndex+2) % 7);
+            Note n2(it->number);
+            notes->push_back(n2);
+
+            it = scale->begin();
+            std::advance(it, (baseNoteIndex+4) % 7);
+            Note n3(it->number);
+            notes->push_back(n3);
+        }
 };
 
 
@@ -51,7 +69,7 @@ static std::list<Note>* ExpandNotesIntoOctaves(std::list<Note>* notes, int baseN
     
     for (int i = 0; i < size; i++)
     {
-        std::list<Track>::iterator it = notes->begin();
+        std::list<Note>::iterator it = notes->begin();
         std::advance(it, i % notes->size());
 
         int newNoteNumber = baseNote + it->number + 12 * ((i / numOctaves));
