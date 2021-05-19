@@ -29,15 +29,26 @@ struct ChordProgression
 class Composer
 {
     public:
+        int scaleType, baseNote, numOctaves;
+
         Scale scale;
     
         // TODO: Turn this to a list rather than it being a single progression
         ChordProgression progression;
 
 
-        Composer()
+        Composer(int scaleType, int baseNote, int numOctaves)
         {
-            scale = MinorScale(26, 3);
+            this->scaleType = scaleType;
+            this->baseNote = baseNote;
+            this->numOctaves = numOctaves;
+
+            if (this->scaleType == 1)
+                scale = MinorScale(baseNote, numOctaves);
+            else if (this->scaleType == 2)
+                scale = MajorScale(baseNote, numOctaves);
+            
+
         }
 
         Note* GetChordInProgression(int index)
