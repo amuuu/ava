@@ -120,11 +120,9 @@ class Scale
 
     public:
         
-        Scale (Settings settings)
-        {
-            settings = settings;
-        }
-
+        virtual void SetNotesAndChords() {}
+        
+        
         bool IsNoteInScale(int noteNumber)
         {
             for(int i = 0; i < SCALE_NOTES_SIZE; i++)
@@ -140,11 +138,6 @@ class Scale
         Note* GetScaleNotes()
         {
             return ExpandToOctaves(notes, settings.baseNote, settings.numOctaves);            
-        }
-
-        virtual void SetNotesAndChords()
-        { 
-            printf("bruh"); 
         }
 
 };
@@ -180,6 +173,40 @@ class MinorScale : public Scale
             notes[4].chord = MinorChord(4, notes);
             notes[5].chord = MajorChord(5, notes);
             notes[6].chord = MajorChord(6, notes);
+        }
+};
+
+class MajorScale : public Scale
+{
+    public:
+        MajorScale(int scaleType, int baseNote, int numOctaves)
+        {
+            settings.scaleType = scaleType;
+            settings.baseNote = baseNote;
+            settings.numOctaves = numOctaves;
+
+            SetNotesAndChords();
+        }
+
+        void SetNotesAndChords() override
+        {
+            notes = new ScaleNote[SCALE_NOTES_SIZE];
+            
+            notes[0] = ScaleNote(0);
+            notes[1] = ScaleNote(2);
+            notes[2] = ScaleNote(4);
+            notes[3] = ScaleNote(5);
+            notes[4] = ScaleNote(7);
+            notes[5] = ScaleNote(9);
+            notes[6] = ScaleNote(10);
+
+            notes[0].chord = MajorChord(0, notes);
+            notes[1].chord = MinorChord(1, notes);
+            notes[2].chord = MinorChord(2, notes);
+            notes[3].chord = MajorChord(3, notes);
+            notes[4].chord = MajorChord(4, notes);
+            notes[5].chord = MinorChord(5, notes);
+            notes[6].chord = DimChord(6, notes);
         }
 };
 
