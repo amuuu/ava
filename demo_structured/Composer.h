@@ -3,6 +3,39 @@
 #include <string>
 #include <list>
 
+#define SCALE_NOTES_SIZE 7
+
+struct Settings
+{
+    int scaleType; // 1->minor / 2->major
+    int baseNote; // c2->36 / c8->88
+    int numOctaves; // -> 3
+};
+
+struct ChordProgression
+{
+    int length;
+    int* chords; // index respective to the index of the notes inside scale.
+    int currentIndex;
+};
+
+
+class Composer
+{
+    public:
+        Scale scale;
+        ChordProgression progression;
+
+        Note[] GetNextChord()
+        {
+            return scale.notes[progression.currentIndex].chord progression.chords[]    
+        }
+
+        Note[] GetRandomChordInScale() { }
+};
+
+
+
 class Note
 {
     public:
@@ -14,69 +47,77 @@ class Note
         }
 };
 
+class ScaleNote : public Note
+{
+    public:
+        Chord chord;
 
+        ScaleNote(int number) : Note(number)
+        {
+
+        }
+};
 
 class Chord
 {
     protected:
-        std::list<Note>* notes;
-        std::string typeName;
-    
-    public:
-        Chord(std::string typeName, int baseNoteIndex, Note* scale)
-        {
-            notes = new std::list<Note>;
+        Note notes[];
 
-            typeName = typeName;
+
+};
+
+
+
+class Scale
+{
+    protected:
+        ScaleNote* notes;
+        Settings settings;
+
+    public:
+        
+        Scale (Settings settings)
+        {
+            settings = settings;
         }
 
-        std::list<Note>* GetChordNotes(int baseNote, int numOctaves)
+        bool IsNoteInScale(int noteNumber)
         {
-            return ExpandNotesIntoOctaves(notes, baseNote, numOctaves);
+            for(int i = 0; i < SCALE_NOTES_SIZE; i++)
+            {
+                if (noteNumber % 12 == notes[i].number) // bug potential
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        Note* GetScaleNotes()
+        {
+            return ExpandToOctaves(notes, settings.baseNote, settings.numOctaves);            
+        }
+
+        virtual void SetNotesAndChords()
+        { 
+            printf("bruh"); 
         }
 
 };
 
-class MinorChord : public Chord
-{
-    public:
-        MinorChord(int baseNoteIndex, std::list<Note>* scale) : Chord("m", baseNoteIndex, scale)
-        {
-            std::list<Note>::iterator it = scale->begin();
-            
-            std::advance(it, baseNoteIndex % 7);
-            Note n1(it->number);
-            notes->push_back(n1);
-
-            it = scale->begin();
-            std::advance(it, (baseNoteIndex+2) % 7);
-            Note n2(it->number);
-            notes->push_back(n2);
-
-            it = scale->begin();
-            std::advance(it, (baseNoteIndex+4) % 7);
-            Note n3(it->number);
-            notes->push_back(n3);
-        }
-};
-
-
-static std::list<Note>* ExpandNotesIntoOctaves(std::list<Note>* notes, int baseNote, int numOctaves)
+Note* ExpandToOctaves(ScaleNote* notes, int baseNote, int numOctaves)
 {
     
-    int size = notes->size() * numOctaves;
-    std::list<Note>* result = new std::list<Note>;
-    
+    int size = SCALE_NOTES_SIZE * numOctaves;
+    Note* resultNotes = new Note(size);
+
     for (int i = 0; i < size; i++)
     {
-        std::list<Note>::iterator it = notes->begin();
-        std::advance(it, i % notes->size());
-
-        int newNoteNumber = baseNote + it->number + 12 * ((i / numOctaves));
+        int newNoteNumber = baseNote + notes[i % SCALE_NOTES_SIZE].number + 12 * ((i / numOctaves));
 
         Note newNote(newNoteNumber);
-        result->push_back(newNote);
+        resultNotes[i] = newNote;
     }
 
-    return result;
+    return resultNotes;
 }
