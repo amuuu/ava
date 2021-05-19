@@ -11,7 +11,7 @@ struct Settings
 {
     int scaleType; // 1->minor / 2->major
     int baseNote; // c2->36 / c8->88
-    int numOctaves; // -> 3
+    int numOctaves; // ->3
 
     int GetBaseNote() { return baseNote; }
     int GetNumOctaves() { return numOctaves; }
@@ -127,6 +127,7 @@ class Chord
 {
     protected:
         int* noteIdexes;
+        int type;
 
     public:    
         int length;
@@ -143,6 +144,8 @@ class MinorChord : public Chord
     public:
         MinorChord(int baseNoteIndex, ScaleNote* scaleNotes)
         {
+            type = 1;
+            
             length = 3;
             noteIdexes = new int[length]; // bug potential
             
@@ -157,6 +160,8 @@ class MajorChord : public Chord
     public:
         MajorChord(int baseNoteIndex, ScaleNote* scaleNotes)
         {
+            type = 2;
+
             length = 3;
             noteIdexes = new int[length]; // bug potential
             
@@ -171,6 +176,8 @@ class DimChord : public Chord
     public:
         DimChord(int baseNoteIndex, ScaleNote* scaleNotes)
         {
+            type = 3; 
+
             length = 3;
             noteIdexes = new int[length]; // bug potential
             
