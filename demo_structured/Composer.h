@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <list>
+#include <stdlib.h>
 
 #define SCALE_NOTES_SIZE 7
 
@@ -12,6 +12,9 @@ struct Settings
     int scaleType; // 1->minor / 2->major
     int baseNote; // c2->36 / c8->88
     int numOctaves; // -> 3
+
+    int GetBaseNote() { return baseNote; }
+    int GetNumOctaves() { return numOctaves; }
 };
 
 struct ChordProgression
@@ -27,14 +30,49 @@ class Composer
 {
     public:
         Scale scale;
+    
+        // TODO: Turn this to a list rather than it being a single progression
         ChordProgression progression;
 
-        Note[] GetNextChord()
+
+        Composer()
         {
-            return scale.notes[progression.currentIndex].chord progression.chords[]    
+            scale = MinorScale(26, 3);
         }
 
-        Note[] GetRandomChordInScale() { }
+        Note* GetChordInProgression(int index)
+        {
+            Chord tmpChord = scale.GetScaleNote(index).chord;
+            
+
+            Note* chordBaseNotes = new Note[tmpChord.length];
+            int* chordNoteIndexes = tmpChord.GetNoteIndexes();
+            for (int i = 0; i < tmpChord.length; i++)
+            {
+                chordBaseNotes[i] = Note(chordBaseNotes[i]);
+            }
+
+             // base note might be buggy
+            return ExpandToOctaves(chordBaseNotes, scale.settings.GetBaseNote(), scale.settings.numOctaves);
+        }
+
+        Note* GetNextChord() 
+        {
+            Note* result = GetChordInProgression(progression.currentIndex);
+            progression.currentIndex++;
+            if (progression.currentIndex > progression.length)
+                progression.currentIndex = 0;
+
+            return result;
+        }
+
+
+        Note* GetRandomChordInScale()
+        {
+            srand(time(0));
+            int index = rand() % SCALE_NOTES_SIZE;
+            return GetChordInProgression(index);
+        }
 };
 
 
@@ -79,6 +117,14 @@ class Chord
     protected:
         int* noteIdexes;
 
+    public:    
+        int length;
+        
+        int* GetNoteIndexes()
+        {
+            return noteIdexes;
+        }
+
 };
 
 class MinorChord : public Chord
@@ -86,7 +132,8 @@ class MinorChord : public Chord
     public:
         MinorChord(int baseNoteIndex, ScaleNote* scaleNotes)
         {
-            noteIdexes = new int[3]; // bug potential
+            length = 3;
+            noteIdexes = new int[length]; // bug potential
             
             noteIdexes[0] = scaleNotes[baseNoteIndex % SCALE_NOTES_SIZE].number;
             noteIdexes[1] = scaleNotes[(baseNoteIndex + 2) % SCALE_NOTES_SIZE].number;
@@ -99,7 +146,8 @@ class MajorChord : public Chord
     public:
         MajorChord(int baseNoteIndex, ScaleNote* scaleNotes)
         {
-            noteIdexes = new int[3]; // bug potential
+            length = 3;
+            noteIdexes = new int[length]; // bug potential
             
             noteIdexes[0] = scaleNotes[baseNoteIndex % SCALE_NOTES_SIZE].number;
             noteIdexes[1] = (scaleNotes[(baseNoteIndex + 2) % SCALE_NOTES_SIZE].number - 1) % 12;
@@ -112,7 +160,8 @@ class DimChord : public Chord
     public:
         DimChord(int baseNoteIndex, ScaleNote* scaleNotes)
         {
-            noteIdexes = new int[3]; // bug potential
+            length = 3;
+            noteIdexes = new int[length]; // bug potential
             
             noteIdexes[0] = scaleNotes[baseNoteIndex % SCALE_NOTES_SIZE].number;
             noteIdexes[1] = scaleNotes[(baseNoteIndex + 2) % SCALE_NOTES_SIZE].number;
@@ -128,10 +177,11 @@ class Scale
 {
     protected:
         ScaleNote* notes;
-        Settings settings;
 
     public:
-        
+        Settings settings;
+
+
         virtual void SetNotesAndChords() {}
         
         bool IsNoteInScale(int noteNumber)
@@ -151,14 +201,19 @@ class Scale
             return ExpandToOctaves(notes, settings.baseNote, settings.numOctaves);            
         }
 
+        ScaleNote GetScaleNote(int index)
+        {
+            return notes[index];
+        }
+
 };
 
 class MinorScale : public Scale
 {
     public:
-        MinorScale(int scaleType, int baseNote, int numOctaves)
+        MinorScale(int baseNote, int numOctaves)
         {
-            settings.scaleType = scaleType;
+            settings.scaleType = 1;
             settings.baseNote = baseNote;
             settings.numOctaves = numOctaves;
 
@@ -190,9 +245,9 @@ class MinorScale : public Scale
 class MajorScale : public Scale
 {
     public:
-        MajorScale(int scaleType, int baseNote, int numOctaves)
+        MajorScale(int baseNote, int numOctaves)
         {
-            settings.scaleType = scaleType;
+            settings.scaleType = 2;
             settings.baseNote = baseNote;
             settings.numOctaves = numOctaves;
 
@@ -225,7 +280,7 @@ class MajorScale : public Scale
 
 /* UTILITY FUNCTIONS */
 
-Note* ExpandToOctaves(ScaleNote* notes, int baseNote, int numOctaves)
+Note* ExpandToOctaves(Note* notes, int baseNote, int numOctaves)
 {
     
     int size = SCALE_NOTES_SIZE * numOctaves;
