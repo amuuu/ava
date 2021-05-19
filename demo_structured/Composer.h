@@ -5,6 +5,8 @@
 
 #define SCALE_NOTES_SIZE 7
 
+/* STRUCTS */
+
 struct Settings
 {
     int scaleType; // 1->minor / 2->major
@@ -19,6 +21,7 @@ struct ChordProgression
     int currentIndex;
 };
 
+/* CONTROLLER CLASS */
 
 class Composer
 {
@@ -35,6 +38,7 @@ class Composer
 };
 
 
+/* NOTE */
 
 class Note
 {
@@ -65,14 +69,17 @@ class ScaleNote : public Note
         }
 };
 
+
+
+/* CHORDS */
+// TODO: Make sure the chord formulas are right.
+
 class Chord
 {
     protected:
         int* noteIdexes;
 
 };
-
-// TODO: Make sure the chord formulas are right.
 
 class MinorChord : public Chord
 {
@@ -86,6 +93,7 @@ class MinorChord : public Chord
             noteIdexes[2] = scaleNotes[(baseNoteIndex + 4) % SCALE_NOTES_SIZE].number;
         }
 };
+
 class MajorChord : public Chord
 {
     public:
@@ -112,6 +120,10 @@ class DimChord : public Chord
         }
 };
 
+
+
+/* SCALES */
+
 class Scale
 {
     protected:
@@ -121,7 +133,6 @@ class Scale
     public:
         
         virtual void SetNotesAndChords() {}
-        
         
         bool IsNoteInScale(int noteNumber)
         {
@@ -209,6 +220,10 @@ class MajorScale : public Scale
             notes[6].chord = DimChord(6, notes);
         }
 };
+
+
+
+/* UTILITY FUNCTIONS */
 
 Note* ExpandToOctaves(ScaleNote* notes, int baseNote, int numOctaves)
 {
