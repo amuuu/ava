@@ -84,6 +84,12 @@ class Composer
             int index = rand() % SCALE_NOTES_SIZE;
             return GetChordInProgression(index);
         }
+
+        void SetProgression(int* indexes, int length)
+        {
+            progression.length = length;
+            progression.chords = indexes;
+        }
 };
 
 
