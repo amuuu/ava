@@ -3,6 +3,7 @@
 #include <sstream>
 
 
+#define CMD_DELI '-'
 #define EXIT_CMD "exit"
 #define PLAY_CMD "playbruh"
 
@@ -38,7 +39,7 @@ static void tokenize(std::string const &str, const char delim,
 static std::string GetCommandPart(std::string command, int index)
 {
     std::vector<std::string> out;
-    tokenize(command, '-', out);
+    tokenize(command, CMD_DELI, out);
 
     if (out.size() < index)
         return "";
@@ -61,7 +62,6 @@ class PlayCommand
             std::string first = GetCommandPart(command, 0);
             if (first == PLAY_CMD)
             {
-                printf("here bruh");
                 result.isValid = true;
                 
                 std::string sec = GetCommandPart(command, 1);
