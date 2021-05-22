@@ -71,26 +71,18 @@ int main(void)
             printf("Num Tracks: %d\n", ava->GetNumTracks());
         }
 
-
-        else if (inputCommand == "deactivate")
+        if (ActivateTrackCommand::Check(inputCommand).isValid)
         {
-            std::cout << "(index starts from 0)\nwhich device? ";
-            std::cin >> deviceNumber;
+            DeserializedActiveCmd res = ActivateTrackCommand::Check(inputCommand);
 
-            ava->SetTrackActive(deviceNumber, Deactivated);
+            ava->SetTrackActive(res.trackIndex, Active);
         }
 
-        else if (inputCommand == "activate")
+        if (DectivateTrackCommand::Check(inputCommand).isValid)
         {
-            std::cout << "(index starts from 0)\nwhich device? ";
-            std::cin >> deviceNumber;
+            DeserializedActiveCmd res = DectivateTrackCommand::Check(inputCommand);
 
-            ava->SetTrackActive(deviceNumber, Active);
-        }
-
-        else
-        {
-            std::cout << "invalid command.\n";
+            ava->SetTrackActive(res.trackIndex, Deactivated);
         }
 
     }

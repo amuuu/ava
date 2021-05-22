@@ -12,7 +12,10 @@
 #define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5 or setfreqparams-1-n-0.5 (device number - freq - amp)
 #define SHOW_AUDIO_SETTINGS__CMD "showaudiosettings" // showdevices
 #define ADD_NEW_DEVICE__CMD "addnew" // addnew or addnew-440-1 or addnew-440
-#define NUM_TRACKS__CMD "numtracks"
+#define NUM_TRACKS__CMD "numtracks" // numtracks
+#define ACTIVATE_TRACK__CMD "activate" //activate-1
+#define DEACTIVATE_TRACK__CMD "deactivate" //deactivate-1
+
  
 struct DeserializedCmd
 {
@@ -54,6 +57,12 @@ struct DeserializedNumTracksCmd :  public DeserializedCmd
     // empty
 };
 
+struct DeserializedActiveCmd :  public DeserializedCmd
+{
+    int trackIndex;
+};
+
+
 
 static void tokenize(std::string const &str, const char delim,
             std::vector<std::string> &out)
@@ -71,7 +80,7 @@ static std::string GetCommandPart(std::string command, int index)
     std::vector<std::string> out;
     tokenize(command, CMD_DELI, out);
 
-    if (out.size() < index)
+    if ((out.size() < index) && (out.size() <= 0))
         return "";
 
     else
@@ -239,6 +248,63 @@ class NumTracksCommand
                 result.isValid = true;
             else
                 result.isValid = false;
+
+            return result;
+        }
+};
+
+class ActivateTrackCommand
+{
+    public:
+        static DeserializedActiveCmd Check (std::string command)
+        {
+
+            DeserializedActiveCmd result;
+
+            std::string first = GetCommandPart(command, 0);
+            if (first == ACTIVATE_TRACK__CMD)
+            {
+                result.isValid = true;
+                
+                std::string sec = GetCommandPart(command, 1);
+                if (sec != "")
+                    result.trackIndex = std::stoi(sec); 
+                else
+                    result.isValid = false;
+            }
+            else 
+            {
+                result.isValid = false;
+            }
+
+            return result;
+        }
+};
+
+
+class DectivateTrackCommand
+{
+    public:
+        static DeserializedActiveCmd Check (std::string command)
+        {
+
+            DeserializedActiveCmd result;
+
+            std::string first = GetCommandPart(command, 0);
+            if (first == DEACTIVATE_TRACK__CMD)
+            {
+                result.isValid = true;
+                
+                std::string sec = GetCommandPart(command, 1);
+                if (sec != "")
+                    result.trackIndex = std::stoi(sec); 
+                else
+                    result.isValid = false;
+            }
+            else 
+            {
+                result.isValid = false;
+            }
 
             return result;
         }
