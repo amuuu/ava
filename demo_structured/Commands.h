@@ -164,7 +164,7 @@ class SetFreqParamsCommand
                 std::string third = GetCommandPart(command, 2);
                 if (third != "n") 
                 {
-                    result.freq = std::stoi(sec); 
+                    result.freq = std::stoi(third); 
                     result.isFreqModified = true;
                 }
                 else
@@ -173,7 +173,7 @@ class SetFreqParamsCommand
                 std::string forth = GetCommandPart(command, 3);
                 if (forth != "n") 
                 {
-                    result.amp = std::stoi(third); 
+                    result.amp = std::stoi(forth); 
                     result.isAmpModified = true;
                 }
                 else
@@ -201,14 +201,13 @@ class SetNoteParamsCommand
             {
                 result.isValid = true;
 
-                
                 std::string sec = GetCommandPart(command, 1);
                 result.deviceNum = std::stoi(sec);
                 
                 std::string third = GetCommandPart(command, 2);
                 if (third != "n") 
                 {
-                    result.noteNum = std::stoi(sec); 
+                    result.noteNum = std::stoi(third); 
                 }
             }
             else 

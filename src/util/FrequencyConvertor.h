@@ -20,9 +20,11 @@ static float NoteNumberToFreq(int noteNumber)
 {
     float baseFreq = 440.0; // A above the middle C / A4=57(midi)
 
-    int distanceToMiddleC = noteNumber - 57; //middle C
-
-    float result = baseFreq * pow(1.059463, distanceToMiddleC);
+    int distanceToBaseNote = noteNumber - 57; //middle C
+    
+    printf("DISTANCE %d\n", distanceToBaseNote);
+    
+    float result = baseFreq * pow(1.059463, distanceToBaseNote);
 
     printf("RESULT %f\n", result);
     return result;
