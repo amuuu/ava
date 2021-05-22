@@ -23,7 +23,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "commands: play, exit, setfreqparams \n";
+        std::cout << "commands: play, exit, setfreqparams, showdevices \n";
         std::cin >> inputCommand;
 
         
@@ -54,7 +54,11 @@ int main(void)
                 ava->SetParameter(res.deviceNum,"amp", res.amp, false);
         }
 
+        if (ShowDevicesCommand::Check(inputCommand).isValid)
+        {
+            ava->DisplayAudioDeviceSettings();
 
+        }
 
         if (inputCommand == "addnew")
         {
@@ -83,11 +87,6 @@ int main(void)
             std::cin >> deviceNumber;
 
             ava->SetTrackActive(deviceNumber, Active);
-        }
-
-        else if (inputCommand == "showdevices")
-        {
-            ava->DisplayAudioDeviceSettings();
         }
 
         else

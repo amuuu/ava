@@ -7,7 +7,7 @@
 #define EXIT__CMD "exit" // exit
 #define PLAY__CMD "play" // play-2 (seconds)
 #define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5 (device number - freq - amp)
-
+#define SHOW_DEVICES__CMD "showdevices" // showdevices
 
  
 struct DeserializedCmd
@@ -34,6 +34,10 @@ struct DeserializedSetFreqParamsCmd :  public DeserializedCmd
     bool isAmpModified;
 };
 
+struct DeserializedShowDevicesCmd :  public DeserializedCmd
+{
+    // empty
+};
 
 
 static void tokenize(std::string const &str, const char delim,
@@ -151,4 +155,21 @@ class SetFreqParamCommand
 };
 
 
+class ShowDevicesCommand
+{
+    public:
+        static DeserializedShowDevicesCmd Check (std::string command)
+        {
+
+            DeserializedShowDevicesCmd result;
+        
+            std::string first = GetCommandPart(command, 0);
+            if (first == SHOW_DEVICES__CMD)
+                result.isValid = true;
+            else
+                result.isValid = false;
+
+            return result;
+        }
+};
 
