@@ -1,4 +1,4 @@
-// there might be better ways to implement this kinda stuff. will refactor later.
+// there are better ways to implement this whole commands stuff. will refactor later.
 
 #include <string>
 #include <vector>
