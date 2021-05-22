@@ -14,12 +14,8 @@ int main(void)
 {
     AvaInterface* ava = new AvaInterface();
     
-    float newFreq = 440, newAmp = 1;
-    float numSeconds = 0.5; 
-    int deviceNumber = 1;
-    bool shouldExit = false;
-    
     std::string inputCommand;
+
     while (true)
     {
 
@@ -87,8 +83,6 @@ int main(void)
 
             ava->SetTrackActive(res.trackIndex, Deactivated);
         }
-
-        
 
     }
 
