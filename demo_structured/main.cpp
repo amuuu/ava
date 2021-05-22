@@ -1,8 +1,14 @@
 #include "AvaInterface.h"
 #include "Composer.h"
+#include "Commands.h"
 
 #include <iostream>
 
+
+void CheckExitCmd()
+{
+
+}
 
 int main(void)
 {
@@ -18,14 +24,28 @@ int main(void)
     {
 
         std::cout << "commands: addnew/setparams/play/showdevices/deactivate/activate/exit\n";
+
         std::cin >> inputCommand;
+
         
-        if (inputCommand == "exit")
+        if(ExitCommand::Check(inputCommand).isValid)
         {
+            printf("exiting...\n");
             break;
         }
 
-        else if (inputCommand == "addnew")
+        if(PlayCommand::Check(inputCommand).isValid)
+        {
+            DeserializedPlayCmd res = PlayCommand::Check(inputCommand);
+
+            if (res.numSeconds != -1)
+            {
+                ava->Play(res.numSeconds);
+            }
+        }
+
+
+        if (inputCommand == "addnew")
         {
             std::cout << "init freq? ";
             std::cin >> newFreq;
