@@ -9,12 +9,14 @@
 
 #define EXIT__CMD "exit" // exit
 #define PLAY__CMD "play" // play or play-2 (seconds)
-#define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5 or setfreqparams-1-n-0.5 (device number - freq - amp)
+#define SET_FREQ_PARAMS__CMD "setfreqparams" // setfreqparams-1-440-0.5 or setfreqparams-1-n-0.5 (device number - freq - amp)
+#define SET_NOTE_PARAMS__CMD "setnote" // setnote-36
 #define SHOW_AUDIO_SETTINGS__CMD "showaudiosettings" // showdevices
 #define ADD_NEW_DEVICE__CMD "addnew" // addnew or addnew-440-1 or addnew-440
 #define NUM_TRACKS__CMD "numtracks" // numtracks
 #define ACTIVATE_TRACK__CMD "activate" //activate-1
 #define DEACTIVATE_TRACK__CMD "deactivate" //deactivate-1
+
 
  
 struct DeserializedCmd
@@ -39,6 +41,12 @@ struct DeserializedSetFreqParamsCmd :  public DeserializedCmd
     bool isFreqModified;
     float amp;
     bool isAmpModified;
+};
+
+struct DeserializedSetNoteParamsCmd :  public DeserializedCmd
+{
+    int deviceNum;
+    int noteNum;
 };
 
 struct DeserializedShowAudioSettingsCmd :  public DeserializedCmd
@@ -145,7 +153,7 @@ class SetFreqParamsCommand
             DeserializedSetFreqParamsCmd result;
 
             std::string first = GetCommandPart(command, 0);
-            if (first == SET_FREQ_PARAMS_CMD)
+            if (first == SET_FREQ_PARAMS__CMD)
             {
                 result.isValid = true;
 
@@ -170,6 +178,38 @@ class SetFreqParamsCommand
                 }
                 else
                     result.isAmpModified = false;
+            }
+            else 
+            {
+                result.isValid = false;
+            }
+
+            return result;
+        }
+};
+
+class SetNoteParamsCommand
+{
+    public:
+        static DeserializedSetNoteParamsCmd Check (std::string command)
+        {
+
+            DeserializedSetNoteParamsCmd result;
+
+            std::string first = GetCommandPart(command, 0);
+            if (first == SET_NOTE_PARAMS__CMD)
+            {
+                result.isValid = true;
+
+                
+                std::string sec = GetCommandPart(command, 1);
+                result.deviceNum = std::stoi(sec);
+                
+                std::string third = GetCommandPart(command, 2);
+                if (third != "n") 
+                {
+                    result.noteNum = std::stoi(sec); 
+                }
             }
             else 
             {

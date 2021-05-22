@@ -23,7 +23,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "commands: play, exit, setfreqparams, showaudiosettings, addnew, numtracks \n";
+        std::cout << "commands: play, exit, setfreqparams, showaudiosettings, addnew, numtracks, setnote \n";
         std::cin >> inputCommand;
 
         
@@ -48,6 +48,15 @@ int main(void)
 
             if (res.isAmpModified)
                 ava->SetParameter(res.deviceNum,"amp", res.amp, false);
+        }
+
+        if (SetNoteParamsCommand::Check(inputCommand).isValid)
+        {
+            DeserializedSetNoteParamsCmd res = SetNoteParamsCommand::Check(inputCommand);
+            
+            float freq = NoteNumberToFreq(res.noteNum);
+
+            ava->SetParameter(res.deviceNum,"freq", freq, false);
         }
 
         if (ShowAudioSettingsCommand::Check(inputCommand).isValid)
@@ -80,6 +89,8 @@ int main(void)
 
             ava->SetTrackActive(res.trackIndex, Deactivated);
         }
+
+        
 
     }
 
