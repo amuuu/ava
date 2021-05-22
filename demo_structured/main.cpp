@@ -23,8 +23,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "commands: addnew/setparams/play/showdevices/deactivate/activate/exit\n";
-
+        std::cout << "commands: play, exit, setfreqparams \n";
         std::cin >> inputCommand;
 
         
@@ -70,20 +69,6 @@ int main(void)
             ava->AddNewSineGeneratorTrack(newFreq, newAmp);
         }
 
-
-
-        else if (inputCommand == "play")
-        {
-
-            std::cout << "secs: ";
-            std::cin >> numSeconds;
-
-            if (numSeconds != -1)
-            {
-                ava->Play(numSeconds);
-            }
-        }
-        
         else if (inputCommand == "deactivate")
         {
             std::cout << "(index starts from 0)\nwhich device? ";

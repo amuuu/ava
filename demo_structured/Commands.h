@@ -5,8 +5,8 @@
 
 #define CMD_DELI '-'
 #define EXIT__CMD "exit" // exit
-#define PLAY__CMD "play" // play-2
-#define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5
+#define PLAY__CMD "play" // play-2 (seconds)
+#define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5 (device number - freq - amp)
 
 
  
