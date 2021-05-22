@@ -8,7 +8,7 @@
 #define CMD_DELI '-'
 
 #define EXIT__CMD "exit" // exit
-#define PLAY__CMD "play" // play-2 (seconds)
+#define PLAY__CMD "play" // play or play-2 (seconds)
 #define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5 or setfreqparams-1-n-0.5 (device number - freq - amp)
 #define SHOW_AUDIO_SETTINGS__CMD "showaudiosettings" // showdevices
 #define ADD_NEW_DEVICE__CMD "addnew" // addnew or addnew-440-1 or addnew-440
@@ -80,7 +80,7 @@ static std::string GetCommandPart(std::string command, int index)
     std::vector<std::string> out;
     tokenize(command, CMD_DELI, out);
 
-    if ((out.size() < index) && (out.size() <= 0))
+    if (out.size() <= index)
         return "";
 
     else
@@ -121,7 +121,11 @@ class PlayCommand
                 result.isValid = true;
                 
                 std::string sec = GetCommandPart(command, 1);
-                result.numSeconds = std::stoi(sec); 
+                
+                if (sec != "")
+                    result.numSeconds = std::stoi(sec); 
+                else
+                    result.numSeconds = 1; 
 
             }
             else 
@@ -214,12 +218,12 @@ class AddNewCommand
                 result.amp = 1;
                 
 
-                std::string sec = GetCommandPart(command, 2);
+                std::string sec = GetCommandPart(command, 1);
                 if (sec != "") 
                 {
                     result.freq = std::stoi(sec); 
                 
-                    std::string third = GetCommandPart(command, 3);
+                    std::string third = GetCommandPart(command, 2);
                     if (third != "") 
                     {
                         result.amp = std::stoi(third); 

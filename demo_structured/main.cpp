@@ -36,11 +36,7 @@ int main(void)
         if (PlayCommand::Check(inputCommand).isValid)
         {
             DeserializedPlayCmd res = PlayCommand::Check(inputCommand);
-
-            if (res.numSeconds != -1)
-            {
-                ava->Play(res.numSeconds);
-            }
+            ava->Play(res.numSeconds);
         }
 
         if (SetFreqParamsCommand::Check(inputCommand).isValid)
