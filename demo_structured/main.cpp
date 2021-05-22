@@ -1,4 +1,5 @@
 #include "AvaInterface.h"
+#include "Composer.h"
 
 #include <iostream>
 
@@ -13,7 +14,6 @@ int main(void)
     bool shouldExit = false;
     
     std::string inputCommand;
-
     while (true)
     {
 

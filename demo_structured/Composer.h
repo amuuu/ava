@@ -24,74 +24,6 @@ struct ChordProgression
     int currentIndex;
 };
 
-/* CONTROLLER CLASS */
-
-class Composer
-{
-    public:
-        int scaleType, baseNote, numOctaves;
-
-        Scale scale;
-    
-        // TODO: Turn this to a list rather than it being a single progression
-        ChordProgression progression;
-
-
-        Composer(int scaleType, int baseNote, int numOctaves)
-        {
-            this->scaleType = scaleType;
-            this->baseNote = baseNote;
-            this->numOctaves = numOctaves;
-
-            if (this->scaleType == 1)
-                scale = MinorScale(baseNote, numOctaves);
-            else if (this->scaleType == 2)
-                scale = MajorScale(baseNote, numOctaves);
-            
-
-        }
-
-        Note* GetChordInProgression(int index)
-        {
-            Chord tmpChord = scale.GetScaleNote(index).chord;
-            
-
-            Note* chordBaseNotes = new Note[tmpChord.length];
-            int* chordNoteIndexes = tmpChord.GetNoteIndexes();
-            for (int i = 0; i < tmpChord.length; i++)
-            {
-                chordBaseNotes[i] = Note(chordBaseNotes[i]);
-            }
-
-             // base note might be buggy
-            return ExpandToOctaves(chordBaseNotes, scale.settings.GetBaseNote(), scale.settings.numOctaves);
-        }
-
-        Note* GetNextChord() 
-        {
-            Note* result = GetChordInProgression(progression.currentIndex);
-            progression.currentIndex++;
-            if (progression.currentIndex > progression.length)
-                progression.currentIndex = 0;
-
-            return result;
-        }
-
-
-        Note* GetRandomChordInScale()
-        {
-            srand(time(0));
-            int index = rand() % SCALE_NOTES_SIZE;
-            return GetChordInProgression(index);
-        }
-
-        void SetProgression(int* indexes, int length)
-        {
-            progression.length = length;
-            progression.chords = indexes;
-        }
-};
-
 
 /* NOTE */
 
@@ -108,22 +40,25 @@ class Note
         }
 };
 
-class ScaleNote : public Note
+
+/* UTILITY FUNCTIONS */
+
+static Note* ExpandToOctaves(Note* notes, int baseNote, int numOctaves)
 {
-    public:
-        Chord chord;
+    
+    int size = SCALE_NOTES_SIZE * numOctaves;
+    Note* resultNotes = new Note[size];
 
-        ScaleNote()
-        {
+    for (int i = 0; i < size; i++)
+    {
+        int newNoteNumber = baseNote + notes[i % SCALE_NOTES_SIZE].number + 12 * ((i / numOctaves));
 
-        }
-        
-        ScaleNote(int number) : Note(number)
-        {
+        Note newNote(newNoteNumber);
+        resultNotes[i] = newNote;
+    }
 
-        }
-};
-
+    return resultNotes;
+}
 
 
 /* CHORDS */
@@ -144,6 +79,25 @@ class Chord
         }
 
 };
+
+
+
+class ScaleNote : public Note
+{
+    public:
+        Chord chord;
+
+        ScaleNote()
+        {
+
+        }
+        
+        ScaleNote(int number) : Note(number)
+        {
+
+        }
+};
+
 
 class MinorChord : public Chord
 {
@@ -192,7 +146,6 @@ class DimChord : public Chord
             noteIdexes[2] = scaleNotes[(baseNoteIndex + 4) % SCALE_NOTES_SIZE].number;
         }
 };
-
 
 
 /* SCALES */
@@ -302,21 +255,72 @@ class MajorScale : public Scale
 
 
 
-/* UTILITY FUNCTIONS */
 
-Note* ExpandToOctaves(Note* notes, int baseNote, int numOctaves)
+
+/* CONTROLLER CLASS */
+
+class Composer
 {
+    public:
+        int scaleType, baseNote, numOctaves;
+
+        Scale scale;
     
-    int size = SCALE_NOTES_SIZE * numOctaves;
-    Note* resultNotes = new Note[size];
+        // TODO: Turn this to a list rather than it being a single progression
+        ChordProgression progression;
 
-    for (int i = 0; i < size; i++)
-    {
-        int newNoteNumber = baseNote + notes[i % SCALE_NOTES_SIZE].number + 12 * ((i / numOctaves));
 
-        Note newNote(newNoteNumber);
-        resultNotes[i] = newNote;
-    }
+        Composer(int scaleType, int baseNote, int numOctaves)
+        {
+            this->scaleType = scaleType;
+            this->baseNote = baseNote;
+            this->numOctaves = numOctaves;
 
-    return resultNotes;
-}
+            if (this->scaleType == 1)
+                scale = MinorScale(baseNote, numOctaves);
+            else if (this->scaleType == 2)
+                scale = MajorScale(baseNote, numOctaves);
+            
+
+        }
+
+        Note* GetChordInProgression(int index)
+        {
+            Chord tmpChord = scale.GetScaleNote(index).chord;
+            
+
+            Note* chordBaseNotes = new Note[tmpChord.length];
+            int* chordNoteIndexes = tmpChord.GetNoteIndexes();
+            for (int i = 0; i < tmpChord.length; i++)
+            {
+                chordBaseNotes[i] = Note(chordBaseNotes[i]);
+            }
+
+             // base note might be buggy
+            return ExpandToOctaves(chordBaseNotes, scale.settings.GetBaseNote(), scale.settings.numOctaves);
+        }
+
+        Note* GetNextChord() 
+        {
+            Note* result = GetChordInProgression(progression.currentIndex);
+            progression.currentIndex++;
+            if (progression.currentIndex > progression.length)
+                progression.currentIndex = 0;
+
+            return result;
+        }
+
+
+        Note* GetRandomChordInScale()
+        {
+            srand(time(0));
+            int index = rand() % SCALE_NOTES_SIZE;
+            return GetChordInProgression(index);
+        }
+
+        void SetProgression(int* indexes, int length)
+        {
+            progression.length = length;
+            progression.chords = indexes;
+        }
+};
