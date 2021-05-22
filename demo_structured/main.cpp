@@ -28,13 +28,13 @@ int main(void)
         std::cin >> inputCommand;
 
         
-        if(ExitCommand::Check(inputCommand).isValid)
+        if (ExitCommand::Check(inputCommand).isValid)
         {
             printf("exiting...\n");
             break;
         }
 
-        if(PlayCommand::Check(inputCommand).isValid)
+        if (PlayCommand::Check(inputCommand).isValid)
         {
             DeserializedPlayCmd res = PlayCommand::Check(inputCommand);
 
@@ -43,6 +43,18 @@ int main(void)
                 ava->Play(res.numSeconds);
             }
         }
+
+        if (SetFreqParamCommand::Check(inputCommand).isValid)
+        {
+            DeserializedSetFreqParamsCmd res = SetFreqParamCommand::Check(inputCommand);
+            
+            if(res.isFreqModified)
+                ava->SetParameter(res.deviceNum,"freq", res.freq, false);
+
+            if(res.isAmpModified)
+                ava->SetParameter(res.deviceNum,"amp", res.amp, false);
+        }
+
 
 
         if (inputCommand == "addnew")
@@ -58,27 +70,7 @@ int main(void)
             ava->AddNewSineGeneratorTrack(newFreq, newAmp);
         }
 
-        else if (inputCommand == "setparams")
-        {
-            std::cout << "(index starts from 0)\nwhich device? ";
-            std::cin >> deviceNumber;
 
-            std::cout << "new freq: ";
-            std::cin >> newFreq;
-            
-            std::cout << "new amp: ";
-            std::cin >> newAmp;
-
-            if (newFreq != -1)
-            {
-                ava->SetParameter(deviceNumber,"freq", newFreq, false);
-            }
-            
-            if (newAmp != -1)
-            {
-                ava->SetParameter(deviceNumber,"amp", newAmp, false);
-            }
-        }
 
         else if (inputCommand == "play")
         {

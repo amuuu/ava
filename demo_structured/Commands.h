@@ -4,8 +4,10 @@
 
 
 #define CMD_DELI '-'
-#define EXIT_CMD "exit"
-#define PLAY_CMD "playbruh"
+#define EXIT__CMD "exit" // exit
+#define PLAY__CMD "play" // play-2
+#define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5
+
 
  
 struct DeserializedCmd
@@ -21,6 +23,15 @@ struct DeserializedExitCmd :  public DeserializedCmd
 struct DeserializedPlayCmd :  public DeserializedCmd
 {
     int numSeconds;
+};
+
+struct DeserializedSetFreqParamsCmd :  public DeserializedCmd
+{
+    int deviceNum;
+    float freq;
+    bool isFreqModified;
+    float amp;
+    bool isAmpModified;
 };
 
 
@@ -50,6 +61,23 @@ static std::string GetCommandPart(std::string command, int index)
 }
 
 
+class ExitCommand
+{
+    public:
+        static DeserializedExitCmd Check (std::string command)
+        {
+
+            DeserializedExitCmd result;
+        
+            std::string first = GetCommandPart(command, 0);
+            if (first == EXIT__CMD)
+                result.isValid = true;
+            else
+                result.isValid = false;
+
+            return result;
+        }
+};
 
 class PlayCommand
 {
@@ -60,7 +88,7 @@ class PlayCommand
             DeserializedPlayCmd result;
 
             std::string first = GetCommandPart(command, 0);
-            if (first == PLAY_CMD)
+            if (first == PLAY__CMD)
             {
                 result.isValid = true;
                 
@@ -78,20 +106,49 @@ class PlayCommand
 };
 
 
-class ExitCommand
+class SetFreqParamCommand
 {
     public:
-        static DeserializedExitCmd Check (std::string command)
+        static DeserializedSetFreqParamsCmd Check (std::string command)
         {
 
-            DeserializedExitCmd result;
-        
+            DeserializedSetFreqParamsCmd result;
+
             std::string first = GetCommandPart(command, 0);
-            if (first == EXIT_CMD)
+            if (first == SET_FREQ_PARAMS_CMD)
+            {
                 result.isValid = true;
-            else
+
+                
+                std::string sec = GetCommandPart(command, 1);
+                result.deviceNum = std::stoi(sec);
+                
+                std::string third = GetCommandPart(command, 2);
+                if (third != "n") 
+                {
+                    result.freq = std::stoi(sec); 
+                    result.isFreqModified = true;
+                }
+                else
+                    result.isFreqModified = false;
+                
+                std::string forth = GetCommandPart(command, 3);
+                if (forth != "n") 
+                {
+                    result.freq = std::stoi(third); 
+                    result.isAmpModified = true;
+                }
+                else
+                    result.isAmpModified = false;
+            }
+            else 
+            {
                 result.isValid = false;
+            }
 
             return result;
         }
 };
+
+
+
