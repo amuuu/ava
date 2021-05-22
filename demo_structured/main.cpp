@@ -53,11 +53,7 @@ int main(void)
         if (SetNoteParamsCommand::Check(inputCommand).isValid)
         {
             DeserializedSetNoteParamsCmd res = SetNoteParamsCommand::Check(inputCommand);
-            printf("NOTE NUM %d\n", res.noteNum);
-            printf("DEVICE NUM %d\n", res.deviceNum);
-
             float freq = NoteNumberToFreq(res.noteNum);
-            printf("ANS %f\n",freq);
             ava->SetParameter(res.deviceNum,"freq", freq, false);
         }
 

@@ -22,10 +22,7 @@ static float NoteNumberToFreq(int noteNumber)
 
     int distanceToBaseNote = noteNumber - 57; //middle C
     
-    printf("DISTANCE %d\n", distanceToBaseNote);
-    
     float result = baseFreq * pow(1.059463, distanceToBaseNote);
 
-    printf("RESULT %f\n", result);
     return result;
 }
