@@ -59,3 +59,8 @@ void AvaInterface::DisplayAudioDeviceSettings()
 {
     ava->DisplayAudioDevicesSettings();
 }
+
+int AvaInterface::GetNumTracks()
+{
+    return ava->project->GetTracksSize();
+}

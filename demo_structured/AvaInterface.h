@@ -14,6 +14,8 @@ class AvaInterface
 
         void AddNewSineGeneratorTrack(float initialFreq, float initialAmp);
         
+        int GetNumTracks();
+        
         /* TODO: audio device settings */
         void DisplayAudioDeviceSettings();
 
