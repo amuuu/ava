@@ -1,14 +1,18 @@
+// there might be better ways to implement this kinda stuff. will refactor later.
+
 #include <string>
 #include <vector>
 #include <sstream>
 
 
 #define CMD_DELI '-'
+
 #define EXIT__CMD "exit" // exit
 #define PLAY__CMD "play" // play-2 (seconds)
-#define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5 (device number - freq - amp)
-#define SHOW_DEVICES__CMD "showdevices" // showdevices
-
+#define SET_FREQ_PARAMS_CMD "setfreqparams" // setfreqparams-1-440-0.5 or setfreqparams-1-n-0.5 (device number - freq - amp)
+#define SHOW_AUDIO_SETTINGS__CMD "showaudiosettings" // showdevices
+#define ADD_NEW_DEVICE__CMD "addnew" // addnew or addnew-440-1 or addnew-440
+#define NUM_TRACKS__CMD "numtracks"
  
 struct DeserializedCmd
 {
@@ -34,7 +38,18 @@ struct DeserializedSetFreqParamsCmd :  public DeserializedCmd
     bool isAmpModified;
 };
 
-struct DeserializedShowDevicesCmd :  public DeserializedCmd
+struct DeserializedShowAudioSettingsCmd :  public DeserializedCmd
+{
+    // empty
+};
+
+struct DeserializedAddNewCmd :  public DeserializedCmd
+{
+    float freq;
+    float amp;
+};
+
+struct DeserializedNumTracksCmd :  public DeserializedCmd
 {
     // empty
 };
@@ -110,7 +125,7 @@ class PlayCommand
 };
 
 
-class SetFreqParamCommand
+class SetFreqParamsCommand
 {
     public:
         static DeserializedSetFreqParamsCmd Check (std::string command)
@@ -139,7 +154,7 @@ class SetFreqParamCommand
                 std::string forth = GetCommandPart(command, 3);
                 if (forth != "n") 
                 {
-                    result.freq = std::stoi(third); 
+                    result.amp = std::stoi(third); 
                     result.isAmpModified = true;
                 }
                 else
@@ -155,16 +170,16 @@ class SetFreqParamCommand
 };
 
 
-class ShowDevicesCommand
+class ShowAudioSettingsCommand
 {
     public:
-        static DeserializedShowDevicesCmd Check (std::string command)
+        static DeserializedShowAudioSettingsCmd Check (std::string command)
         {
 
-            DeserializedShowDevicesCmd result;
+            DeserializedShowAudioSettingsCmd result;
         
             std::string first = GetCommandPart(command, 0);
-            if (first == SHOW_DEVICES__CMD)
+            if (first == SHOW_AUDIO_SETTINGS__CMD)
                 result.isValid = true;
             else
                 result.isValid = false;
@@ -173,3 +188,58 @@ class ShowDevicesCommand
         }
 };
 
+class AddNewCommand
+{
+    public:
+        static DeserializedAddNewCmd Check (std::string command)
+        {
+
+            DeserializedAddNewCmd result;
+
+            std::string first = GetCommandPart(command, 0);
+            if (first == ADD_NEW_DEVICE__CMD)
+            {
+                result.isValid = true;
+                
+                result.freq = 440.0;
+                result.amp = 1;
+                
+
+                std::string sec = GetCommandPart(command, 2);
+                if (sec != "") 
+                {
+                    result.freq = std::stoi(sec); 
+                
+                    std::string third = GetCommandPart(command, 3);
+                    if (third != "") 
+                    {
+                        result.amp = std::stoi(third); 
+                    }
+                }
+            }
+            else 
+            {
+                result.isValid = false;
+            }
+
+            return result;
+        }
+};
+
+class NumTracksCommand
+{
+    public:
+        static DeserializedNumTracksCmd Check (std::string command)
+        {
+
+            DeserializedNumTracksCmd result;
+        
+            std::string first = GetCommandPart(command, 0);
+            if (first == NUM_TRACKS__CMD)
+                result.isValid = true;
+            else
+                result.isValid = false;
+
+            return result;
+        }
+};

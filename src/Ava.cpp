@@ -20,7 +20,7 @@ bool Halt::PerformTransition(IOController* io)
 bool OutputPlayback::PerformTransition(IOController* io)
 {
     if (io->pac->OpenStream(Pa_GetDefaultOutputDevice())) /* TODO: it shouldn't always be the default device */
-        if(io->pac->StartStream())
+        if (io->pac->StartStream())
             return true;
     return false;
 }

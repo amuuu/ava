@@ -23,7 +23,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "commands: play, exit, setfreqparams, showdevices \n";
+        std::cout << "commands: play, exit, setfreqparams, showaudiosettings, addnew, numtracks \n";
         std::cin >> inputCommand;
 
         
@@ -43,35 +43,34 @@ int main(void)
             }
         }
 
-        if (SetFreqParamCommand::Check(inputCommand).isValid)
+        if (SetFreqParamsCommand::Check(inputCommand).isValid)
         {
-            DeserializedSetFreqParamsCmd res = SetFreqParamCommand::Check(inputCommand);
+            DeserializedSetFreqParamsCmd res = SetFreqParamsCommand::Check(inputCommand);
             
-            if(res.isFreqModified)
+            if (res.isFreqModified)
                 ava->SetParameter(res.deviceNum,"freq", res.freq, false);
 
-            if(res.isAmpModified)
+            if (res.isAmpModified)
                 ava->SetParameter(res.deviceNum,"amp", res.amp, false);
         }
 
-        if (ShowDevicesCommand::Check(inputCommand).isValid)
+        if (ShowAudioSettingsCommand::Check(inputCommand).isValid)
         {
             ava->DisplayAudioDeviceSettings();
-
         }
 
-        if (inputCommand == "addnew")
+        if (AddNewCommand::Check(inputCommand).isValid)
         {
-            std::cout << "init freq? ";
-            std::cin >> newFreq;
-            std::cout << "init amp? ";
-            std::cin >> newAmp;
+            DeserializedAddNewCmd res = AddNewCommand::Check(inputCommand);
 
-            if (newFreq = -1) newFreq = 440;
-            if (newAmp = -1) newAmp = 1;
-
-            ava->AddNewSineGeneratorTrack(newFreq, newAmp);
+            ava->AddNewSineGeneratorTrack(res.freq, res.amp);
         }
+
+        if (NumTracksCommand::Check(inputCommand).isValid)
+        {
+            printf("Num Tracks: %d\n", ava->GetNumTracks());
+        }
+
 
         else if (inputCommand == "deactivate")
         {

@@ -72,7 +72,7 @@ const char* Pa_GetVersionText( void );
  the currently running version. For example:
 
  @code
-     if( Pa_GetVersion() < paMakeVersionNumber(19,5,1) ) {}
+     if ( Pa_GetVersion() < paMakeVersionNumber(19,5,1) ) {}
  @endcode
 
  @see Pa_GetVersion, Pa_GetVersionInfo

@@ -140,7 +140,7 @@ bool PortAudioController::DisplayAudioDevicesSettings()
 
     int numDevices = Pa_GetDeviceCount();
 
-    if( numDevices < 0)
+    if ( numDevices < 0)
     {
         printf( "ERROR: Pa_GetDeviceCount returned 0x%x\n", numDevices );
         return false;
@@ -160,25 +160,25 @@ bool PortAudioController::DisplayAudioDevicesSettings()
 
         /* Mark global and API specific default devices */
         defaultDisplayed = 0;
-        if( i == Pa_GetDefaultInputDevice() )
+        if ( i == Pa_GetDefaultInputDevice() )
         {
             printf( "[ Default Input" );
             defaultDisplayed = 1;
         }
-        else if( i == Pa_GetHostApiInfo( deviceInfo->hostApi )->defaultInputDevice )
+        else if ( i == Pa_GetHostApiInfo( deviceInfo->hostApi )->defaultInputDevice )
         {
             const PaHostApiInfo *hostInfo = Pa_GetHostApiInfo( deviceInfo->hostApi );
             printf( "[ Default %s Input", hostInfo->name );
             defaultDisplayed = 1;
         }
         
-        if( i == Pa_GetDefaultOutputDevice() )
+        if ( i == Pa_GetDefaultOutputDevice() )
         {
             printf( (defaultDisplayed ? "," : "[") );
             printf( " Default Output" );
             defaultDisplayed = 1;
         }
-        else if( i == Pa_GetHostApiInfo( deviceInfo->hostApi )->defaultOutputDevice )
+        else if ( i == Pa_GetHostApiInfo( deviceInfo->hostApi )->defaultOutputDevice )
         {
             const PaHostApiInfo *hostInfo = Pa_GetHostApiInfo( deviceInfo->hostApi );
             printf( (defaultDisplayed ? "," : "[") );                
@@ -186,7 +186,7 @@ bool PortAudioController::DisplayAudioDevicesSettings()
             defaultDisplayed = 1;
         }
 
-        if( defaultDisplayed )
+        if ( defaultDisplayed )
             printf( " ]\n" );
 
         /* print device info fields */

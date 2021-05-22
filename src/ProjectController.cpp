@@ -45,7 +45,7 @@ int ProjectController::GetNumActiveTracks()
     int ans = 0;
     for (std::list<Track>::iterator it = tracks->begin(); it != tracks->end(); ++it) {
 
-        if(it->GetTrackState() == Active)
+        if (it->GetTrackState() == Active)
             ans++;
     }
 
