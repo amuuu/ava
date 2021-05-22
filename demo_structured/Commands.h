@@ -63,7 +63,6 @@ struct DeserializedActiveCmd :  public DeserializedCmd
 };
 
 
-
 static void tokenize(std::string const &str, const char delim,
             std::vector<std::string> &out)
 {
@@ -137,7 +136,6 @@ class PlayCommand
         }
 };
 
-
 class SetFreqParamsCommand
 {
     public:
@@ -181,7 +179,6 @@ class SetFreqParamsCommand
             return result;
         }
 };
-
 
 class ShowAudioSettingsCommand
 {
@@ -285,7 +282,6 @@ class ActivateTrackCommand
         }
 };
 
-
 class DectivateTrackCommand
 {
     public:
@@ -313,3 +309,5 @@ class DectivateTrackCommand
             return result;
         }
 };
+
+
