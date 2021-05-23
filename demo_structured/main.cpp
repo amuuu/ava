@@ -90,12 +90,21 @@ int main(void)
 
             Note* notes = composer->scale.GetScaleNotes();
             
-            for (int i = 0; i < SCALE_NOTES_SIZE; i++)
+            int size = 21;
+            
+            for (int i = 0; i < size; i++)
             {
+                printf("NOTE IS %d\n", notes[i].number);
+
                 float freq = NoteNumberToFreq(notes[i].number);
+                
                 ava->SetParameter(res.deviceNum,"freq", freq, false);
-                ava->Play(res.numSeconds);
-                std::this_thread::sleep_for(std::chrono::milliseconds(res.numSeconds * 1000));
+                
+                // printf("num secs %f\n", res.numSeconds);
+                
+                // ava->Play(res.numSeconds);
+                
+                std::this_thread::sleep_for(std::chrono::milliseconds((int)(res.numSeconds * 1000)));
             }
         }
 

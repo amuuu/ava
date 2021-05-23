@@ -73,7 +73,7 @@ struct DeserializedActiveCmd :  public DeserializedCmd
 struct DeserializedPlayScaleNotesCmd :  public DeserializedCmd
 {
     int deviceNum;
-    int numSeconds;
+    float numSeconds;
 };
 
 static void tokenize(std::string const &str, const char delim,

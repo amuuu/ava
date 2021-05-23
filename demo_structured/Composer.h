@@ -45,14 +45,16 @@ class Note
 
 static Note* ExpandToOctaves(Note* notes, int baseNote, int numOctaves)
 {
-    
-    int size = SCALE_NOTES_SIZE * numOctaves;
+    int size = SCALE_NOTES_SIZE * numOctaves; // not clean
     Note* resultNotes = new Note[size];
-
+    
     for (int i = 0; i < size; i++)
     {
-        int newNoteNumber = baseNote + notes[i % SCALE_NOTES_SIZE].number + 12 * ((i / numOctaves));
+        printf("i=%d\n", i);
+        printf("n=%d\n", notes[i % SCALE_NOTES_SIZE].number);
 
+        int newNoteNumber = baseNote + notes[i % SCALE_NOTES_SIZE].number + 12 * ((i / SCALE_NOTES_SIZE));
+        
         Note newNote(newNoteNumber);
         resultNotes[i] = newNote;
     }
@@ -175,7 +177,12 @@ class Scale
 
         Note* GetScaleNotes()
         {
-            return ExpandToOctaves(notes, settings.baseNote, settings.numOctaves);            
+            ///// dirty way
+            Note* tmpNotes = new Note[SCALE_NOTES_SIZE]; 
+            for (int i = 0; i< SCALE_NOTES_SIZE; i++) tmpNotes[i] = notes[i];
+            ///// 
+            
+            return ExpandToOctaves(tmpNotes, settings.baseNote, settings.numOctaves);            
         }
 
         ScaleNote GetScaleNote(int index)
