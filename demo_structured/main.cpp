@@ -14,7 +14,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "commands: play, exit, setfreqparams, \nshowaudiosettings, addnew, numtracks, setnote \n";
+        std::cout << "\ncommands:\nplay - setfreqparams - addnew - setnote\nnumtracks - showaudiosettings - exit\n\n";
         std::cin >> inputCommand; 
 
         
@@ -24,13 +24,13 @@ int main(void)
             break;
         }
 
-        if (PlayCommand::Check(inputCommand).isValid)
+        else if (PlayCommand::Check(inputCommand).isValid)
         {
             DeserializedPlayCmd res = PlayCommand::Check(inputCommand);
             ava->Play(res.numSeconds);
         }
 
-        if (SetFreqParamsCommand::Check(inputCommand).isValid)
+        else if (SetFreqParamsCommand::Check(inputCommand).isValid)
         {
             DeserializedSetFreqParamsCmd res = SetFreqParamsCommand::Check(inputCommand);
             
@@ -41,42 +41,47 @@ int main(void)
                 ava->SetParameter(res.deviceNum,"amp", res.amp, false);
         }
 
-        if (SetNoteParamsCommand::Check(inputCommand).isValid)
+        else if (SetNoteParamsCommand::Check(inputCommand).isValid)
         {
             DeserializedSetNoteParamsCmd res = SetNoteParamsCommand::Check(inputCommand);
             float freq = NoteNumberToFreq(res.noteNum);
             ava->SetParameter(res.deviceNum,"freq", freq, false);
         }
 
-        if (ShowAudioSettingsCommand::Check(inputCommand).isValid)
+        else if (ShowAudioSettingsCommand::Check(inputCommand).isValid)
         {
             ava->DisplayAudioDeviceSettings();
         }
 
-        if (AddNewCommand::Check(inputCommand).isValid)
+        else if (AddNewCommand::Check(inputCommand).isValid)
         {
             DeserializedAddNewCmd res = AddNewCommand::Check(inputCommand);
 
             ava->AddNewSineGeneratorTrack(res.freq, res.amp);
         }
 
-        if (NumTracksCommand::Check(inputCommand).isValid)
+        else if (NumTracksCommand::Check(inputCommand).isValid)
         {
             printf("Num Tracks: %d\n", ava->GetNumTracks());
         }
 
-        if (ActivateTrackCommand::Check(inputCommand).isValid)
+        else if (ActivateTrackCommand::Check(inputCommand).isValid)
         {
             DeserializedActiveCmd res = ActivateTrackCommand::Check(inputCommand);
 
             ava->SetTrackActive(res.trackIndex, Active);
         }
 
-        if (DectivateTrackCommand::Check(inputCommand).isValid)
+        else if (DectivateTrackCommand::Check(inputCommand).isValid)
         {
             DeserializedActiveCmd res = DectivateTrackCommand::Check(inputCommand);
 
             ava->SetTrackActive(res.trackIndex, Deactivated);
+        }
+
+        else 
+        {
+            printf("Invalid Command.\n");
         }
 
     }

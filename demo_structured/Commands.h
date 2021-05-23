@@ -9,13 +9,13 @@
 
 #define EXIT__CMD "exit" // exit
 #define PLAY__CMD "play" // play or play-2 (seconds)
-#define SET_FREQ_PARAMS__CMD "setfreqparams" // setfreqparams-1-440-0.5 or setfreqparams-1-n-0.5 (device number - freq - amp)
-#define SET_NOTE_PARAMS__CMD "setnote" // setnote-36
+#define SET_FREQ_PARAMS__CMD "setfreqparams" // setfreqparams-0-440-0.5 or setfreqparams-0-n-0.5 (device number - freq - amp)
+#define SET_NOTE_PARAMS__CMD "setnote" // setnote-0-36
 #define SHOW_AUDIO_SETTINGS__CMD "showaudiosettings" // showdevices
 #define ADD_NEW_DEVICE__CMD "addnew" // addnew or addnew-440-1 or addnew-440
 #define NUM_TRACKS__CMD "numtracks" // numtracks
-#define ACTIVATE_TRACK__CMD "activate" //activate-1
-#define DEACTIVATE_TRACK__CMD "deactivate" //deactivate-1
+#define ACTIVATE_TRACK__CMD "activate" //activate-0
+#define DEACTIVATE_TRACK__CMD "deactivate" //deactivate-0
 
 
  
