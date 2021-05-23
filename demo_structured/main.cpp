@@ -94,7 +94,7 @@ int main(void)
             
             for (int i = 0; i < size; i++)
             {
-                printf("NOTE IS %d\n", notes[i].number);
+                std::this_thread::sleep_for(std::chrono::milliseconds((int)(res.numSeconds * 1000)));
 
                 float freq = NoteNumberToFreq(notes[i].number);
                 
@@ -102,9 +102,8 @@ int main(void)
                 
                 // printf("num secs %f\n", res.numSeconds);
                 
-                // ava->Play(res.numSeconds);
+                ava->Play(res.numSeconds);
                 
-                std::this_thread::sleep_for(std::chrono::milliseconds((int)(res.numSeconds * 1000)));
             }
         }
 
