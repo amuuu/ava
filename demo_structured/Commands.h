@@ -73,7 +73,7 @@ struct DeserializedActiveCmd :  public DeserializedCmd
 struct DeserializedPlayScaleNotesCmd :  public DeserializedCmd
 {
     int deviceNum;
-    float numSeconds;
+    float bpm;
 };
 
 static void tokenize(std::string const &str, const char delim,
@@ -375,11 +375,11 @@ class PlayScaleNotesCommand
                     std::string third = GetCommandPart(command, 2);
                     if (third != "")
                     {
-                        result.numSeconds = std::stoi(third);
+                        result.bpm = std::stoi(third);
                     }
                     else
                     {
-                        result.numSeconds = 0.5;
+                        result.bpm = 120;
                     }
 
                 }

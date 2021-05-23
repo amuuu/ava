@@ -5,4 +5,4 @@
 
 #include "effects/Presets.h"
 
-#include "util/FrequencyConvertor.h"
+#include "util/Convertors.h"

@@ -1,6 +1,13 @@
-/** @file FrequencyConvertor.h
+/** @file Convertors.h
 	@brief Frequency convertor functions
 */
+
+
+#pragma once
+
+#include <math.h>
+
+
 /*
 *   Used links:
 
@@ -10,11 +17,6 @@
 
     https://pages.mtu.edu/~suits/notefreqs.html
 */
-
-#pragma once
-
-#include <math.h>
-
 // equal tempered scale
 static float NoteNumberToFreq(int noteNumber)
 {
@@ -25,4 +27,11 @@ static float NoteNumberToFreq(int noteNumber)
     float result = baseFreq * pow(1.059463, distanceToBaseNote);
 
     return result;
+}
+
+
+static float BPMToMilliseconds(float bpm)
+{
+    return (float) 60000 / bpm;
+
 }

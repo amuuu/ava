@@ -88,13 +88,15 @@ int main(void)
         {
             DeserializedPlayScaleNotesCmd res = PlayScaleNotesCommand::Check(inputCommand);
 
+            float millisecs = BPMToMilliseconds(res.bpm);
+
             Note* notes = composer->scale.GetScaleNotes();
             
             int size = 21;
             
             for (int i = 0; i < size; i++)
             {
-                std::this_thread::sleep_for(std::chrono::milliseconds((int)(res.numSeconds * 1000)));
+                //std::this_thread::sleep_for(std::chrono::milliseconds((int)(millisecs)));
 
                 float freq = NoteNumberToFreq(notes[i].number);
                 
@@ -102,7 +104,7 @@ int main(void)
                 
                 // printf("num secs %f\n", res.numSeconds);
                 
-                ava->Play(res.numSeconds);
+                ava->Play(millisecs/1000);
                 
             }
         }
