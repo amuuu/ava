@@ -278,10 +278,10 @@ class Composer
 
             if (this->scaleType == 1)
                 scale = MinorScale(baseNote, numOctaves);
+            
             else if (this->scaleType == 2)
                 scale = MajorScale(baseNote, numOctaves);
             
-
         }
 
         Note* GetChordInProgression(int index)

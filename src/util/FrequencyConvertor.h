@@ -20,7 +20,7 @@ static float NoteNumberToFreq(int noteNumber)
 {
     float baseFreq = 440.0; // A above the middle C / A4=57(midi)
 
-    int distanceToBaseNote = noteNumber - 57; //middle C
+    int distanceToBaseNote = noteNumber - 57;
     
     float result = baseFreq * pow(1.059463, distanceToBaseNote);
 

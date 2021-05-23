@@ -5,11 +5,6 @@
 #include <iostream>
 
 
-void CheckExitCmd()
-{
-
-}
-
 int main(void)
 {
     AvaInterface* ava = new AvaInterface();
@@ -20,7 +15,7 @@ int main(void)
     {
 
         std::cout << "commands: play, exit, setfreqparams, \nshowaudiosettings, addnew, numtracks, setnote \n";
-        std::cin >> inputCommand;
+        std::cin >> inputCommand; 
 
         
         if (ExitCommand::Check(inputCommand).isValid)
