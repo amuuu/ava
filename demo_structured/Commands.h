@@ -16,7 +16,7 @@
 #define NUM_TRACKS__CMD "numtracks" // numtracks
 #define ACTIVATE_TRACK__CMD "activate" //activate-0
 #define DEACTIVATE_TRACK__CMD "deactivate" //deactivate-0
-
+#define PLAY_SCALE_NOTES__CMD "playscalenotes" // playscalenotes-0-0.5 or playscalenotes-0
 
  
 struct DeserializedCmd
@@ -70,6 +70,11 @@ struct DeserializedActiveCmd :  public DeserializedCmd
     int trackIndex;
 };
 
+struct DeserializedPlayScaleNotesCmd :  public DeserializedCmd
+{
+    int deviceNum;
+    int numSeconds;
+};
 
 static void tokenize(std::string const &str, const char delim,
             std::vector<std::string> &out)
@@ -349,4 +354,41 @@ class DectivateTrackCommand
         }
 };
 
+class PlayScaleNotesCommand
+{
+    public:
+        static DeserializedPlayScaleNotesCmd Check (std::string command)
+        {
 
+            DeserializedPlayScaleNotesCmd result;
+
+            std::string first = GetCommandPart(command, 0);
+            if (first == PLAY_SCALE_NOTES__CMD)
+            {
+                result.isValid = true;
+                
+                std::string sec = GetCommandPart(command, 1);
+                if (sec != "") 
+                {
+                    result.deviceNum = std::stoi(sec); 
+                    
+                    std::string third = GetCommandPart(command, 2);
+                    if (third != "")
+                    {
+                        result.numSeconds = std::stoi(third);
+                    }
+                    else
+                    {
+                        result.numSeconds = 0.5;
+                    }
+
+                }
+            }
+            else 
+            {
+                result.isValid = false;
+            }
+
+            return result;
+        }
+};

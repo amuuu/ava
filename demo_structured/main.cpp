@@ -4,17 +4,22 @@
 
 #include <iostream>
 
+// for sleep
+#include <chrono>
+#include <thread>
+
 
 int main(void)
 {
     AvaInterface* ava = new AvaInterface();
+    Composer* composer = new Composer(1, 36, 3);
     
     std::string inputCommand;
 
     while (true)
     {
 
-        std::cout << "\ncommands:\nplay - setfreqparams - addnew - setnote\nnumtracks - showaudiosettings - exit\n\n";
+        std::cout << "\ncommands:\nplay - setfreqparams - addnew - setnote\nplayscalenotes\nactivate - deactivate\nnumtracks - showaudiosettings - exit\n\n";
         std::cin >> inputCommand; 
 
         
@@ -77,6 +82,21 @@ int main(void)
             DeserializedActiveCmd res = DectivateTrackCommand::Check(inputCommand);
 
             ava->SetTrackActive(res.trackIndex, Deactivated);
+        }
+
+        else if (PlayScaleNotesCommand::Check(inputCommand).isValid)
+        {
+            DeserializedPlayScaleNotesCmd res = PlayScaleNotesCommand::Check(inputCommand);
+
+            Note* notes = composer->scale.GetScaleNotes();
+            
+            for (int i = 0; i < SCALE_NOTES_SIZE; i++)
+            {
+                float freq = NoteNumberToFreq(notes[i].number);
+                ava->SetParameter(res.deviceNum,"freq", freq, false);
+                ava->Play(res.numSeconds);
+                std::this_thread::sleep_for(std::chrono::milliseconds(res.numSeconds * 1000));
+            }
         }
 
         else 
