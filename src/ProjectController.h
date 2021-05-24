@@ -39,6 +39,7 @@ class ProjectController
             int PROJECT_SAMPLE_RATE;
             float PROJECT_MASTER_VOLUME;
             float PROJECT_MASTER_PAN;
+            float PROJET_MASTER_BPM;
             std::string PROJECT_NAME; 
         } globalSettings;
 
