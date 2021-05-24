@@ -12,7 +12,7 @@
 int main(void)
 {
     AvaInterface* ava = new AvaInterface();
-    Composer* composer = new Composer(1, 36, 3);
+    Composer* composer = new Composer(1, 36, 3); // scale type - base note - octave number
     
     std::string inputCommand;
     std::string prevCommand;
