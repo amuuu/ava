@@ -96,15 +96,13 @@ int main(void)
             
             for (int i = 0; i < size; i++)
             {
-                //std::this_thread::sleep_for(std::chrono::milliseconds((int)(millisecs)));
+                std::this_thread::sleep_for(std::chrono::milliseconds((int)(millisecs)));
 
                 float freq = NoteNumberToFreq(notes[i].number);
                 
                 ava->SetParameter(res.deviceNum,"freq", freq, false);
                 
-                // printf("num secs %f\n", res.numSeconds);
-                
-                ava->Play(millisecs/1000);
+                ava->Play(res.releaseValue);
                 
             }
         }

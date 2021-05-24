@@ -16,7 +16,7 @@
 #define NUM_TRACKS__CMD "numtracks" // numtracks
 #define ACTIVATE_TRACK__CMD "activate" //activate-0
 #define DEACTIVATE_TRACK__CMD "deactivate" //deactivate-0
-#define PLAY_SCALE_NOTES__CMD "playscalenotes" // playscalenotes-0-0.5 or playscalenotes-0
+#define PLAY_SCALE_NOTES__CMD "playscalenotes" // playscalenotes-0-120 or playscalenotes-0 or playscalenotes-0-120-0.5 (device num - bpm - release)
 
  
 struct DeserializedCmd
@@ -31,7 +31,7 @@ struct DeserializedExitCmd :  public DeserializedCmd
 
 struct DeserializedPlayCmd :  public DeserializedCmd
 {
-    int numSeconds;
+    float numSeconds;
 };
 
 struct DeserializedSetFreqParamsCmd :  public DeserializedCmd
@@ -74,6 +74,7 @@ struct DeserializedPlayScaleNotesCmd :  public DeserializedCmd
 {
     int deviceNum;
     float bpm;
+    float releaseValue;
 };
 
 static void tokenize(std::string const &str, const char delim,
@@ -135,7 +136,7 @@ class PlayCommand
                 std::string sec = GetCommandPart(command, 1);
                 
                 if (sec != "")
-                    result.numSeconds = std::stoi(sec); 
+                    result.numSeconds = std::stof(sec); 
                 else
                     result.numSeconds = 1; 
 
@@ -169,7 +170,7 @@ class SetFreqParamsCommand
                 std::string third = GetCommandPart(command, 2);
                 if (third != "n") 
                 {
-                    result.freq = std::stoi(third); 
+                    result.freq = std::stof(third); 
                     result.isFreqModified = true;
                 }
                 else
@@ -178,7 +179,7 @@ class SetFreqParamsCommand
                 std::string forth = GetCommandPart(command, 3);
                 if (forth != "n") 
                 {
-                    result.amp = std::stoi(forth); 
+                    result.amp = std::stof(forth); 
                     result.isAmpModified = true;
                 }
                 else
@@ -262,12 +263,12 @@ class AddNewCommand
                 std::string sec = GetCommandPart(command, 1);
                 if (sec != "") 
                 {
-                    result.freq = std::stoi(sec); 
+                    result.freq = std::stof(sec); 
                 
                     std::string third = GetCommandPart(command, 2);
                     if (third != "") 
                     {
-                        result.amp = std::stoi(third); 
+                        result.amp = std::stof(third); 
                     }
                 }
             }
@@ -375,11 +376,20 @@ class PlayScaleNotesCommand
                     std::string third = GetCommandPart(command, 2);
                     if (third != "")
                     {
-                        result.bpm = std::stoi(third);
+                        result.bpm = std::stof(third);
+
+                        std::string forth = GetCommandPart(command, 3);
+
+                        if (forth != "")
+                        {
+                            result.releaseValue = std::stof(forth);
+                        }
+
                     }
                     else
                     {
                         result.bpm = 120;
+                        result.releaseValue = 0.5;
                     }
 
                 }
