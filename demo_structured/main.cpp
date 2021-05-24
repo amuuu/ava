@@ -102,7 +102,7 @@ int main(void)
                 
                 ava->SetParameter(res.deviceNum,"freq", freq, false);
                 
-                ava->Play(res.releaseValue);
+                ava->Play(res.decayValue);
                 
             }
         }

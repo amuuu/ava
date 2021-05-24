@@ -74,7 +74,7 @@ struct DeserializedPlayScaleNotesCmd :  public DeserializedCmd
 {
     int deviceNum;
     float bpm;
-    float releaseValue;
+    float decayValue;
 };
 
 static void tokenize(std::string const &str, const char delim,
@@ -382,14 +382,14 @@ class PlayScaleNotesCommand
 
                         if (forth != "")
                         {
-                            result.releaseValue = std::stof(forth);
+                            result.decayValue = std::stof(forth);
                         }
 
                     }
                     else
                     {
                         result.bpm = 120;
-                        result.releaseValue = 0.5;
+                        result.decayValue = 0.5;
                     }
 
                 }
