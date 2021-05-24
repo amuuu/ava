@@ -96,7 +96,7 @@ int main(void)
             
             for (int i = 0; i < size; i++)
             {
-                std::this_thread::sleep_for(std::chrono::milliseconds((int)(millisecs)));
+                std::this_thread::sleep_for(std::chrono::milliseconds((int)(millisecs))); // it must either be (milliseconds) or (milliseconds - decayValue)
 
                 float freq = NoteNumberToFreq(notes[i].number);
                 
