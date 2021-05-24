@@ -96,13 +96,13 @@ int main(void)
             
             for (int i = 0; i < size; i++)
             {
-                std::this_thread::sleep_for(std::chrono::milliseconds((int)(millisecs))); // it must either be (milliseconds) or (milliseconds - decayValue)
 
                 float freq = NoteNumberToFreq(notes[i].number);
                 
                 ava->SetParameter(res.deviceNum,"freq", freq, false);
                 
                 ava->Play(res.decayValue);
+                std::this_thread::sleep_for(std::chrono::milliseconds((int)(millisecs - res.decayValue*1000)));
                 
             }
         }
