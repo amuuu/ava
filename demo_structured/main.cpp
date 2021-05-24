@@ -20,7 +20,7 @@ int main(void)
     while (true)
     {
 
-        std::cout << "\ncommands:\nplay - setfreqparams - addnew - setnote\nplayscalenotes\nactivate - deactivate\nnumtracks - showaudiosettings - repeat - exit\n\n";
+        std::cout << "\n~~~ commands: ~~~\nplay - setfreqparams - addnew - setnote\nplayscalenotes\nactivate - deactivate\nnumtracks - showaudiosettings - repeat - exit\n~~~~~~\n";
         std::cin >> inputCommand; 
 
         if (inputCommand == "repeat") inputCommand = prevCommand;
