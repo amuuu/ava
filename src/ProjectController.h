@@ -41,6 +41,7 @@ class ProjectController
             float PROJECT_MASTER_PAN;
             float PROJET_MASTER_BPM;
             std::string PROJECT_NAME; 
+            
         } globalSettings;
 
         int GetNumActiveTracks();

@@ -15,13 +15,15 @@ int main(void)
     Composer* composer = new Composer(1, 36, 3);
     
     std::string inputCommand;
+    std::string prevCommand;
 
     while (true)
     {
 
-        std::cout << "\ncommands:\nplay - setfreqparams - addnew - setnote\nplayscalenotes\nactivate - deactivate\nnumtracks - showaudiosettings - exit\n\n";
+        std::cout << "\ncommands:\nplay - setfreqparams - addnew - setnote\nplayscalenotes\nactivate - deactivate\nnumtracks - showaudiosettings - repeat - exit\n\n";
         std::cin >> inputCommand; 
 
+        if (inputCommand == "repeat") inputCommand = prevCommand;
         
         if (ExitCommand::Check(inputCommand).isValid)
         {
@@ -111,6 +113,8 @@ int main(void)
         {
             printf("Invalid Command.\n");
         }
+
+        prevCommand = inputCommand;
 
     }
 
